@@ -1,0 +1,121 @@
+# Analysis
+
+## Global Variables
+
+```{r}
+# change this file path as necessary
+DATA_SHEET_FILE_PATH = "data/raw/Data sheets & inventory.xlsx"
+```
+
+## Loading Libraries
+
+```{r}
+library(readxl)
+library(janitor)
+library(tidyverse)
+library(broom)
+library(lme4)
+```
+
+## Reading in Data
+
+```{r message = FALSE, warning = FALSE}
+# get economic level per dissemination area
+overall_data <- read_excel(DATA_SHEET_FILE_PATH, sheet='Overall Analysis')
+economic_level_per_da <- overall_data |>
+  select(`Economic level (k)...21`:`DA...22`) |>  # select desired columns
+  drop_na() |>  # remove empty rows
+  rename(economic_level_k = `Economic level (k)...21`,  # clean column names
+         dissemination_area = `DA...22`)
+
+stats_data <- read_excel(DATA_SHEET_FILE_PATH, sheet='Everything_statistics') |>
+  select(House:Tree_percentage) |>  # select necessary columns
+  drop_na() |>  # remove empty rows
+  clean_names() |>  # clean column names
+  mutate(dissemination_area = as.factor(str_sub(house, 1, 2)))
+```
+
+## Exploratory Data Analysis
+
+```{r}
+
+```
+
+## Chapter 1: How is Economic Level Associated with the Composition of Private Urban Forests?
+
+In Chapter 1, we aimed to analyze the effect of economic level on the composition of private urban forests. Given this goal, we used multiple models with economic level as the explanatory variable. 
+In this study, samples were taken per dissemination area. This means that our data points are **not** independent of each other. Instead, subsets of the data points share a correlation structure. To take this into account, we used linear **mixed effects** models so observations of the same dissemination area can share the same **random effect/intercept**, making a correlation structure. This is denoted by `(1 | dissemination_area)` in the model code.
+
+Additionally, we are doing multiple tests to examine the effect of economic level on different elements of private urban forest composition. Without any correction, multiple tests run a higher risk of a type I error (rejecting a null hypothesis when it is true). To correct for this, we collected the p-values and applied a False Discovery Rate (aka Benjamini-Hochberg) correction, which keeps our expected proportion of type I errors under 0.05 in this study. We chose this less conservative approach over the Bonferroni correction (which controls for the probability of producing at least one type I error) since the consequences of a type I error from this study are not detrimental to human and environmental health.
+
+### 1.1 Is vegetation diversity correlated with income/property value?
+
+```{r}
+ggplot(data=stats_data, aes(x = economic_level, y = overall_garden_diversity)) + geom_point()
+```
+
+
+```{r}
+veg_div <- lmer(overall_garden_diversity ~ economic_level +
+                  (1 | dissemination_area), data = stats_data)
+
+summary(veg_div)
+
+p_values <- tibble(question = 'veg diversity vs. economic level',
+                  raw_p_value = summary(veg_div)$coefficients[2, "t value"])
+```
+
+### 1.2 How does canopy cover vary across economic levels?
+```{r}
+ggplot(data=stats_data, aes(x = economic_level, y = canopy_cover_garden)) + geom_point()
+```
+
+
+```{r}
+can_cover <- lmer(canopy_cover_garden ~ economic_level + (1 | dissemination_area), data = stats_data)
+
+summary(can_cover)
+
+p_values <- rbind(
+  p_values,
+  tibble(
+    question = 'canopy cover vs. economic level',
+    raw_p_value = summary(can_cover)$coefficients[2, "t value"]
+  )
+)
+```
+
+
+
+Are native species proportions influenced by income or garden size?
+
+```{r}
+# native_species <- lm(... ~ economic_level + garden_size, data = stats_data)
+# 
+# p_values <- rbind(
+#   p_values,
+#   tibble(
+#     question = 'native species vs. economic level and garden size',
+#     raw_p_value = tidy(native_species)$p.value[2]
+#   )
+# )
+```
+
+
+Adjust p-values
+
+```{r}
+p_values <- p_values |>
+  mutate(adjusted_p_value = p.adjust(raw_p_value, method='fdr'))
+
+p_values
+```
+
+## Chapter 2
+
+Is bird richness correlated with vegetation diversity? Does structural complexity predict bird richness? Does % native vegetation influence native bird richness? Does nearby green space (% within 100 m) affect bird diversity?
+
+```{r}
+# bird_richness <- lm(bird_diversity ~ overall_garden_diversity + ..., data = stats_data)
+# tidy(bird_richness)
+```
