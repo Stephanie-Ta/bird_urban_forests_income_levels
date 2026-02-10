@@ -107,7 +107,7 @@ vegetation_species_counts_per_da <- vegetation_data |>
 
 vegetation_top_5_species_counts_per_da <- vegetation_species_counts_per_da |>
   group_by(economic_level_k, .drop = FALSE) |>
-  slice(1:5)
+  slice(1:5) 
 ```
 
 ```{r, fig.width=7, fig.height=20}
