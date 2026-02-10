@@ -4,7 +4,8 @@
 
 ```{r}
 # change this file path as necessary
-DATA_SHEET_FILE_PATH = "data/raw/Data sheets & inventory.xlsx"
+DATA_FILE_PATH = "data/raw/Data sheets & inventory.xlsx"
+GARDEN_FILE_PATH = "data/raw/GARDENS_spreadsheet.xlsx"
 ```
 
 ## Loading Libraries
@@ -15,94 +16,213 @@ library(janitor)
 library(tidyverse)
 library(broom)
 library(lme4)
+library(lmerTest)
+library(plotly)
 ```
 
 ## Reading in Data
 
 ```{r message = FALSE, warning = FALSE}
-# get economic level per dissemination area
-overall_data <- read_excel(DATA_SHEET_FILE_PATH, sheet='Overall Analysis')
-economic_level_per_da <- overall_data |>
-  select(`Economic level (k)...21`:`DA...22`) |>  # select desired columns
+# get native percentage
+garden_data <- read_excel(GARDEN_FILE_PATH, sheet='Native_vs_not_GRAPHING') |>
+  select(House:Economic_level) |> # select necessary columns
   drop_na() |>  # remove empty rows
-  rename(economic_level_k = `Economic level (k)...21`,  # clean column names
-         dissemination_area = `DA...22`)
+  clean_names()  # clean column names
 
-stats_data <- read_excel(DATA_SHEET_FILE_PATH, sheet='Everything_statistics') |>
+native_percent <- garden_data |> # get native percentage per house
+  select(house, native_percent_total)
+
+# get main data
+stats_data <- read_excel(DATA_FILE_PATH, sheet='Everything_statistics') |>
   select(House:Tree_percentage) |>  # select necessary columns
   drop_na() |>  # remove empty rows
   clean_names() |>  # clean column names
-  mutate(dissemination_area = as.factor(str_sub(house, 1, 2)))
+  mutate(dissemination_area = as.factor(str_sub(house, 1, 2))) |> # add dissemination area
+  left_join(native_percent, by = join_by(house)) # add native percentage
+```
+
+```{r}
+# read in plant and shrub data
+plant_shrub_data <- read_excel(GARDEN_FILE_PATH, sheet='Plantsnshrub_per_garden') |>
+  clean_names() |>  # clean column names
+  fill(house, .direction = "down")  # fill in missing house values
+
+# isolate plant data
+plant_data <- plant_shrub_data |>
+  select(house, plants, native_or_not) |>
+  drop_na() |>
+  rename(name = plants, native_or_non_native = native_or_not) |>
+  mutate(type = "plant")
+
+# isolate shrub data
+shrub_data <- plant_shrub_data |>
+  select(house, shrubs, native_or_non) |>
+  drop_na() |>
+  rename(native_or_non_native = native_or_non, name =  shrubs) |>
+  mutate(type = "shrub")
+
+# put together plant and shrub data in a long format
+plant_shrub_data_clean <- bind_rows(plant_data, shrub_data) |>
+  mutate(native_or_non_native = case_when(native_or_non_native == "non" ~ "non-native",
+                                          TRUE ~ native_or_non_native))
+
+# read in tree data
+tree_data <- read_excel(GARDEN_FILE_PATH, sheet='Tree_per_garden') |>
+  clean_names() |>
+  select(id:crown_area_m2)
+
+subset_tree_data <- tree_data |>
+  select(id, common_name, native_or_non_native) |>
+  mutate(native_or_non_native = str_to_lower(native_or_non_native),
+         type = "tree") |>
+  rename(house = id, name = common_name)
+
+# put together plant, shrub, and tree data
+vegetation_data <- bind_rows(plant_shrub_data_clean, subset_tree_data) |>
+  mutate(dissemination_area = as.factor(str_sub(house, 1, 2)),   # add dissemination area
+         name = str_to_sentence(name))  # standardize capitalization of names
+
+# get economic level data per dissemination area
+economic_level_per_da <- read_excel(DATA_FILE_PATH, sheet='Overall Analysis') |>
+  select(`Economic level (k)...21`:`DA...22`) |>
+  drop_na() |>
+  rename(economic_level_k = `Economic level (k)...21`,
+         dissemination_area = `DA...22`)
+
+# add economic level to vegetation data
+vegetation_data <- vegetation_data |>
+  left_join(economic_level_per_da, by=join_by(dissemination_area))
 ```
 
 ## Exploratory Data Analysis
 
 ```{r}
+vegetation_species_counts_per_da <- vegetation_data |>
+  group_by(dissemination_area, economic_level_k, name, native_or_non_native, type) |>
+  summarize(number = n()) |>
+  ungroup() |>
+  arrange(economic_level_k, desc(number)) |>
+  mutate(da_el = str_c(dissemination_area, economic_level_k, sep = ", economic level: "),
+         da_el = fct_reorder(da_el, economic_level_k))
 
+vegetation_top_5_species_counts_per_da <- vegetation_species_counts_per_da |>
+  group_by(economic_level_k, .drop = FALSE) |>
+  slice(1:5)
+```
+
+```{r, fig.width=7, fig.height=20}
+ggplot(vegetation_top_5_species_counts_per_da,
+       aes(x = number, y = fct_reorder(name, -number), fill = type)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~da_el, ncol = 1, scales = "free_y", axes = "all_x") +
+  labs(title = "Top 5 Vegetation Species Per Dissemination Area/Economic Level",
+       x = "Number of Houses with the Species",
+       y = "Vegetation Species",
+       fill = "Vegetation Type")
 ```
 
 ## Chapter 1: How is Economic Level Associated with the Composition of Private Urban Forests?
 
-In Chapter 1, we aimed to analyze the effect of economic level on the composition of private urban forests. Given this goal, we used multiple models with economic level as the explanatory variable. 
-In this study, samples were taken per dissemination area. This means that our data points are **not** independent of each other. Instead, subsets of the data points share a correlation structure. To take this into account, we used linear **mixed effects** models so observations of the same dissemination area can share the same **random effect/intercept**, making a correlation structure. This is denoted by `(1 | dissemination_area)` in the model code.
+In Chapter 1, we aimed to analyze the effect of economic level on the composition of private urban forests. Given this goal, we used multiple models with economic level as the explanatory variable. In this study, samples were taken per dissemination area. This means that our data points are **not** independent of each other. Instead, subsets of the data points share a correlation structure. To take this into account, we used linear **mixed effects** models so observations of the same dissemination area can share the same **random effect/intercept**, making a correlation structure. This is denoted by `(1 | dissemination_area)` in the model code.
 
-Additionally, we are doing multiple tests to examine the effect of economic level on different elements of private urban forest composition. Without any correction, multiple tests run a higher risk of a type I error (rejecting a null hypothesis when it is true). To correct for this, we collected the p-values and applied a False Discovery Rate (aka Benjamini-Hochberg) correction, which keeps our expected proportion of type I errors under 0.05 in this study. We chose this less conservative approach over the Bonferroni correction (which controls for the probability of producing at least one type I error) since the consequences of a type I error from this study are not detrimental to human and environmental health.
+Additionally, we are doing multiple tests to examine the effect of economic level on different elements of private urban forest composition. Without any correction, multiple tests run a higher risk of a type I error (rejecting a null hypothesis when it is true). To correct for this, we collected the p-values and applied a False Discovery Rate (FDR, aka Benjamini-Hochberg) correction, which keeps our expected proportion of type I errors under 0.05 in this study. We chose this less conservative approach over the Bonferroni correction (which controls for the probability of producing at least one type I error) since the consequences of a type I error from this study are not detrimental to human and environmental health.
 
 ### 1.1 Is vegetation diversity correlated with income/property value?
 
 ```{r}
-ggplot(data=stats_data, aes(x = economic_level, y = overall_garden_diversity)) + geom_point()
+ggplot(data = stats_data,
+       aes(x = economic_level,
+           y = overall_garden_diversity)) +
+  geom_point()
 ```
 
-
 ```{r}
-veg_div <- lmer(overall_garden_diversity ~ economic_level +
+veg_div_model <- lmer(overall_garden_diversity ~ economic_level +
                   (1 | dissemination_area), data = stats_data)
 
-summary(veg_div)
+summary(veg_div_model)
 
 p_values <- tibble(question = 'veg diversity vs. economic level',
-                  raw_p_value = summary(veg_div)$coefficients[2, "t value"])
+                  raw_p_value = summary(veg_div_model)$coefficients[2, "Pr(>|t|)"])
 ```
 
 ### 1.2 How does canopy cover vary across economic levels?
+
 ```{r}
-ggplot(data=stats_data, aes(x = economic_level, y = canopy_cover_garden)) + geom_point()
+ggplot(data = stats_data,
+       aes(x = economic_level,
+           y = canopy_cover_garden)) +
+  geom_point()
 ```
 
-
 ```{r}
-can_cover <- lmer(canopy_cover_garden ~ economic_level + (1 | dissemination_area), data = stats_data)
+can_cover_model <- lmer(canopy_cover_garden ~ economic_level +
+                    (1 | dissemination_area), data = stats_data)
 
-summary(can_cover)
+summary(can_cover_model)
 
 p_values <- rbind(
   p_values,
   tibble(
     question = 'canopy cover vs. economic level',
-    raw_p_value = summary(can_cover)$coefficients[2, "t value"]
+    raw_p_value = summary(can_cover_model)$coefficients[2, "Pr(>|t|)"]
   )
 )
 ```
 
-
-
-Are native species proportions influenced by income or garden size?
+### 1.3 Are native species proportions influenced by income or garden size?
 
 ```{r}
-# native_species <- lm(... ~ economic_level + garden_size, data = stats_data)
-# 
-# p_values <- rbind(
-#   p_values,
-#   tibble(
-#     question = 'native species vs. economic level and garden size',
-#     raw_p_value = tidy(native_species)$p.value[2]
-#   )
-# )
+ggplot(data = stats_data,
+       aes(x = economic_level,
+           y = native_percent_total)) +
+  geom_point()
 ```
 
+```{r}
+native_species_model <- lmer(native_percent_total ~ economic_level +
+                       (1 | dissemination_area), data = stats_data)
 
-Adjust p-values
+summary(native_species_model)
+
+p_values <- rbind(
+  p_values,
+  tibble(
+    question = 'native species percentage vs. economic level',
+    raw_p_value = summary(native_species_model)$coefficients[2, "Pr(>|t|)"]
+  )
+)
+```
+
+### 1.4 Is Garden Size influenced by economic level?
+
+```{r}
+ggplot(data = stats_data,
+       aes(x = economic_level,
+           y = garden_size)) +
+  geom_point()
+```
+
+```{r}
+garden_size_model <- lmer(garden_size ~ economic_level +
+                       (1 | dissemination_area), data = stats_data)
+
+summary(garden_size_model)
+
+p_values <- rbind(
+  p_values,
+  tibble(
+    question = 'garden size vs. economic level',
+    raw_p_value = summary(garden_size_model)$coefficients[2, "Pr(>|t|)"]
+  )
+)
+```
+
+### Adjust p-values
+
+Here, we adjusted the p-values of the coefficients of each private urban forest composition measure using the FDR correction.
+
+We can see that economic level does not have a significant association with vegetation diversity (adjusted p-value = 0.9226) or native species percentage (adjusted p-value = 0.5931). However, it does have a significant association canopy cover (adjusted p-value = 0.0204) and garden size (adjusted p-value = 0.00999).
 
 ```{r}
 p_values <- p_values |>
@@ -111,11 +231,27 @@ p_values <- p_values |>
 p_values
 ```
 
-## Chapter 2
+## Chapter 2: Bird Species Richness
 
-Is bird richness correlated with vegetation diversity? Does structural complexity predict bird richness? Does % native vegetation influence native bird richness? Does nearby green space (% within 100 m) affect bird diversity?
+In this chapter, we aimed to investigate the following questions:
+
+Is bird richness associated with vegetation diversity? Does canopy cover predict bird richness? Does % native vegetation influence native bird richness?
+
+Again, we used a linear mixed effects model to take into account that observations were made per dissemination area and are not independent. Again, we used a FDR correction.
 
 ```{r}
-# bird_richness <- lm(bird_diversity ~ overall_garden_diversity + ..., data = stats_data)
-# tidy(bird_richness)
+bird_richness <- lmer(bird_diversity ~ overall_garden_diversity +
+                        canopy_cover_garden +
+                        native_percent_total +
+                        economic_level +
+                        (1 | dissemination_area),
+                      data = stats_data)
+
+bird_richness_results <- summary(bird_richness)$coefficients |>
+   as.data.frame() |>
+  mutate(adjusted_p_value = p.adjust(`Pr(>|t|)`, 'fdr'))
+
+bird_richness_results
 ```
+
+From the table above, it does not appear that overall garden diversity, canopy cover, native plant percentage, or economic level have a significant association with bird species richness.
