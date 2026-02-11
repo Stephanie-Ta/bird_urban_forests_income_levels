@@ -10,7 +10,7 @@ GARDEN_FILE_PATH = "data/raw/GARDENS_spreadsheet.xlsx"
 
 ## Loading Libraries
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(readxl)
 library(janitor)
 library(tidyverse)
@@ -18,6 +18,7 @@ library(broom)
 library(lme4)
 library(lmerTest)
 library(plotly)
+library(knitr)
 ```
 
 ## Reading in Data
@@ -41,7 +42,7 @@ stats_data <- read_excel(DATA_FILE_PATH, sheet='Everything_statistics') |>
   left_join(native_percent, by = join_by(house)) # add native percentage
 ```
 
-```{r}
+```{r message = FALSE, warning = FALSE}
 # read in plant and shrub data
 plant_shrub_data <- read_excel(GARDEN_FILE_PATH, sheet='Plantsnshrub_per_garden') |>
   clean_names() |>  # clean column names
@@ -96,7 +97,7 @@ vegetation_data <- vegetation_data |>
 
 ## Exploratory Data Analysis
 
-```{r}
+```{r message = FALSE, warning = FALSE}
 vegetation_species_counts_per_da <- vegetation_data |>
   group_by(dissemination_area, economic_level_k, name, native_or_non_native, type) |>
   summarize(number = n()) |>
@@ -136,7 +137,7 @@ ggplot(data = stats_data,
   geom_point()
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 veg_div_model <- lmer(overall_garden_diversity ~ economic_level +
                   (1 | dissemination_area), data = stats_data)
 
@@ -155,7 +156,7 @@ ggplot(data = stats_data,
   geom_point()
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 can_cover_model <- lmer(canopy_cover_garden ~ economic_level +
                     (1 | dissemination_area), data = stats_data)
 
@@ -179,7 +180,7 @@ ggplot(data = stats_data,
   geom_point()
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 native_species_model <- lmer(native_percent_total ~ economic_level +
                        (1 | dissemination_area), data = stats_data)
 
@@ -203,7 +204,7 @@ ggplot(data = stats_data,
   geom_point()
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 garden_size_model <- lmer(garden_size ~ economic_level +
                        (1 | dissemination_area), data = stats_data)
 
@@ -224,11 +225,11 @@ Here, we adjusted the p-values of the coefficients of each private urban forest 
 
 We can see that economic level does not have a significant association with vegetation diversity (adjusted p-value = 0.9226) or native species percentage (adjusted p-value = 0.5931). However, it does have a significant association canopy cover (adjusted p-value = 0.0204) and garden size (adjusted p-value = 0.00999).
 
-```{r}
+```{r, warning=FALSE}
 p_values <- p_values |>
   mutate(adjusted_p_value = p.adjust(raw_p_value, method='fdr'))
 
-p_values
+kable(p_values)
 ```
 
 ## Chapter 2: Bird Species Richness
@@ -239,7 +240,7 @@ Is bird richness associated with vegetation diversity? Does canopy cover predict
 
 Again, we used a linear mixed effects model to take into account that observations were made per dissemination area and are not independent. Again, we used a FDR correction.
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 bird_richness <- lmer(bird_diversity ~ overall_garden_diversity +
                         canopy_cover_garden +
                         native_percent_total +
@@ -251,7 +252,7 @@ bird_richness_results <- summary(bird_richness)$coefficients |>
    as.data.frame() |>
   mutate(adjusted_p_value = p.adjust(`Pr(>|t|)`, 'fdr'))
 
-bird_richness_results
+kable(bird_richness_results)
 ```
 
 From the table above, it does not appear that overall garden diversity, canopy cover, native plant percentage, or economic level have a significant association with bird species richness.
