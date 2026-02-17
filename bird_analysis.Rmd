@@ -150,12 +150,21 @@ ggplot(bird_stats_data, aes(x=native_percent_total, y=species)) +
 
 ## GAMS
 
+Suggested GAMs:
 1. detection probability GAM with canopy cover or vegetation diversity
 2. presence probability vs native plant%
 
-### Number of unique houses per species
+→ I think we can do a logistic regression model to model the presence or absence of a species using predictors such as canopy cover, vegetation diversity, and native plant %. We can use an step wise approach or other approach to select our predictors, and the model output should tell us which predictors are actually significant.
+
+However, we might not be able to do this for species that are either present at nearly every house or absent from nearly all houses.
+
+
+Quick look at number of unique houses per species:
 ```{r}
 n_houses_per_species <- bird_subset_data |>
   group_by(species) |>
-  summarise(n_houses = n_distinct(house))
+  summarise(n_houses = n_distinct(house)) |>
+  arrange(n_houses)
+
+n_houses_per_species
 ```
