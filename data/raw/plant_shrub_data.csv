@@ -1,0 +1,706 @@
+House;Species;Native;Type;Fruiting;Flowering;Grain
+P11;Rutabaga;non;Plant;n;n;n
+;Leek;non;Plant;n;n;n
+;Bok choy;non;Plant;n;n;n
+;Garlic;non;Plant;n;n;n
+;English Holly;non;Plant;n;n;n
+;Juniperus comunis;native;Shrub;n;n;n
+;Ilex;non;Shrub;n;n;n
+;Chamaecyparis;non;Shrub;n;n;n
+P12;Aloe vera;non;Plant;n;n;n
+;Ditch lily;non;Plant;n;n;n
+;Chives;non;Plant;n;n;n
+;Sorrel;non;Plant;n;n;n
+;Pussy willow;native;Plant;n;n;n
+;Tiger lily;non;Plant;n;n;n
+;Peony;non;Plant;n;n;n
+;Sweet woodruff;non;Plant;n;n;n
+;New england aster;native;Plant;n;n;n
+;Large yellow loosestrife;non;Plant;n;n;n
+;Indian Shot;non;Plant;n;n;n
+;Actinidia chinensis;non;Shrub;n;n;n
+;Rosa chinensis;non;Shrub;n;n;n
+;Wisteria sinensis;non;Shrub;n;n;n
+P13;mugwort;non;Plant;n;n;n
+;Jerusalem artichoke;non;Plant;n;n;n
+;sweet fennel;non;Plant;n;n;n
+;field mustard;non;Plant;y;n;n
+;rue;non;Plant;n;n;n
+;lady fern;native;Plant;n;n;n
+;dandelion;non;Plant;n;n;n
+;bouncing-bet;non;Plant;n;n;n
+;rhubarb;non;Plant;n;n;n
+;Spanish bluebell;non;Plant;n;n;n
+;garden snapdragon;non;Plant;n;n;n
+;wall lettuce;non;Plant;n;n;n
+;common evening-primrose;non;Plant;n;n;n
+;orpine;non;Plant;n;n;n
+;clustered bellflower;non;Plant;y;n;n
+;feverfew;non;Plant;n;n;n
+;European plum;non;Plant;n;n;n
+;fringed willowherb;native;Plant;n;n;n
+;clammy ground cherry;non;Plant;n;n;n
+;creeping woodsorrel;non;Plant;n;n;n
+;spearmint;non;Plant;n;n;n
+;obedient plant;non;Plant;n;n;n
+;common plantain;non;Plant;n;n;n
+;chives;non;Plant;n;n;n
+;oregano;non;Plant;n;n;n
+;china rose;non;Shrub;y;n;n
+;Chinese boxthorn;non;Shrub;n;n;n
+;Chinese wolfberry;non;Shrub;n;n;n
+P14;buckwheat;non;Plant;y;n;n
+;creeping jenny;non;Plant;n;n;n
+;common bugle;non;Plant;n;n;n
+;montbretia;non;Plant;y;n;n
+;tiger lily;non;Plant;y;n;n
+;blue fescue;non;Plant;n;n;n
+;japanese maple;non;Shrub;n;n;n
+;hortensia;non;Shrub;y;n;n
+;japanese pieris;non;Shrub;n;n;n
+;mirror plant;non;Shrub;n;n;n
+;rose of sharon;non;Shrub;n;n;n
+;dappled willow;non;Shrub;y;n;n
+;pacific rhododendron;native;Shrub;n;n;n
+P21;Spanish bluebell;non;Plant;n;n;n
+;Creeping buttercup;non;Plant;n;n;n
+;Ditch lily;non;Plant;n;n;n
+;Hot pepper;non;Plant;n;n;n
+;Onion;non;Plant;n;n;n
+;Rosemary;non;Plant;n;n;n
+;garden tulips;non;Plant;n;n;n
+;oregano;non;Plant;n;n;n
+;Plantain lily;non;Plant;n;n;n
+;Spring onion;non;Plant;n;n;n
+;Strawberry;native;Plant;y;n;n
+;Hardy fuchsia;non;Plant;y;n;n
+;Vine kiwi;non;Shrub;n;n;n
+;Highbush blueberry;native;Shrub;n;n;n
+;Red raspberry;native;Shrub;n;n;n
+;Common boxwood;non;Shrub;n;n;n
+P22;Spanish bluebell;non;Plant;n;n;n
+;Solomon's seal;native;Plant;n;n;n
+;lop grass;non;Plant;n;n;y
+;tiger lily;non;Plant;n;n;n
+;common sowthistle;non;Plant;n;n;n
+;crevice alumroot;non;Plant;n;n;n
+;tiger flower;non;Plant;n;n;n
+;common bugle;non;Plant;y;n;n
+;cheddar pink;non;Plant;n;n;n
+;wall lettuce;non;Plant;n;n;n
+;creeping buttercup;non;Plant;y;n;n
+;red hot poker;non;Plant;n;n;n
+;lenten rose;non;Plant;n;n;n
+;lesser trefoil;non;Plant;n;n;n
+;white clover;non;Plant;y;n;n
+;Pacific rhododendron;native;Shrub;n;n;n
+;Japanese skimmia;non;Shrub;n;n;n
+;Japanese maple;non;Shrub;n;n;n
+;Japanese camellia ;non;Shrub;n;n;n
+;Spurge laurel;non;Shrub;n;n;n
+P31;choy sum;non;Plant;n;n;n
+;crown daisy;non;Plant;n;n;n
+;beet;non;Plant;n;n;n
+;field mustard;non;Plant;n;n;n
+;potato;non;Plant;n;n;n
+;garlic;non;Plant;n;n;n
+;chives;non;Plant;n;n;n
+;lettuce;non;Plant;n;n;n
+;pea;non;Plant;n;n;n
+;strawberry;native;Plant;n;n;n
+;radish;non;Plant;n;n;n
+;common mugwort;non;Plant;n;n;n
+;Iceland poppy;non;Plant;y;n;n
+;garden lupine;non;Plant;y;n;n
+;garden tulip;non;Plant;n;n;n
+;chameleon plant;non;Plant;n;n;n
+;tomato;non;Plant;n;n;n
+;wild dafodil;non;Plant;n;n;n
+;evergreen azalea;non;Plant;y;n;n
+;Serbian bellflower;non;Plant;y;n;n
+;rose campion;non;Plant;n;n;n
+;hardy fuchsia;non;Plant;n;n;n
+;purple bergenia;non;Plant;y;n;n
+;Japanese honeysuckle;non;Plant;n;n;n
+;bearded iris;non;Plant;y;n;n
+;creeping buttercup;non;Plant;y;n;n
+;purple rock cress;non;Plant;y;n;n
+;common mallow;non;Plant;n;n;n
+;Chinese wisteria;non;Shrub;n;n;n
+;Rue;non;Shrub;n;n;n
+;China rose;non;Shrub;y;n;n
+;peony;non;Shrub;y;n;n
+;Chinese wolfberry;non;Shrub;n;n;n
+;tree peony;non;Shrub;y;n;n
+;blueblossom;non;Shrub;y;n;n
+;Japanese maple;non;Shrub;n;y;n
+;Japanese pieris;non;Shrub;y;n;n
+;heavenly bamboo;non;Shrub;y;n;n
+;fig;non;Shrub;n;y;n
+;chayote;non;Shrub;n;n;n
+P32;Kentucky bluegrass;non;Plant;n;n;y
+;Spanish bluebell;non;Plant;n;n;n
+;chameleon plant;non;Plant;n;n;n
+;corn speedwell;non;Plant;n;n;n
+;common sage;non;Plant;n;n;n
+;creeping buttercup;non;Plant;y;n;n
+;eastern bluestar;non;Plant;n;n;n
+;large bindweed;non;Plant;n;n;n
+;Pacific rhododendron;native;Shrub;n;n;n
+;oriental arbovitae;non;Shrub;n;n;n
+;highbush blueberry;native;Shrub;y;n;n
+;China rose;non;Shrub;y;n;n
+;bay laurel;non;Shrub;n;n;n
+;common boxwood;non;Shrub;n;n;n
+P41;rhubarb;non;Plant;n;n;n
+;tomato;non;Plant;n;n;n
+;field pumpkin;non;Plant;n;n;n
+;chives;non;Plant;y;n;n
+;garden pea;non;Plant;n;n;n
+;cucumber;non;Plant;n;n;n
+;lovage;non;Plant;n;n;n
+;poeny;non;Plant;y;n;n
+;ditch lily;non;Plant;n;n;n
+;sweet alyssum;non;Plant;y;n;n
+;orange coneflower;non;Plant;n;n;n
+;zonal geranium;non;Plant;n;n;n
+;dense blazing star;non;Plant;n;y;n
+;New York aster;non;Plant;n;n;n
+;Siebold's plantain lily;non;Plant;n;y;n
+;yellow daylily;non;Plant;y;n;n
+;glandular cape marigold;non;Plant;y;n;n
+;garden snapdragon;non;Plant;y;n;n
+;garden dahlia;non;Plant;y;n;n
+;sea thrift;non;Plant;y;n;n
+;balloon flower;non;Plant;n;n;n
+;wax begonia;non;Plant;y;n;n
+;Serbian bellflower;non;Plant;y;n;n
+;regal geranium;non;Plant;y;n;n
+;large-petal globeflower;non;Plant;y;n;n
+;false buck'sbeard;non;Plant;n;y;n
+;red raspberry;native;Shrub;n;n;n
+;red currant;non;Shrub;n;n;n
+;multiflora rose;non;Shrub;n;n;n
+;pacific rhododendron;native;Shrub;n;n;n
+;China rose;non;Shrub;n;n;n
+;western red cedar;native;Shrub;n;n;n
+;evergreen azalea;non;Shrub;n;n;n
+;bigleaf hydrangea;non;Shrub;n;n;n
+;English lavender;non;Shrub;n;n;n
+;virgin's bower;non;Shrub;n;n;n
+M11;seersucker sedge;non;Plant;n;n;y
+;British Columbia wild ginger;native;Plant;n;n;n
+;common snowberry;native;Plant;n;n;n
+;aleutian maidenhair;native;Plant;n;n;n
+;sweet alyssum;non;Plant;y;n;n
+;woodland strawberry;native;Plant;y;n;n
+;Ram's horn;non;Plant;y;n;n
+;pregnant onion;non;Plant;n;n;n
+;common columbine;native;Plant;n;n;n
+;beefsteak plant;non;Plant;n;n;n
+;spurge laurel;non;Plant;n;n;n
+;agueweed;non;Plant;n;n;n
+;plantain lily;non;Plant;n;n;n
+;peony;non;Plant;y;n;n
+;solomon's seal;native;Plant;n;n;n
+;siberian bugloss;non;Plant;y;n;n
+;meadow buttercup;non;Plant;n;n;n
+;lenten rose;non;Plant;y;n;n
+;American beautyberry;non;Plant;n;n;n
+;ostrich fern;native;Plant;n;n;n
+;cypress spurge;non;Plant;y;n;n
+;barrenwort;non;Plant;n;n;n
+;fringed loosestrife;non;Plant;n;n;n
+;bear's breech;non;Plant;n;n;n
+;heavenly bamboo;non;Plant;n;n;n
+;paperplant;non;Plant;n;n;n
+;bigleaf hydrangea;non;Plant;n;n;n
+;bush lily;non;Plant;n;n;n
+;spotted dead nettles;non;Plant;n;n;n
+;rose campion;non;Plant;n;n;n
+;american alumroot;non;Plant;n;n;n
+;western blue virginsbower;native;Plant;y;n;n
+;bacopa;non;Plant;y;n;n
+;oakleaf hydrangea;non;Plant;n;n;n
+;hardy fuchsia;non;Plant;n;n;n
+;new guinea impatiens;non;Plant;y;n;n
+;chives;non;Plant;n;n;n
+;cleft phlox;non;Plant;n;n;n
+;rocky mountain penstemon;non;Plant;y;n;n
+;poppy anemone;non;Plant;y;n;n
+;Jacob's ladder;non;Plant;n;n;n
+;garden asparagus;non;Plant;n;n;n
+;yellow marsh marigold;non;Plant;n;n;n
+;ground elders;non;Plant;n;n;n
+;cow parsley;non;Plant;n;n;n
+;hakone grass;non;Plant;n;n;n
+;queen of the prairie;non;Plant;n;n;n
+;bloodroot;non;Plant;n;n;n
+;goat's beard;native;Plant;n;n;n
+;rose of sharon;non;Plant;n;n;n
+;culver's root;native;Plant;n;n;n
+;leafy spurge;non;Plant;n;n;n
+;hart's-tongue fern;non;Plant;n;n;n
+;lakeshore sedge;native;Plant;n;n;n
+;purple marshlocks;non;Plant;n;n;n
+;common primrose;non;Plant;n;n;n
+;marguerite daisy;non;Plant;n;n;n
+;canadian anemone;native;Plant;y;n;n
+;brook saxifrage;native;Plant;y;n;n
+;red huckleberry;native;Shrub;n;y;n
+;Mexican orange;non;Shrub;n;n;n
+;Chinese wisteria;non;Shrub;n;n;n
+;multiflora rose;non;Shrub;y;n;n
+;Pacific rhododendron;native;Shrub;n;n;n
+;Japanese skimmia;non;Shrub;n;n;n
+;vine maple;native;Shrub;n;n;n
+;common boxwood;non;Shrub;n;n;n
+;vasevine;non;Shrub;n;n;n
+;evergreen candytuft;non;Shrub;n;n;n
+;tree peony;non;Shrub;n;n;n
+;virginia sweetspire;non;Shrub;n;n;n
+;Chinese clematis;non;Shrub;n;n;n
+;common myrtle;non;Shrub;n;n;n
+;sweet mock-orange;native;Shrub;n;n;n
+;western azalea;non;Shrub;n;n;n
+;tea-oil camellia;non;Shrub;n;n;n
+;buttonwood;non;Shrub;n;n;n
+;japanese camellia;non;Shrub;n;n;n
+;smooth hydrangea;non;Shrub;n;n;n
+M12;pacific bleeding heart;native;Plant;y;n;n
+;crinklerroot;non;Plant;n;n;n
+;greater masterwort;non;Plant;n;n;n
+;woodland strawberry;native;Plant;n;n;n
+;spanish bluebell;non;Plant;n;n;n
+;smooth hydrangea;non;Shrub;n;n;n
+;Pacific Rhododendron;non;Shrub;n;n;n
+;Lewis' mock orange;native;Shrub;n;n;n
+;Thuja occcidentalis;native;Shrub;n;n;n
+M13;siebold's plantain lily;non;plant;n;n;n
+;large bindweed;non;plant;n;n;n
+;hydrangea;non;Shrub;n;n;n
+;common boxwood;non;Shrub;n;n;n
+;oriental arborvitae;non;Shrub;n;n;n
+M14;Busy Lizzie ;non;Plant;y;n;n
+;lady fern;native;Plant;n;n;n
+;Common foxglove;non;Plant;y;n;n
+;Lenten rose;non;Plant;n;n;n
+;cornflower;non;Plant;n;n;n
+;Rhubarb;non;Plant;n;n;n
+;spearmint;non;Plant;n;n;n
+;Rosemint;non;Plant;n;n;n
+;creeping jenny;non;Plant;n;n;n
+;chives;non;Plant;n;n;n
+;sweet william;non;Plant;n;n;n
+;strawberry;native;Plant;n;n;n
+;raddish;non;Plant;n;n;n
+;tomato;non;Plant;n;n;n
+;garden nasturtium;non;Plant;n;n;n
+;African marigold;non;Plant;y;n;n
+;annual honesty;non;Plant;n;n;n
+;plantain lily;non;Plant;n;n;n
+;common holly lock;non;Plant;n;n;n
+;august lily;non;Plant;n;n;n
+;grapeleaf anemone;non;Plant;n;n;n
+;cabbage;non;Plant;n;n;n
+; Lettuce;non;Plant;n;n;n
+;creeping buttercup;non;Plant;n;n;n
+;ditch lily;non;Plant;n;n;n
+;winter creeper;non;Plant;n;n;n
+;Japanese meadowsweet;non;Plant;n;n;n
+;Asian virginsbower;non;Plant;n;n;n
+;Peruvian lily;non;Plant;n;n;n
+;western wallflower;native;Plant;n;n;n
+;cabbage tree ;non;Plant;n;n;n
+;crevice alumroot ;native;Plant;y;n;n
+;zonal geranium;non;Plant;y;n;n
+;garden petunia;non;Plant;y;n;n
+;basil;non;Plant;n;n;n
+;Johnny jump up ;non;Plant;y;n;n
+;hardy fuchsia;non;Plant;n;n;n
+;Sweet alyssum;non;Plant;y;n;n
+;Spanish bluebell;non;Plant;y;n;n
+;Sticky geranium;native;Plant;y;n;n
+;Western sword fern;native;Plant;n;n;n
+;Vanhouttei spires;non;Shrub;y;n;n
+;China rose ;non;Shrub;n;n;n
+;Peony;non;Shrub;n;n;n
+;Weeping forsythia;non;Shrub;n;n;n
+;Tree peony;non;Shrub;n;n;n
+;Rose of sharon;non;Shrub;n;n;n
+;Sweet mock orange;native;Shrub;y;n;n
+;common ninebark;native;Shrub;y;n;n
+;Chinese wisteria;non;Shrub;y;n;n
+;Bigleaf hydrangea;non;Shrub;y;n;n
+;False spirea;non;Shrub;n;n;n
+M21;chives;non;Plant;n;n;n
+;creeping buttercup;non;Plant;n;n;n
+;wall lettuce;non;Plant;n;n;n
+;field horsetail;native;Plant;n;n;n
+;bindweed;non;Plant;n;n;n
+;ditch lily;non;Plant;n;n;n
+;China rose;non;Shrub;n;n;n
+;sweat mock orange;native;Shrub;n;n;n
+;red raspberry;native;Shrub;n;n;n
+;highbush blueberry;native;Shrub;n;n;n
+M22;onion;non;Plant;n;n;n
+;large bindweed;non;Plant;y;n;n
+;english ivy;non;Plant;n;n;n
+;lady fern;native;Plant;n;n;n
+;yellow corydalis;non;Plant;y;n;n
+;siberian bugloss;non;Plant;y;n;n
+;english holly;non;Plant;n;n;n
+;plantain lily;non;Plant;n;n;n
+;China rose;non;Shrub;n;n;n
+;common boxwood;non;Shrub;n;n;n
+;Thuja accidentalis;non;Shrub;n;n;n
+;English holly;non;Shrub;n;n;n
+;common hawthorn;non;Shrub;n;n;n
+M23;plantain lily;non;Plant;n;n;n
+;dusty miller;non;Plant;n;n;n
+;creeping jenny;non;Plant;n;n;n
+;zonal geranium;non;Plant;y;n;n
+;lady fern;native;Plant;n;n;n
+;english ivy;non;Plant;n;n;n
+;creeping woodsorrel;non;Plant;n;n;n
+;spanish bluebell;non;Plant;n;n;n
+;garden snapdragon;non;Plant;y;n;n
+;herb robert;native;Plant;y;n;n
+;woodland strawberry;native;Plant;n;n;n
+;fragrant sweet box;non;Plant;n;n;n
+;lenten rose;non;Plant;n;n;n
+;common daisy;non;Plant;y;n;n
+;feverfew;non;Plant;n;n;n
+;wild daffodil;non;Plant;n;n;n
+;hardy fuchsia;non;Plant;n;n;n
+;common columbine;native;Plant;n;n;n
+;large white petunia;non;Plant;n;n;n
+;sweet alyssum;non;Plant;y;n;n
+;chives;non;Plant;n;n;n
+;peony;non;Plant;n;n;n
+;rhubarb;non;Plant;n;n;n
+;tiger lily;non;Plant;n;n;n
+;dill;non;Plant;n;n;n
+;coriander;non;Plant;n;n;n
+;solomon's seal;native;Plant;y;n;n
+;edging lobelia;non;Plant;n;n;n
+;common yarrow;native;Plant;n;n;n
+;virginia creeper;non;Plant;n;n;n
+;rockspray cotoneaster;non;shrub;y;n;n
+;pacific rhododendron;native;shrub;y;n;n
+;autumn sage;non;shrub;n;n;n
+;western red cedar;non;shrub;n;n;n
+;trumpet honeysuckle;non;shrub;n;n;n
+;multiflora rose;non;shrub;n;n;n
+;japanese skimmia;non;shrub;n;y;n
+;smooth hydrangea;non;shrub;n;n;n
+M24;lady fern;native;Plant;n;n;n
+;iceland poppy;non;Plant;n;n;n
+;herb robert;native;Plant;n;n;n
+;creeping buttercup;non;Plant;n;n;n
+;peony;non;Plant;n;n;n
+;spanish bluebell;non;Plant;n;n;n
+;pacific rhododendron;native;Shrub;y;n;n
+;common lilac;non;Shrub;y;n;n
+;china rose;non;Shrub;n;n;n
+;chinese wisteria;non;Shrub;y;n;n
+;Japanese flowering quince;non;Shrub;n;n;n
+;sweet mock orange;native;Shrub;n;n;n
+M31;creeping buttercup;non;Plant;n;n;n
+;sword fern;native;Plant;n;n;n
+;lady fern;native;Plant;n;n;n
+;leafy spurge;non;Plant;n;n;n
+;strawberry;native;Plant;y;n;n
+;tomato;non;Plant;n;y;n
+;spanish bluebell;non;Plant;n;n;n
+;english lavender;non;Plant;n;n;n
+;giant onion;non;Plant;y;n;n
+;plantain lily;non;Plant;n;n;n
+;china rose;non;Shrub;y;n;n
+;peony;non;Shrub;n;n;n
+;yellow flag;non;Shrub;y;n;n
+;rockspray cotoneaster;non;Shrub;y;n;n
+;japanese skimmia;non;Shrub;n;y;n
+;old fashioned weigela;non;Shrub;y;n;n
+;dog rose;non;Shrub;y;n;n
+;Thuja occidentalis;non;Shrub;n;n;n
+;french rose;non;Shrub;y;n;n
+;evergreen spindle;non;Shrub;n;n;n
+M41;garden verbena;non;Plant;y;n;n
+;garden petunia;non;Plant;y;n;n
+;lenten rose;non;Plant;y;n;n
+;plantain lily;non;Plant;n;n;n
+;hakone grass;non;Plant;n;n;y
+;upright sedge;non;Plant;n;n;n
+;lily of the valley;non;Plant;n;n;n
+;hart's tongue fern;non;Plant;n;n;n
+;creeping jenny;non;Plant;n;n;n
+;bacopa;non;Plant;n;n;n
+;evergreen candytuft;non;Plant;n;n;n
+;chives;non;Plant;y;n;n
+;wax begonia;non;Plant;y;n;n
+;big blue lilyturf;non;Plant;n;n;n
+;western red cedar;native;shrub;n;n;n
+;japanese camellia;non;shrub;n;n;n
+;japanese yew;non;shrub;n;n;n
+;japanese pieris;non;shrub;n;n;n
+;sweet osmanthus;non;shrub;n;n;n
+;star jasmine;non;shrub;n;n;n
+;panicle hydrangea;non;shrub;n;n;n
+;false spiraea;non;shrub;n;n;n
+;alpen rose;non;shrub;n;n;n
+;pacific rhododendron;native;shrub;n;n;n
+;vasvine;non;shrub;y;n;n
+;false azalea;native;shrub;y;n;n
+;japanese maple;non;shrub;n;n;n
+;common boxwood;non;shrub;y;n;n
+;great laurel;native;shrub;y;n;n
+;common lilac;non;shrub;y;n;n
+;smoketree;non;shrub;y;n;n
+;japanese snowbell;non;shrub;y;n;n
+M42;chives;non;Plant;n;n;n
+;sweet fennel;non;Plant;n;n;n
+;garlic;non;Plant;n;n;n
+;lettuce;non;Plant;n;n;n
+;wall lettuce;non;Plant;n;n;n
+;large bindweed;non;Plant;n;n;n
+;english ivy;non;Plant;n;n;n
+;grapeleaf anemone;non;Plant;n;n;n
+;creeping buttercup;non;Plant;y;n;n
+;iceland poppy;non;Plant;y;n;n
+;common nipplewort;non;Plant;n;n;n
+;creeping woodsorrel;non;Plant;n;n;n
+;thimbleberry;native;Plant;n;n;n
+;western sword fern;native;Plant;n;n;n
+;ground elder;non;Plant;n;n;n
+;horseradish;non;Plant;n;n;n
+;common bean;non;Plant;n;n;n
+;common columbine;native;Plant;n;n;n
+;rhubarb;non;Plant;n;n;n
+;parsley;non;Plant;n;n;n
+;heavenly bamboo;non;shrub;n;y;n
+;spurge laurel;non;shrub;n;n;n
+;great laurel;native;shrub;n;n;n
+;japanese cherry;non;shrub;n;n;n
+;peony;non;shrub;n;n;n
+;panicle hydrangea;non;shrub;n;n;n
+;ginkgo;non;shrub;n;n;n
+;japanese camellia;non;shrub;n;n;n
+R11;orpine;non;Plant;n;n;n
+;common bugloss;non;Plant;n;n;n
+;candle larkspur;non;Plant;n;n;n
+;basil;non;Plant;n;n;n
+;chives;non;Plant;n;n;n
+;longleaf speedwell;non;Plant;n;n;n
+;Spanish bluebell;non;Plant;n;n;n
+;English ivy;non;Plant;n;n;n
+;English lavender;non;Shrub;n;n;n
+;Cape jasmine;non;Shrub;n;n;n
+;Japanese yew;non;Shrub;n;n;n
+;Canada yew;native;Shrub;n;n;n
+;Oriental arborvitae;non;Shrub;n;n;n
+;Pacific rhododendron;native;Shrub;n;n;n
+R12;Lavender;non;plant;n;n;n
+;Parsley;non;plant;n;n;n
+;mint;non;plant;n;n;n
+;common Sage;non;plant;n;n;n
+;blueberry;native;plant;n;n;n
+;white impatiens;non;plant;n;n;n
+;false buck's beard;native;plant;n;n;n
+;Lenten rose;non;plant;n;n;n
+;dusty miller;non;plant;n;n;n
+;garden dahlia;non;plant;n;n;n
+;Japanese maple;non;Shrub;n;n;n
+;Common boxwood;non;Shrub;n;n;n
+;Siberian dogwood;non;Shrub;n;n;n
+;Paeonia lactiflora;non;Shrub;n;n;n
+;Tree peony;non;Shrub;y;n;n
+;Japanese yew;non;Shrub;n;n;n
+;common lilac;non;Shrub;y;n;n
+;Chinese wisteria;non;Shrub;y;n;n
+;Winter creeper;non;Shrub;n;n;n
+R13;garden tulip;non;Plant;n;n;n
+;sword fern;native;Plant;n;n;n
+;English ivy;non;Plant;n;n;n
+;winter creeper;non;Plant;n;n;n
+;plantain lily;non;Plant;n;n;n
+;Iceland poppy;non;Plant;n;n;n
+;spurge laurel;non;Plant;n;n;n
+;thimbleberry;native;Plant;n;n;n
+;Spanish bluebell;non;Plant;n;n;n
+;Fatsia japonica;non;Plant;n;n;n
+;Norway spruce;non;shrub;n;n;n
+;pacific rhododendron;native;shrub;n;n;n
+;red cedar;native;shrub;n;n;n
+;false chestnut;non;shrub;n;n;n
+;Mexican orange;non;shrub;n;n;n
+;Japanese maple;non;shrub;n;n;n
+;Pieris japonica;non;shrub;n;n;n
+;Japanese skimmia;non;shrub;n;n;n
+;Chinese photinia;non;shrub;n;n;n
+;Japanese laurel;non;shrub;n;n;n
+;bigleaf hydrangea;non;shrub;n;n;n
+R21;Strawberry;native;Plant;n;n;n
+;Feverfew;non;Plant;y;n;n
+;old-fashioned weigela;non;Plant;n;n;n
+;shasta daisy;non;Plant;n;n;n
+;Peppermint;non;Plant;n;n;n
+;chives;non;Plant;n;n;n
+;zonal geranium;non;Plant;n;n;n
+;china rose;non;Plant;n;n;n
+;woodland forget-me-not;non;Plant;n;n;n
+;lemon balm;non;Plant;n;n;n
+;evergreen candytuft;non;Plant;n;n;n
+;lily of the valley;non;Plant;n;n;n
+;iceland poppy;non;Plant;n;n;n
+;swamp sunflower;non;Plant;n;n;n
+;Great Laurel;native;shrub;y;n;n
+;Western red cedar;native;shrub;n;n;n
+;Highbush blueberry;native;shrub;y;n;n
+;Evergreen azalea;non;shrub;y;n;n
+;Pacific rhododendron;native;shrub;n;n;n
+;Black cherry;non;shrub;n;n;n
+;Viburnum tinus;non;shrub;n;n;n
+R22;creeping bellflower;non;Plant;n;n;n
+;anise;non;Plant;y;y;n
+;japanese honeysuckle;non;Plant;n;n;n
+;common periwinkle;non;Plant;y;n;n
+;spanish bluebell;non;Plant;n;n;n
+;china rose;non;Plant;n;n;n
+;plantain lily;non;Plant;n;n;n
+;yellow flag;non;Plant;n;n;n
+;old fashioned weigela;non;shrub;y;n;n
+;bigleaf hydrangea;non;shrub;n;n;n
+;blue blossom;non;shrub;n;n;n
+;japanese meadowsweet;non;shrub;y;n;n
+;sweet mock orange;native;shrub;y;n;n
+;kousa dogwood;non;shrub;n;n;n
+;common lilac;non;shrub;y;n;n
+;siberian dogwood;non;shrub;n;n;n
+;great laurel;native;shrub;y;n;n
+;smoketree;non;shrub;n;n;n
+;japanese pieris;non;shrub;n;n;n
+;japanese barberry;non;shrub;n;n;n
+;multiflora rose;non;shrub;n;n;n
+;mexican orange;non;shrub;y;n;n
+;koreanspice viburnum;non;shrub;n;n;n
+;western red cedar;native;shrub;y;n;n
+R23;Polystichum braunii;native;Plant;n;n;n
+;Lavandula angustifolia;non;Plant;y;n;n
+;Strawberry;native;Plant;y;y;n
+;Festuca californica;non;Plant;n;n;y
+;Viola tricolor;non;Plant;y;n;n
+;Hakonechloa macra;non;Plant;n;n;n
+;Myrsine lessertiana;non;Shrub;n;y;n
+;Hydrangea paniculata;non;Shrub;n;n;n
+;Prunus caroliniana;non;Shrub;n;y;n
+;common lilac;non;Shrub;y;n;n
+;Syringa villosa;non;Shrub;n;n;n
+;Common boxwood;non;Shrub;n;n;n
+;Daphne odora;non;Shrub;n;n;n
+R31;ditch lily;non;Plant;y;n;n
+;garden tulip;non;Plant;n;n;n
+;garden phlox;non;Plant;n;n;n
+;bigleaf hydrangea;non;Plant;n;n;n
+;giant onion;non;Plant;n;n;n
+;lady's mantle;non;Plant;n;n;n
+;siberian iris;non;Plant;n;n;n
+;chinese astilbe;non;Plant;n;n;n
+;august lily;non;Plant;n;n;n
+;spreading rush;non;Plant;n;n;n
+;wild geranium;non;Plant;n;n;n
+;common lady fern;native;Plant;n;n;n
+;common comfrey;non;Plant;n;n;n
+;hakone grass;non;Plant;n;n;n
+;iceland poppy;non;Plant;n;n;n
+;strawberry;native;Plant;y;n;n
+;whorled tickseed;non;Plant;n;n;n
+;kale;non;Plant;y;n;n
+;raspberry;native;Plant;n;n;n
+;garden asparagus;non;Plant;n;n;n
+;potato;non;Plant;n;n;n
+;cornflower;non;Plant;n;n;n
+;zonal geranium;non;Plant;y;n;n
+;winter jasmine;non;shrub;n;n;n
+;stinking hellebore;non;shrub;n;n;n
+;holly olive;non;shrub;n;n;n
+;panicle hydrangea;non;shrub;n;n;n
+;japanese snowbell;non;shrub;n;n;n
+;pacific rhododendron;native;shrub;n;n;n
+;scotch heather;non;shrub;n;n;n
+;dappled willow;non;shrub;n;n;n
+;japanese barberry;non;shrub;n;n;n
+;english lavender;non;shrub;n;n;n
+;japanese maple;non;shrub;n;n;n
+;common lilac;non;shrub;y;n;n
+;trumpet honeysuckle;non;shrub;n;n;n
+R32;creeping buttercup;non;Plant;n;n;n
+;common lady fern;native;Plant;n;n;n
+;english ivy;non;Plant;n;n;n
+;siebold's plantain lily;non;Plant;n;n;n
+;ditch lily;non;Plant;n;n;n
+;peony;non;Plant;n;n;n
+;solomon's seal;native;Plant;y;n;n
+;yellow archangel;non;Plant;y;n;n
+;redwood sorrel;native;Plant;y;n;n
+;cherry laurel;non;shrub;n;n;n
+;scotch heather;non;shrub;y;n;n
+;china rose;non;shrub;n;n;n
+;english holly;non;shrub;n;n;n
+;border forsythia;non;shrub;n;n;n
+;pacific rhododendron;native;shrub;y;n;n
+;bigleaf hydrangea;non;shrub;n;n;n
+R33;Creeping bellflower;non;Plant;n;n;n
+;wall lettuce;non;Plant;y;n;n
+;Norway maple;non;Plant;n;n;n
+;Cornflower;non;Plant;y;n;n
+;Spanish bluebell;non;Plant;n;n;n
+;Orange coneflower;non;Plant;n;n;n
+;Plantain lily;non;Plant;n;n;n
+;Ditch lily;non;Plant;n;n;n
+;White panicle;non;Plant;n;n;n
+;Creeping buttercup;non;Plant;n;n;n
+;Yellow archangel;non;Plant;n;n;n
+;Wax begonia;non;Plant;y;n;n
+;mountain laurel;non;shrub;n;n;n
+;western red cedar;native;shrub;n;n;n
+;Multiflower rose;non;shrub;y;n;n
+;Pacific rhododendron;native;shrub;n;n;n
+;Chaemacyparis pisifera;non;shrub;n;n;n
+;Japanese pieris;non;shrub;n;n;n
+;Norway spruce;non;shrub;n;n;n
+;Winter creeper;non;shrub;n;n;n
+;Catawba roseberry;non;shrub;y;n;n
+;French rose;non;shrub;y;n;n
+;Rhododendron ferrugineum;non;shrub;y;n;n
+;Ruby's laciniatus;non;shrub;n;n;n
+;Common lilac;non;shrub;y;n;n
+;Common boxwood;non;shrub;n;n;n
+;Smooth hydrangea;non;shrub;n;n;n
+;Arborvitae;non;shrub;n;n;n
+R34;Garden petunia;non;Plant;y;n;n
+;Lady's mantle;non;Plant;y;n;n
+;Siberian iris;non;Plant;y;n;n
+;rhubarb;non;Plant;n;n;n
+;bacopa;non;Plant;y;n;n
+;sweet potato vine;non;Plant;n;n;n
+;zonal geranium;non;Plant;y;n;n
+;Garden verbena;non;Plant;y;n;n
+;ivy geranium;non;Plant;n;n;n
+;Lady fern;native;Plant;n;n;n
+;Pacific bleeding heart;native;Plant;n;n;n
+;sweet violet;non;Plant;n;n;n
+;common holly;non;Plant;n;n;n
+;English ivy;non;Plant;n;n;n
+;wall lettuce;non;Plant;n;n;n
+;creeping woodsorrel;non;Plant;n;n;n
+;garden lupine;non;Plant;n;n;n
+;sweet william;non;Plant;n;y;n
+;garden snapdragon;non;Plant;n;n;n
+;hardy fuchsia;non;Plant;n;n;n
+;Oregano;non;Plant;n;n;n
+;Tarragon;non;Plant;n;n;n
+;Japanese skimmia;non;shrub;n;y;n
+;Highbush blueberry;native;shrub;n;y;n
+;;;;;;
+;;;;;;

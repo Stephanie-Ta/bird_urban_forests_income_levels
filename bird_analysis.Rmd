@@ -1,0 +1,161 @@
+## Loading Libraries
+
+```{r message=FALSE, warning=FALSE}
+library(readr)
+library(readxl)
+library(janitor)
+library(tidyverse)
+library(broom)
+library(lme4)
+library(lmerTest)
+library(plotly)
+library(knitr)
+library(cowplot)
+```
+
+## Reading in Data and Cleaning
+```{r message=FALSE, warning=FALSE}
+# get economic level data per dissemination area
+economic_level_per_da <- read_excel("data/raw/Data sheets & inventory.xlsx", sheet='Overall Analysis') |>
+  select(`Economic level (k)...21`:`DA...22`) |>
+  drop_na() |>
+  rename(economic_level_k = `Economic level (k)...21`,
+         dissemination_area = `DA...22`)
+
+plant_shrub_full_data <- read_delim("data/raw/plant_shrub_data.csv", delim=';') |>
+  clean_names() |>
+  fill(house, .direction = "down")
+
+bird_data <- read_excel("data/raw/BIRDS_spreadsheet2.xlsx", sheet="Long_clean") |>
+  clean_names()
+
+# get native percentage
+garden_data <- read_excel("data/raw/GARDENS_spreadsheet.xlsx", sheet='Native_vs_not_GRAPHING') |>
+  select(House:Economic_level) |> # select necessary columns
+  drop_na() |>  # remove empty rows
+  clean_names()  # clean column names
+
+native_percent <- garden_data |> # get native percentage per house
+  select(house, native_percent_total)
+
+# get main data
+stats_data <- read_excel("data/raw/Data sheets & inventory.xlsx", sheet='Everything_statistics') |>
+  select(House:Tree_percentage) |>  # select necessary columns
+  drop_na() |>  # remove empty rows
+  clean_names() |>  # clean column names
+  mutate(dissemination_area = as.factor(str_sub(house, 1, 2))) |> # add dissemination area
+  left_join(native_percent, by = join_by(house)) # add native percentage
+```
+## OSFL, BARS, NOFL, PIWO, CBCH, CEDW, VATH, PAWR, RBNU
+
+### Time of day detection
+```{r}
+bird_subset_data <- bird_data |>
+  filter(species %in% c("OSFL", "BARS", "NOFL", "PIWO", "CBCH", "CEDW", "VATH", "PAWR", "RBNU"))
+
+ggplot(bird_subset_data, aes(x = hour)) +
+  geom_histogram(binwidth = 1, fill="skyblue", colour="white") +
+  facet_wrap(~species, scales = "free_y", axes = "all_x") +
+  scale_x_continuous(breaks = 4:12) +
+  theme_minimal() +
+  labs(
+    title = "Detection Time Distribution by Species",
+    x = "Hour of Day",
+    y = "Number of Detections"
+  )
+```
+
+Per House:
+```{r, fig.height=10}
+ggplot(bird_subset_data, aes(x = hour, y = house, colour = house)) +
+  geom_point() +
+  geom_line() +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  labs(title = "Species of Interest Detection Time Per House",
+       x = "Hour of Day",
+       y = "House") +
+  facet_wrap(~species, scales = "free_y", axes = "all_x")
+```
+
+### Economic level
+```{r, fig.width=8, fig.height=6}
+bird_house_data <- bird_subset_data |>
+  distinct(house, species)
+  
+bird_stats_data <- stats_data |>
+  filter(house %in% bird_house_data$house) |>
+  full_join(bird_house_data, by="house")
+
+ggplot(bird_stats_data, aes(x=economic_level, y= species)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.2, aes(colour = species), show.legend = FALSE) +
+  theme_minimal() +
+  labs(y = "Species",
+       x = "Economic Level (k)",
+       title = "Economic Level of Areas where Species of Interest Were Detected")
+```
+
+### Canopy Cover
+```{r, fig.width=8, fig.height=15}
+garden_canopy_plot <- ggplot(bird_stats_data, aes(x=canopy_cover_garden, y=species)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.2, aes(colour = species), show.legend = FALSE) +
+  theme_minimal() +
+  labs(y = "Species",
+       x = "Canopy Cover (m^2)",
+       title = "Garden Canopy Cover of Areas where Species of Interest were Detected")
+
+canopy_50_plot <- ggplot(bird_stats_data, aes(x=canopy_cover_radius_50m, y=species)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.2, aes(colour = species), show.legend = FALSE) +
+  theme_minimal() +
+  labs(y = "Species",
+       x = "Canopy Cover Radius (m)",
+       title = "Canopy Cover Radius 50m where Species of Interest were Detected")
+
+canopy_100_plot <- ggplot(bird_stats_data, aes(x=canopy_cover_radius_100m, y=species)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.2, aes(colour = species), show.legend = FALSE) +
+  theme_minimal() +
+  labs(y = "Species",
+       x = "Canopy Cover Radius (m)",
+       title = "Canopy Cover Radius 100m where Species of Interest were Detected")
+
+plot_grid(garden_canopy_plot, canopy_50_plot, canopy_100_plot, ncol = 1)
+```
+
+### Overall Garden Diversity
+```{r, fig.width=8, fig.height=6}
+ggplot(bird_stats_data, aes(x=overall_garden_diversity, y=species)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.2, aes(colour = species), show.legend = FALSE) +
+  theme_minimal() +
+  labs(y = "Species",
+       x = "Overall Garden Diversity",
+       title = "Garden Diversity of Areas where Species of Interest were Detected")
+```
+
+### Native Plant Percentage
+```{r, fig.width=8, fig.height=6}
+ggplot(bird_stats_data, aes(x=native_percent_total, y=species)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.2, aes(colour = species), show.legend = FALSE) +
+  theme_minimal() +
+  labs(y = "Species",
+       x = "Native Vegetation (%)",
+       title = "Native Vegetation Percentage of Areas where Species of Interest were Detected")
+```
+
+
+## GAMS
+
+1. detection probability GAM with canopy cover or vegetation diversity
+2. presence probability vs native plant%
+
+### Number of unique houses per species
+```{r}
+n_houses_per_species <- bird_subset_data |>
+  group_by(species) |>
+  summarise(n_houses = n_distinct(house))
+```
