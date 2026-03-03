@@ -13,6 +13,8 @@ GARDEN_FILE_PATH = "data/raw/GARDENS_spreadsheet.xlsx"
 ```{r message=FALSE, warning=FALSE}
 library(readxl)
 library(janitor)
+library(MASS)
+library(AER)
 library(tidyverse)
 library(broom)
 library(lme4)
@@ -298,3 +300,37 @@ kable(bird_richness_results)
 ```
 
 From the table above, it does not appear that overall garden diversity, canopy cover, native plant percentage, or economic level have a significant association with bird species richness.
+
+### Poisson Model
+We also tried a Poisson Model and a Poison Mixed Effects Model since bird species richness is a count variable.
+
+A Poisson model assumes that there is equidispersion, in which the mean of the response (in this case, bird diversity) is equal to the variation of the response. Overdispersion is when the variation of the response is greater than the mean of the response. In the case of overdispersion, we would use a negative binomial model.
+
+First, we fit a Poisson model *without mixed effects* to check if there is significant dispersion in the data, since `AER::dispersiontest()` does not work on Poisson models with mixed effects.
+```{r}
+poisson_model <- glm(bird_diversity ~ overall_garden_diversity +
+                       canopy_cover_garden +
+                       native_percent_total +
+                       economic_level, family = poisson, data = stats_data)
+
+dispersiontest(poisson_model)
+```
+From the dispersion test above, we can see that there is not a significant amount of overdispersion (p-value = 0.107).
+
+Then, we went ahead and fit a Poisson model with mixed effects to take into account that our data points are **not** independent of each other since samples were taken per dissemination area.
+
+```{r, warning=FALSE, message=FALSE}
+poisson_me_model <- glmer(bird_diversity ~ overall_garden_diversity +
+                            canopy_cover_garden +
+                            native_percent_total +
+                            economic_level +
+                            (1 | dissemination_area),
+                          data = stats_data,
+                          family = poisson(link = "log")
+)
+
+summary(poisson_me_model)$coefficients |>
+   as.data.frame() |>
+  mutate(adjusted_p_value = p.adjust(`Pr(>|z|)`, 'fdr')) |>
+  kable()
+```

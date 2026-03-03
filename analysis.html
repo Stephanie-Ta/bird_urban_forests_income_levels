@@ -364,6 +364,8 @@ GARDEN_FILE_PATH = &quot;data/raw/GARDENS_spreadsheet.xlsx&quot;</code></pre>
 <h2>Loading Libraries</h2>
 <pre class="r"><code>library(readxl)
 library(janitor)
+library(MASS)
+library(AER)
 library(tidyverse)
 library(broom)
 library(lme4)
@@ -858,6 +860,116 @@ kable(bird_richness_results)</code></pre>
 <p>From the table above, it does not appear that overall garden
 diversity, canopy cover, native plant percentage, or economic level have
 a significant association with bird species richness.</p>
+<div id="poisson-model" class="section level3">
+<h3>Poisson Model</h3>
+<p>We also tried a Poisson Model and a Poison Mixed Effects Model since
+bird species richness is a count variable.</p>
+<p>A Poisson model assumes that there is equidispersion, in which the
+mean of the response (in this case, bird diversity) is equal to the
+variation of the response. Overdispersion is when the variation of the
+response is greater than the mean of the response. In the case of
+overdispersion, we would use a negative binomial model.</p>
+<p>First, we fit a Poisson model <em>without mixed effects</em> to check
+if there is significant dispersion in the data, since
+<code>AER::dispersiontest()</code> does not work on Poisson models with
+mixed effects.</p>
+<pre class="r"><code>poisson_model &lt;- glm(bird_diversity ~ overall_garden_diversity +
+                       canopy_cover_garden +
+                       native_percent_total +
+                       economic_level, family = poisson, data = stats_data)
+
+dispersiontest(poisson_model)</code></pre>
+<pre><code>## 
+##  Overdispersion test
+## 
+## data:  poisson_model
+## z = 1.2282, p-value = 0.1097
+## alternative hypothesis: true dispersion is greater than 1
+## sample estimates:
+## dispersion 
+##   2.252285</code></pre>
+<p>From the dispersion test above, we can see that there is not a
+significant amount of overdispersion (p-value = 0.107).</p>
+<p>Then, we went ahead and fit a Poisson model with mixed effects to
+take into account that our data points are <strong>not</strong>
+independent of each other since samples were taken per dissemination
+area.</p>
+<pre class="r"><code>poisson_me_model &lt;- glmer(bird_diversity ~ overall_garden_diversity +
+                            canopy_cover_garden +
+                            native_percent_total +
+                            economic_level +
+                            (1 | dissemination_area),
+                          data = stats_data,
+                          family = poisson(link = &quot;log&quot;)
+)
+
+summary(poisson_me_model)$coefficients |&gt;
+   as.data.frame() |&gt;
+  mutate(adjusted_p_value = p.adjust(`Pr(&gt;|z|)`, &#39;fdr&#39;)) |&gt;
+  kable()</code></pre>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="20%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Estimate</th>
+<th align="right">Std. Error</th>
+<th align="right">z value</th>
+<th align="right">Pr(&gt;|z|)</th>
+<th align="right">adjusted_p_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">3.4449332</td>
+<td align="right">0.1169807</td>
+<td align="right">29.4487441</td>
+<td align="right">0.0000000</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">overall_garden_diversity</td>
+<td align="right">-0.0004285</td>
+<td align="right">0.0021236</td>
+<td align="right">-0.2017815</td>
+<td align="right">0.8400875</td>
+<td align="right">0.8400875</td>
+</tr>
+<tr class="odd">
+<td align="left">canopy_cover_garden</td>
+<td align="right">0.0005520</td>
+<td align="right">0.0008751</td>
+<td align="right">0.6308253</td>
+<td align="right">0.5281548</td>
+<td align="right">0.7631284</td>
+</tr>
+<tr class="even">
+<td align="left">native_percent_total</td>
+<td align="right">0.0024920</td>
+<td align="right">0.0048924</td>
+<td align="right">0.5093560</td>
+<td align="right">0.6105027</td>
+<td align="right">0.7631284</td>
+</tr>
+<tr class="odd">
+<td align="left">economic_level</td>
+<td align="right">0.0015319</td>
+<td align="right">0.0009307</td>
+<td align="right">1.6459057</td>
+<td align="right">0.0997832</td>
+<td align="right">0.2494579</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
