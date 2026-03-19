@@ -6,6 +6,7 @@
 # change this file path as necessary
 DATA_FILE_PATH = "data/raw/Data sheets & inventory.xlsx"
 GARDEN_FILE_PATH = "data/raw/GARDENS_spreadsheet.xlsx"
+CLEANED_DATA_FOLDER = "data/processed/"
 ```
 
 ## Loading Libraries
@@ -21,19 +22,19 @@ library(lme4)
 library(lmerTest)
 library(plotly)
 library(knitr)
+library(dplyr)
 ```
 
 ## Reading in Data
 
 ```{r message = FALSE, warning = FALSE}
-# get native percentage
-garden_data <- read_excel(GARDEN_FILE_PATH, sheet='Native_vs_not_GRAPHING') |>
-  select(House:Economic_level) |> # select necessary columns
-  drop_na() |>  # remove empty rows
-  clean_names()  # clean column names
+# Get main stats data and add info to it
 
-native_percent <- garden_data |> # get native percentage per house
-  select(house, native_percent_total)
+# get native percentage
+native_percent <- read_excel(GARDEN_FILE_PATH, sheet='Native_vs_not_GRAPHING') |>
+  select(House, Native_percent_total) |>
+  drop_na() |>  # remove empty rows
+  clean_names() # clean column names
 
 # get main data
 stats_data <- read_excel(DATA_FILE_PATH, sheet='Everything_statistics') |>
@@ -42,43 +43,69 @@ stats_data <- read_excel(DATA_FILE_PATH, sheet='Everything_statistics') |>
   clean_names() |>  # clean column names
   mutate(dissemination_area = as.factor(str_sub(house, 1, 2))) |> # add dissemination area
   left_join(native_percent, by = join_by(house)) # add native percentage
+
+# save cleaned stats data
+write_csv(stats_data, paste0(CLEANED_DATA_FOLDER, "stats_data_cleaned.csv"))
+
+# get economic level data per dissemination area for later
+economic_level_per_da <- stats_data |>
+  distinct(dissemination_area, economic_level)
 ```
 
 ```{r message = FALSE, warning = FALSE}
-# get economic level data per dissemination area
-economic_level_per_da <- read_excel(DATA_FILE_PATH, sheet='Overall Analysis') |>
-  select(`Economic level (k)...21`:`DA...22`) |>
-  drop_na() |>
-  rename(economic_level_k = `Economic level (k)...21`,
-         dissemination_area = `DA...22`)
+# Previous code to clean the plant and shrub data:
+# # read in plant and shrub data
+# plant_shrub_data <- read_excel(GARDEN_FILE_PATH, sheet='Plantsnshrub_per_garden') |>
+#   clean_names() |>  # clean column names
+#   fill(house, .direction = "down")  # fill in missing house values
+# 
+# # isolate plant data
+# plant_data <- plant_shrub_data |>
+#   select(house, plants, native_or_not) |>
+#   drop_na() |>  # drop empty rows
+#   rename(name = plants, native_or_non_native = native_or_not) |>  # standardize column name
+#   mutate(type = "plant")  # add vegetation type
+# 
+# # isolate shrub data
+# shrub_data <- plant_shrub_data |>
+#   select(house, shrubs, native_or_non) |>
+#   drop_na() |>  # drop empty rows
+#   rename(native_or_non_native = native_or_non, name =  shrubs) |>  # standardize column name
+#   mutate(type = "shrub")  # add vegetation type
+# 
+# # put together plant and shrub data in a long format and clean it
+# plant_shrub_data_clean <- bind_rows(plant_data, shrub_data) |>
+#   mutate(native_or_non_native = case_when(native_or_non_native == "non" ~ "non-native",
+#                                           TRUE ~ native_or_non_native),  # standardize non vs. non-native
+#          dissemination_area = as.factor(str_sub(house, 1, 2)),  # add dissemination area
+#          name = str_to_sentence(name)) |>  # standardize capitalization of names
+#   left_join(economic_level_per_da, by=join_by(dissemination_area)) # add economic level
 
-# read in plant and shrub data
-plant_shrub_data <- read_excel(GARDEN_FILE_PATH, sheet='Plantsnshrub_per_garden') |>
+# Get shrub and plant data and add info to it
+plant_shrub_data_clean <- read_delim("data/raw/plant_shrub_data.csv", delim=';') |>
   clean_names() |>  # clean column names
-  fill(house, .direction = "down")  # fill in missing house values
-
-# isolate plant data
-plant_data <- plant_shrub_data |>
-  select(house, plants, native_or_not) |>
-  drop_na() |>  # drop empty rows
-  rename(name = plants, native_or_non_native = native_or_not) |>  # standardize column name
-  mutate(type = "plant")  # add vegetation type
-
-# isolate shrub data
-shrub_data <- plant_shrub_data |>
-  select(house, shrubs, native_or_non) |>
-  drop_na() |>  # drop empty rows
-  rename(native_or_non_native = native_or_non, name =  shrubs) |>  # standardize column name
-  mutate(type = "shrub")  # add vegetation type
-
-# put together plant and shrub data in a long format and clean it
-plant_shrub_data_clean <- bind_rows(plant_data, shrub_data) |>
-  mutate(native_or_non_native = case_when(native_or_non_native == "non" ~ "non-native",
-                                          TRUE ~ native_or_non_native),  # standardize non vs. non-native
+  fill(house, .direction = "down") |>  # fill in missing house values
+  mutate(species = str_to_sentence(species),  # standardize capitalization of species names to title case
+         type = str_to_lower(type),  # standardize capitalization of vegetation type to lowercase
+         native = case_when(native == "native" ~ TRUE, # native/non-native to boolean
+                            native == "non" ~ FALSE),
+         fruiting = case_when(fruiting == "y" ~ TRUE, # fruiting to boolean
+                              fruiting == "n" ~ FALSE),
+         flowering = case_when(flowering == "y" ~ TRUE, # flowering to boolean
+                               flowering == "n" ~ FALSE),
+         grain = case_when(grain == "y" ~ TRUE, # grain to boolean
+                           grain == "n" ~ FALSE),
          dissemination_area = as.factor(str_sub(house, 1, 2)),  # add dissemination area
-         name = str_to_sentence(name)) |>  # standardize capitalization of names
-  left_join(economic_level_per_da, by=join_by(dissemination_area)) # add economic level
+         economic_group_code = as.factor(str_sub(dissemination_area, 1, 1)),  # add economic level group code
+         economic_group_code = fct_relevel(economic_group_code, c("P", "M", "R")),  # specify order of economic group levels
+         economic_group = as.factor(case_when(economic_group_code == "P" ~ "Low",  # add economic group level name
+                                    economic_group_code == "M" ~ "Medium",
+                                    economic_group_code == "R" ~ "High")),
+         economic_group = fct_relevel(economic_group, c("Low", "Medium", "High"))) |>  # specify order of economic group levels
+  left_join(economic_level_per_da, by=join_by(dissemination_area))  # add numeric economic level
+```
 
+```{r}
 # read in tree data
 tree_data <- read_excel(GARDEN_FILE_PATH, sheet='Tree_per_garden') |>
   clean_names() |>  # clean column names
@@ -100,15 +127,21 @@ subset_tree_data <- tree_data |>
 **Most Common Tree Species Per Economic Level / Dissemination Area**
 ```{r message = FALSE, warning = FALSE}
 tree_counts_per_da <- subset_tree_data |>
-  group_by(dissemination_area, economic_level_k, name, native_or_non_native, type) |>
+  group_by(dissemination_area, economic_level, name, native_or_non_native, type) |>
   summarize(number = n()) |>
   ungroup() |>
-  arrange(economic_level_k, desc(number)) |>
-  mutate(da_el = str_c(dissemination_area, economic_level_k, sep = ", economic level: "),
-         da_el = fct_reorder(da_el, economic_level_k))
+  arrange(economic_level, desc(number)) |>
+  mutate(da_el = str_c(dissemination_area, economic_level, sep = ", economic level: "),
+         da_el = fct_reorder(da_el, economic_level),
+         economic_group_code = as.factor(str_sub(dissemination_area, 1, 1)),
+         economic_group_code = fct_relevel(economic_group_code, c("P", "M", "R")),
+         economic_group = as.factor(case_when(economic_group_code == "P" ~ "Low",
+                                    economic_group_code == "M" ~ "Medium",
+                                    economic_group_code == "R" ~ "High")),
+         economic_group = fct_relevel(economic_group, c("Low", "Medium", "High")))
 
 tree_top_5_species_counts_per_da <- tree_counts_per_da |>
-  group_by(economic_level_k, .drop = FALSE) |>
+  group_by(economic_level, .drop = FALSE) |>
   slice(1:5) 
 ```
 
@@ -118,29 +151,58 @@ ggplot(tree_top_5_species_counts_per_da,
   geom_bar(stat = "identity", fill = "darkgreen") +
   facet_wrap(~da_el, ncol = 1, scales = "free_y", axes = "all_x") +
   labs(title = "Top 5 Tree Species Per Dissemination Area/Economic Level",
-       x = "Number Occurances",
+       x = "Number of Trees",
        y = "Species") +
   theme_minimal()
+```
+
+```{r fig.height=8, fig.width=6}
+tree_counts_per_economic_group <- tree_counts_per_da |>
+  group_by(economic_group, name) |>
+  summarise(number = sum(number))
+
+# # count trees per species per level
+# tree_counts <- tree_data |>
+#   count(economic_level, name, name = "n_trees")
+# 
+# # total houses per level
+# house_totals <- tree_data |>
+#   distinct(house, economic_level) |>
+#   count(economic_level, name = "n_houses")
+# 
+# # normalize
+# tree_norm <- tree_counts |>
+#   left_join(house_totals, by = "economic_level") |>
+#   mutate(trees_per_house = n_trees / n_houses)
+
+ggplot(tree_counts_per_economic_group,
+       aes(x = economic_group, y = reorder(name, desc(name)), fill = number)) +
+  geom_tile(colour="black") +
+  scale_fill_viridis_c(direction = -1) +
+  theme(panel.background = element_blank()) +
+  labs(x = "Economic Level",
+       y = "Tree Species",
+       fill = "Number of Trees")
 ```
 
 **Most Common Plant and Shrub Species Per Economic Level / Dissemination Area**
 ```{r message = FALSE, warning = FALSE}
 plant_shrub_counts_per_da <- plant_shrub_data_clean |>
-  group_by(dissemination_area, economic_level_k, name, native_or_non_native, type) |>
+  group_by(dissemination_area, economic_level, species, native, type) |>
   summarize(number = n()) |>
   ungroup() |>
-  arrange(economic_level_k, desc(number)) |>
-  mutate(da_el = str_c(dissemination_area, economic_level_k, sep = ", economic level: "),
-         da_el = fct_reorder(da_el, economic_level_k))
+  arrange(economic_level, desc(number)) |>
+  mutate(da_el = str_c(dissemination_area, economic_level, sep = ", economic level: "),
+         da_el = fct_reorder(da_el, economic_level))
 
 plant_shrub_top_5_species_counts_per_da <- plant_shrub_counts_per_da |>
-  group_by(economic_level_k, .drop = FALSE) |>
+  group_by(economic_level, .drop = FALSE) |>
   slice(1:5) 
 ```
 
 ```{r, fig.width=7, fig.height=20}
 ggplot(plant_shrub_top_5_species_counts_per_da,
-       aes(x = number, y = fct_reorder(name, -number), fill = type)) +
+       aes(x = number, y = fct_reorder(species, -number), fill = type)) +
   geom_bar(stat = "identity") +
   facet_wrap(~da_el, ncol = 1, scales = "free_y", axes = "all_x") +
   labs(title = "Top 5 Shrub/Plant Species Per Dissemination Area/Economic Level",
@@ -148,6 +210,37 @@ ggplot(plant_shrub_top_5_species_counts_per_da,
        y = "Shrub/Plant Species",
        fill = "Type") +
   theme_minimal()
+```
+
+```{r fig.height=32, fig.width=6}
+plant_shrub_per_economic_group <- plant_shrub_counts_per_da |>
+  group_by(economic_group, type, species) |>
+  summarise(number = sum(number))
+
+plant_per_economic_group <- plant_shrub_per_economic_group |>
+  filter(type == "plant")
+
+ggplot(plant_per_economic_group,
+       aes(x = economic_group, y = reorder(species, desc(species)), fill = number)) +
+  geom_tile(colour="black") +
+  scale_fill_viridis_c(direction = -1) +
+  theme(panel.background = element_blank()) +
+  labs(x = "Economic Level",
+       y = "Plant Species",
+       fill = "Number of Houses")
+```
+```{r fig.height=16, fig.width=6}
+shrub_per_economic_group <- plant_shrub_per_economic_group |>
+  filter(type == "shrub")
+
+ggplot(shrub_per_economic_group,
+       aes(x = economic_group, y = reorder(species, desc(species)), fill = number)) +
+  geom_tile(colour="black") +
+  scale_fill_viridis_c(direction = -1) +
+  theme(panel.background = element_blank()) +
+  labs(x = "Economic Level",
+       y = "Shrub Species",
+       fill = "Number of Houses")
 ```
 
 ## Chapter 1: How is Economic Level Associated with the Composition of Private Urban Forests?

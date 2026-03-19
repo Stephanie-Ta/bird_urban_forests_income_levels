@@ -168,3 +168,13 @@ n_houses_per_species <- bird_subset_data |>
 
 n_houses_per_species
 ```
+
+### Logistic Regression Model: OSFL
+```{r}
+stats_garden_data <- left_join(stats_data, garden_data, by="house", suffix = c("", ".y")) |>
+  select(-ends_with(".y"))
+
+osfl_houses <- bird_stats_data |>
+  filter(species == "OSFL") |>
+  distinct(house)
+```
