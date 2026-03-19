@@ -169,12 +169,78 @@ n_houses_per_species <- bird_subset_data |>
 n_houses_per_species
 ```
 
-### Logistic Regression Model: OSFL
+### Logistic Regression Model: Olive-Sided Flycatcher (OSFL)
 ```{r}
+# get data necessary for modeling
+plant_shrub_full_data <- read_csv("data/processed/cleaned_plant_shrub_data.csv")
+
 stats_garden_data <- left_join(stats_data, garden_data, by="house", suffix = c("", ".y")) |>
   select(-ends_with(".y"))
 
 osfl_houses <- bird_stats_data |>
   filter(species == "OSFL") |>
   distinct(house)
+
+plant_shrub_data_summarized <- plant_shrub_full_data |>
+  group_by(house) |>
+  summarize(
+    number_fruiting_species = sum(fruiting),
+    number_flowering_species = sum(flowering),
+    number_grain_species = sum(grain),
+  )
+
+stats_garden_data <- left_join(stats_garden_data, plant_shrub_data_summarized, by="house")
+
+osfl_stats_garden_data <- stats_garden_data |>
+  mutate(osfl_present = house %in% osfl_houses$house)
+```
+```{r}
+ggplot(osfl_stats_garden_data) +
+  geom_point(aes(economic_level, osfl_present)) +
+  geom_smooth(aes(economic_level, osfl_present),
+    method = "glm", formula = y ~ x,
+    method.args = c(family = binomial), se = FALSE, color = "blue"
+  )
+```
+
+```{r}
+osfl_model <- glmer(
+  osfl_present ~
+    economic_level +
+    number_fruiting_species +
+    number_flowering_species +
+    number_grain_species +
+    (1 | dissemination_area),
+  data = osfl_stats_garden_data,
+  family = binomial
+)
+
+summary(osfl_model)$coefficients |>
+  as.data.frame() |>
+  mutate(odds_estimate = exp(Estimate),
+         odds_estimate_inverted = 1/odds_estimate) |>
+  kable()
+```
+
+### Logistic Regression Model: Barn Swallow (BARS)
+```{r}
+bars_stats_garden_data <- stats_garden_data |>
+  mutate(bars_present = house %in% osfl_houses$house)
+
+bars_model <- glmer(
+  bars_present ~
+    economic_level +
+    number_fruiting_species +
+    number_flowering_species +
+    number_grain_species +
+    (1 | dissemination_area),
+  data = bars_stats_garden_data,
+  family = binomial
+)
+
+summary(bars_model)$coefficients |>
+  as.data.frame() |>
+  mutate(odds_estimate = exp(Estimate),
+         odds_estimate_inverted = 1/odds_estimate) |>
+  kable()
 ```

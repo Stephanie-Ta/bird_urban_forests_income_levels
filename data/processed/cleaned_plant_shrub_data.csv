@@ -1,0 +1,706 @@
+house,species,native,type,fruiting,flowering,grain,dissemination_area,economic_group_code,economic_group,economic_level
+P11,Rutabaga,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P11,Leek,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P11,Bok choy,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P11,Garlic,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P11,English holly,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P11,Juniperus comunis,TRUE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P11,Ilex,FALSE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P11,Chamaecyparis,FALSE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Aloe vera,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Ditch lily,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Chives,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Sorrel,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Pussy willow,TRUE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Tiger lily,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Peony,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Sweet woodruff,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,New england aster,TRUE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Large yellow loosestrife,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Indian shot,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Actinidia chinensis,FALSE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Rosa chinensis,FALSE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P12,Wisteria sinensis,FALSE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Mugwort,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Jerusalem artichoke,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Sweet fennel,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Field mustard,FALSE,plant,TRUE,FALSE,FALSE,P1,P,Low,52
+P13,Rue,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Lady fern,TRUE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Dandelion,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Bouncing-bet,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Rhubarb,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Spanish bluebell,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Garden snapdragon,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Wall lettuce,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Common evening-primrose,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Orpine,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Clustered bellflower,FALSE,plant,TRUE,FALSE,FALSE,P1,P,Low,52
+P13,Feverfew,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,European plum,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Fringed willowherb,TRUE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Clammy ground cherry,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Creeping woodsorrel,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Spearmint,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Obedient plant,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Common plantain,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Chives,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Oregano,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,China rose,FALSE,shrub,TRUE,FALSE,FALSE,P1,P,Low,52
+P13,Chinese boxthorn,FALSE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P13,Chinese wolfberry,FALSE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P14,Buckwheat,FALSE,plant,TRUE,FALSE,FALSE,P1,P,Low,52
+P14,Creeping jenny,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P14,Common bugle,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P14,Montbretia,FALSE,plant,TRUE,FALSE,FALSE,P1,P,Low,52
+P14,Tiger lily,FALSE,plant,TRUE,FALSE,FALSE,P1,P,Low,52
+P14,Blue fescue,FALSE,plant,FALSE,FALSE,FALSE,P1,P,Low,52
+P14,Japanese maple,FALSE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P14,Hortensia,FALSE,shrub,TRUE,FALSE,FALSE,P1,P,Low,52
+P14,Japanese pieris,FALSE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P14,Mirror plant,FALSE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P14,Rose of sharon,FALSE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P14,Dappled willow,FALSE,shrub,TRUE,FALSE,FALSE,P1,P,Low,52
+P14,Pacific rhododendron,TRUE,shrub,FALSE,FALSE,FALSE,P1,P,Low,52
+P21,Spanish bluebell,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Creeping buttercup,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Ditch lily,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Hot pepper,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Onion,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Rosemary,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Garden tulips,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Oregano,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Plantain lily,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Spring onion,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Strawberry,TRUE,plant,TRUE,FALSE,FALSE,P2,P,Low,48
+P21,Hardy fuchsia,FALSE,plant,TRUE,FALSE,FALSE,P2,P,Low,48
+P21,Vine kiwi,FALSE,shrub,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Highbush blueberry,TRUE,shrub,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Red raspberry,TRUE,shrub,FALSE,FALSE,FALSE,P2,P,Low,48
+P21,Common boxwood,FALSE,shrub,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Spanish bluebell,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Solomon's seal,TRUE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Lop grass,FALSE,plant,FALSE,FALSE,TRUE,P2,P,Low,48
+P22,Tiger lily,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Common sowthistle,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Crevice alumroot,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Tiger flower,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Common bugle,FALSE,plant,TRUE,FALSE,FALSE,P2,P,Low,48
+P22,Cheddar pink,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Wall lettuce,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Creeping buttercup,FALSE,plant,TRUE,FALSE,FALSE,P2,P,Low,48
+P22,Red hot poker,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Lenten rose,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Lesser trefoil,FALSE,plant,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,White clover,FALSE,plant,TRUE,FALSE,FALSE,P2,P,Low,48
+P22,Pacific rhododendron,TRUE,shrub,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Japanese skimmia,FALSE,shrub,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Japanese maple,FALSE,shrub,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Japanese camellia ,FALSE,shrub,FALSE,FALSE,FALSE,P2,P,Low,48
+P22,Spurge laurel,FALSE,shrub,FALSE,FALSE,FALSE,P2,P,Low,48
+P31,Choy sum,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Crown daisy,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Beet,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Field mustard,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Potato,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Garlic,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Chives,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Lettuce,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Pea,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Strawberry,TRUE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Radish,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Common mugwort,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Iceland poppy,FALSE,plant,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Garden lupine,FALSE,plant,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Garden tulip,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Chameleon plant,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Tomato,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Wild dafodil,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Evergreen azalea,FALSE,plant,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Serbian bellflower,FALSE,plant,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Rose campion,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Hardy fuchsia,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Purple bergenia,FALSE,plant,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Japanese honeysuckle,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Bearded iris,FALSE,plant,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Creeping buttercup,FALSE,plant,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Purple rock cress,FALSE,plant,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Common mallow,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Chinese wisteria,FALSE,shrub,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Rue,FALSE,shrub,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,China rose,FALSE,shrub,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Peony,FALSE,shrub,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Chinese wolfberry,FALSE,shrub,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P31,Tree peony,FALSE,shrub,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Blueblossom,FALSE,shrub,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Japanese maple,FALSE,shrub,FALSE,TRUE,FALSE,P3,P,Low,57.6
+P31,Japanese pieris,FALSE,shrub,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Heavenly bamboo,FALSE,shrub,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P31,Fig,FALSE,shrub,FALSE,TRUE,FALSE,P3,P,Low,57.6
+P31,Chayote,FALSE,shrub,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P32,Kentucky bluegrass,FALSE,plant,FALSE,FALSE,TRUE,P3,P,Low,57.6
+P32,Spanish bluebell,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P32,Chameleon plant,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P32,Corn speedwell,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P32,Common sage,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P32,Creeping buttercup,FALSE,plant,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P32,Eastern bluestar,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P32,Large bindweed,FALSE,plant,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P32,Pacific rhododendron,TRUE,shrub,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P32,Oriental arbovitae,FALSE,shrub,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P32,Highbush blueberry,TRUE,shrub,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P32,China rose,FALSE,shrub,TRUE,FALSE,FALSE,P3,P,Low,57.6
+P32,Bay laurel,FALSE,shrub,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P32,Common boxwood,FALSE,shrub,FALSE,FALSE,FALSE,P3,P,Low,57.6
+P41,Rhubarb,FALSE,plant,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Tomato,FALSE,plant,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Field pumpkin,FALSE,plant,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Chives,FALSE,plant,TRUE,FALSE,FALSE,P4,P,Low,51.2
+P41,Garden pea,FALSE,plant,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Cucumber,FALSE,plant,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Lovage,FALSE,plant,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Poeny,FALSE,plant,TRUE,FALSE,FALSE,P4,P,Low,51.2
+P41,Ditch lily,FALSE,plant,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Sweet alyssum,FALSE,plant,TRUE,FALSE,FALSE,P4,P,Low,51.2
+P41,Orange coneflower,FALSE,plant,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Zonal geranium,FALSE,plant,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Dense blazing star,FALSE,plant,FALSE,TRUE,FALSE,P4,P,Low,51.2
+P41,New york aster,FALSE,plant,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Siebold's plantain lily,FALSE,plant,FALSE,TRUE,FALSE,P4,P,Low,51.2
+P41,Yellow daylily,FALSE,plant,TRUE,FALSE,FALSE,P4,P,Low,51.2
+P41,Glandular cape marigold,FALSE,plant,TRUE,FALSE,FALSE,P4,P,Low,51.2
+P41,Garden snapdragon,FALSE,plant,TRUE,FALSE,FALSE,P4,P,Low,51.2
+P41,Garden dahlia,FALSE,plant,TRUE,FALSE,FALSE,P4,P,Low,51.2
+P41,Sea thrift,FALSE,plant,TRUE,FALSE,FALSE,P4,P,Low,51.2
+P41,Balloon flower,FALSE,plant,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Wax begonia,FALSE,plant,TRUE,FALSE,FALSE,P4,P,Low,51.2
+P41,Serbian bellflower,FALSE,plant,TRUE,FALSE,FALSE,P4,P,Low,51.2
+P41,Regal geranium,FALSE,plant,TRUE,FALSE,FALSE,P4,P,Low,51.2
+P41,Large-petal globeflower,FALSE,plant,TRUE,FALSE,FALSE,P4,P,Low,51.2
+P41,False buck'sbeard,FALSE,plant,FALSE,TRUE,FALSE,P4,P,Low,51.2
+P41,Red raspberry,TRUE,shrub,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Red currant,FALSE,shrub,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Multiflora rose,FALSE,shrub,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Pacific rhododendron,TRUE,shrub,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,China rose,FALSE,shrub,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Western red cedar,TRUE,shrub,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Evergreen azalea,FALSE,shrub,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Bigleaf hydrangea,FALSE,shrub,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,English lavender,FALSE,shrub,FALSE,FALSE,FALSE,P4,P,Low,51.2
+P41,Virgin's bower,FALSE,shrub,FALSE,FALSE,FALSE,P4,P,Low,51.2
+M11,Seersucker sedge,FALSE,plant,FALSE,FALSE,TRUE,M1,M,Medium,78.5
+M11,British columbia wild ginger,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Common snowberry,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Aleutian maidenhair,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Sweet alyssum,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Woodland strawberry,TRUE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Ram's horn,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Pregnant onion,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Common columbine,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Beefsteak plant,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Spurge laurel,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Agueweed,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Plantain lily,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Peony,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Solomon's seal,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Siberian bugloss,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Meadow buttercup,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Lenten rose,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,American beautyberry,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Ostrich fern,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Cypress spurge,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Barrenwort,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Fringed loosestrife,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Bear's breech,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Heavenly bamboo,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Paperplant,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Bigleaf hydrangea,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Bush lily,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Spotted dead nettles,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Rose campion,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,American alumroot,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Western blue virginsbower,TRUE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Bacopa,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Oakleaf hydrangea,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Hardy fuchsia,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,New guinea impatiens,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Chives,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Cleft phlox,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Rocky mountain penstemon,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Poppy anemone,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Jacob's ladder,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Garden asparagus,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Yellow marsh marigold,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Ground elders,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Cow parsley,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Hakone grass,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Queen of the prairie,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Bloodroot,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Goat's beard,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Rose of sharon,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Culver's root,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Leafy spurge,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Hart's-tongue fern,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Lakeshore sedge,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Purple marshlocks,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Common primrose,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Marguerite daisy,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Canadian anemone,TRUE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Brook saxifrage,TRUE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Red huckleberry,TRUE,shrub,FALSE,TRUE,FALSE,M1,M,Medium,78.5
+M11,Mexican orange,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Chinese wisteria,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Multiflora rose,FALSE,shrub,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Pacific rhododendron,TRUE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Japanese skimmia,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Vine maple,TRUE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Common boxwood,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Vasevine,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Evergreen candytuft,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Tree peony,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Virginia sweetspire,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Chinese clematis,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Common myrtle,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Sweet mock-orange,TRUE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Western azalea,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Tea-oil camellia,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Buttonwood,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Japanese camellia,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M11,Smooth hydrangea,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M12,Pacific bleeding heart,TRUE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M12,Crinklerroot,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M12,Greater masterwort,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M12,Woodland strawberry,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M12,Spanish bluebell,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M12,Smooth hydrangea,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M12,Pacific rhododendron,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M12,Lewis' mock orange,TRUE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M12,Thuja occcidentalis,TRUE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M13,Siebold's plantain lily,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M13,Large bindweed,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M13,Hydrangea,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M13,Common boxwood,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M13,Oriental arborvitae,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Busy lizzie ,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Lady fern,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Common foxglove,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Lenten rose,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Cornflower,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Rhubarb,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Spearmint,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Rosemint,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Creeping jenny,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Chives,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Sweet william,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Strawberry,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Raddish,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Tomato,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Garden nasturtium,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,African marigold,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Annual honesty,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Plantain lily,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Common holly lock,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,August lily,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Grapeleaf anemone,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Cabbage,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14, Lettuce,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Creeping buttercup,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Ditch lily,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Winter creeper,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Japanese meadowsweet,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Asian virginsbower,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Peruvian lily,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Western wallflower,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Cabbage tree ,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Crevice alumroot ,TRUE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Zonal geranium,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Garden petunia,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Basil,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Johnny jump up ,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Hardy fuchsia,FALSE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Sweet alyssum,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Spanish bluebell,FALSE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Sticky geranium,TRUE,plant,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Western sword fern,TRUE,plant,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Vanhouttei spires,FALSE,shrub,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,China rose ,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Peony,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Weeping forsythia,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Tree peony,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Rose of sharon,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Sweet mock orange,TRUE,shrub,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Common ninebark,TRUE,shrub,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Chinese wisteria,FALSE,shrub,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,Bigleaf hydrangea,FALSE,shrub,TRUE,FALSE,FALSE,M1,M,Medium,78.5
+M14,False spirea,FALSE,shrub,FALSE,FALSE,FALSE,M1,M,Medium,78.5
+M21,Chives,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M21,Creeping buttercup,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M21,Wall lettuce,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M21,Field horsetail,TRUE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M21,Bindweed,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M21,Ditch lily,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M21,China rose,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M21,Sweat mock orange,TRUE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M21,Red raspberry,TRUE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M21,Highbush blueberry,TRUE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M22,Onion,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M22,Large bindweed,FALSE,plant,TRUE,FALSE,FALSE,M2,M,Medium,104
+M22,English ivy,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M22,Lady fern,TRUE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M22,Yellow corydalis,FALSE,plant,TRUE,FALSE,FALSE,M2,M,Medium,104
+M22,Siberian bugloss,FALSE,plant,TRUE,FALSE,FALSE,M2,M,Medium,104
+M22,English holly,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M22,Plantain lily,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M22,China rose,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M22,Common boxwood,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M22,Thuja accidentalis,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M22,English holly,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M22,Common hawthorn,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Plantain lily,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Dusty miller,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Creeping jenny,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Zonal geranium,FALSE,plant,TRUE,FALSE,FALSE,M2,M,Medium,104
+M23,Lady fern,TRUE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,English ivy,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Creeping woodsorrel,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Spanish bluebell,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Garden snapdragon,FALSE,plant,TRUE,FALSE,FALSE,M2,M,Medium,104
+M23,Herb robert,TRUE,plant,TRUE,FALSE,FALSE,M2,M,Medium,104
+M23,Woodland strawberry,TRUE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Fragrant sweet box,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Lenten rose,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Common daisy,FALSE,plant,TRUE,FALSE,FALSE,M2,M,Medium,104
+M23,Feverfew,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Wild daffodil,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Hardy fuchsia,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Common columbine,TRUE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Large white petunia,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Sweet alyssum,FALSE,plant,TRUE,FALSE,FALSE,M2,M,Medium,104
+M23,Chives,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Peony,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Rhubarb,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Tiger lily,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Dill,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Coriander,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Solomon's seal,TRUE,plant,TRUE,FALSE,FALSE,M2,M,Medium,104
+M23,Edging lobelia,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Common yarrow,TRUE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Virginia creeper,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Rockspray cotoneaster,FALSE,shrub,TRUE,FALSE,FALSE,M2,M,Medium,104
+M23,Pacific rhododendron,TRUE,shrub,TRUE,FALSE,FALSE,M2,M,Medium,104
+M23,Autumn sage,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Western red cedar,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Trumpet honeysuckle,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Multiflora rose,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M23,Japanese skimmia,FALSE,shrub,FALSE,TRUE,FALSE,M2,M,Medium,104
+M23,Smooth hydrangea,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M24,Lady fern,TRUE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M24,Iceland poppy,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M24,Herb robert,TRUE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M24,Creeping buttercup,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M24,Peony,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M24,Spanish bluebell,FALSE,plant,FALSE,FALSE,FALSE,M2,M,Medium,104
+M24,Pacific rhododendron,TRUE,shrub,TRUE,FALSE,FALSE,M2,M,Medium,104
+M24,Common lilac,FALSE,shrub,TRUE,FALSE,FALSE,M2,M,Medium,104
+M24,China rose,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M24,Chinese wisteria,FALSE,shrub,TRUE,FALSE,FALSE,M2,M,Medium,104
+M24,Japanese flowering quince,FALSE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M24,Sweet mock orange,TRUE,shrub,FALSE,FALSE,FALSE,M2,M,Medium,104
+M31,Creeping buttercup,FALSE,plant,FALSE,FALSE,FALSE,M3,M,Medium,98
+M31,Sword fern,TRUE,plant,FALSE,FALSE,FALSE,M3,M,Medium,98
+M31,Lady fern,TRUE,plant,FALSE,FALSE,FALSE,M3,M,Medium,98
+M31,Leafy spurge,FALSE,plant,FALSE,FALSE,FALSE,M3,M,Medium,98
+M31,Strawberry,TRUE,plant,TRUE,FALSE,FALSE,M3,M,Medium,98
+M31,Tomato,FALSE,plant,FALSE,TRUE,FALSE,M3,M,Medium,98
+M31,Spanish bluebell,FALSE,plant,FALSE,FALSE,FALSE,M3,M,Medium,98
+M31,English lavender,FALSE,plant,FALSE,FALSE,FALSE,M3,M,Medium,98
+M31,Giant onion,FALSE,plant,TRUE,FALSE,FALSE,M3,M,Medium,98
+M31,Plantain lily,FALSE,plant,FALSE,FALSE,FALSE,M3,M,Medium,98
+M31,China rose,FALSE,shrub,TRUE,FALSE,FALSE,M3,M,Medium,98
+M31,Peony,FALSE,shrub,FALSE,FALSE,FALSE,M3,M,Medium,98
+M31,Yellow flag,FALSE,shrub,TRUE,FALSE,FALSE,M3,M,Medium,98
+M31,Rockspray cotoneaster,FALSE,shrub,TRUE,FALSE,FALSE,M3,M,Medium,98
+M31,Japanese skimmia,FALSE,shrub,FALSE,TRUE,FALSE,M3,M,Medium,98
+M31,Old fashioned weigela,FALSE,shrub,TRUE,FALSE,FALSE,M3,M,Medium,98
+M31,Dog rose,FALSE,shrub,TRUE,FALSE,FALSE,M3,M,Medium,98
+M31,Thuja occidentalis,FALSE,shrub,FALSE,FALSE,FALSE,M3,M,Medium,98
+M31,French rose,FALSE,shrub,TRUE,FALSE,FALSE,M3,M,Medium,98
+M31,Evergreen spindle,FALSE,shrub,FALSE,FALSE,FALSE,M3,M,Medium,98
+M41,Garden verbena,FALSE,plant,TRUE,FALSE,FALSE,M4,M,Medium,93
+M41,Garden petunia,FALSE,plant,TRUE,FALSE,FALSE,M4,M,Medium,93
+M41,Lenten rose,FALSE,plant,TRUE,FALSE,FALSE,M4,M,Medium,93
+M41,Plantain lily,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Hakone grass,FALSE,plant,FALSE,FALSE,TRUE,M4,M,Medium,93
+M41,Upright sedge,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Lily of the valley,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Hart's tongue fern,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Creeping jenny,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Bacopa,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Evergreen candytuft,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Chives,FALSE,plant,TRUE,FALSE,FALSE,M4,M,Medium,93
+M41,Wax begonia,FALSE,plant,TRUE,FALSE,FALSE,M4,M,Medium,93
+M41,Big blue lilyturf,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Western red cedar,TRUE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Japanese camellia,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Japanese yew,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Japanese pieris,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Sweet osmanthus,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Star jasmine,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Panicle hydrangea,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,False spiraea,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Alpen rose,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Pacific rhododendron,TRUE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Vasvine,FALSE,shrub,TRUE,FALSE,FALSE,M4,M,Medium,93
+M41,False azalea,TRUE,shrub,TRUE,FALSE,FALSE,M4,M,Medium,93
+M41,Japanese maple,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M41,Common boxwood,FALSE,shrub,TRUE,FALSE,FALSE,M4,M,Medium,93
+M41,Great laurel,TRUE,shrub,TRUE,FALSE,FALSE,M4,M,Medium,93
+M41,Common lilac,FALSE,shrub,TRUE,FALSE,FALSE,M4,M,Medium,93
+M41,Smoketree,FALSE,shrub,TRUE,FALSE,FALSE,M4,M,Medium,93
+M41,Japanese snowbell,FALSE,shrub,TRUE,FALSE,FALSE,M4,M,Medium,93
+M42,Chives,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Sweet fennel,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Garlic,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Lettuce,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Wall lettuce,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Large bindweed,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,English ivy,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Grapeleaf anemone,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Creeping buttercup,FALSE,plant,TRUE,FALSE,FALSE,M4,M,Medium,93
+M42,Iceland poppy,FALSE,plant,TRUE,FALSE,FALSE,M4,M,Medium,93
+M42,Common nipplewort,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Creeping woodsorrel,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Thimbleberry,TRUE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Western sword fern,TRUE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Ground elder,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Horseradish,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Common bean,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Common columbine,TRUE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Rhubarb,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Parsley,FALSE,plant,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Heavenly bamboo,FALSE,shrub,FALSE,TRUE,FALSE,M4,M,Medium,93
+M42,Spurge laurel,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Great laurel,TRUE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Japanese cherry,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Peony,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Panicle hydrangea,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Ginkgo,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+M42,Japanese camellia,FALSE,shrub,FALSE,FALSE,FALSE,M4,M,Medium,93
+R11,Orpine,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R11,Common bugloss,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R11,Candle larkspur,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R11,Basil,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R11,Chives,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R11,Longleaf speedwell,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R11,Spanish bluebell,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R11,English ivy,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R11,English lavender,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R11,Cape jasmine,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R11,Japanese yew,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R11,Canada yew,TRUE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R11,Oriental arborvitae,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R11,Pacific rhododendron,TRUE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Lavender,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Parsley,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Mint,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Common sage,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Blueberry,TRUE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R12,White impatiens,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R12,False buck's beard,TRUE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Lenten rose,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Dusty miller,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Garden dahlia,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Japanese maple,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Common boxwood,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Siberian dogwood,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Paeonia lactiflora,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Tree peony,FALSE,shrub,TRUE,FALSE,FALSE,R1,R,High,182
+R12,Japanese yew,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R12,Common lilac,FALSE,shrub,TRUE,FALSE,FALSE,R1,R,High,182
+R12,Chinese wisteria,FALSE,shrub,TRUE,FALSE,FALSE,R1,R,High,182
+R12,Winter creeper,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Garden tulip,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Sword fern,TRUE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R13,English ivy,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Winter creeper,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Plantain lily,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Iceland poppy,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Spurge laurel,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Thimbleberry,TRUE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Spanish bluebell,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Fatsia japonica,FALSE,plant,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Norway spruce,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Pacific rhododendron,TRUE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Red cedar,TRUE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R13,False chestnut,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Mexican orange,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Japanese maple,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Pieris japonica,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Japanese skimmia,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Chinese photinia,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Japanese laurel,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R13,Bigleaf hydrangea,FALSE,shrub,FALSE,FALSE,FALSE,R1,R,High,182
+R21,Strawberry,TRUE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Feverfew,FALSE,plant,TRUE,FALSE,FALSE,R2,R,High,130
+R21,Old-fashioned weigela,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Shasta daisy,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Peppermint,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Chives,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Zonal geranium,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,China rose,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Woodland forget-me-not,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Lemon balm,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Evergreen candytuft,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Lily of the valley,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Iceland poppy,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Swamp sunflower,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Great laurel,TRUE,shrub,TRUE,FALSE,FALSE,R2,R,High,130
+R21,Western red cedar,TRUE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Highbush blueberry,TRUE,shrub,TRUE,FALSE,FALSE,R2,R,High,130
+R21,Evergreen azalea,FALSE,shrub,TRUE,FALSE,FALSE,R2,R,High,130
+R21,Pacific rhododendron,TRUE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Black cherry,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R21,Viburnum tinus,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Creeping bellflower,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Anise,FALSE,plant,TRUE,TRUE,FALSE,R2,R,High,130
+R22,Japanese honeysuckle,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Common periwinkle,FALSE,plant,TRUE,FALSE,FALSE,R2,R,High,130
+R22,Spanish bluebell,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R22,China rose,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Plantain lily,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Yellow flag,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Old fashioned weigela,FALSE,shrub,TRUE,FALSE,FALSE,R2,R,High,130
+R22,Bigleaf hydrangea,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Blue blossom,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Japanese meadowsweet,FALSE,shrub,TRUE,FALSE,FALSE,R2,R,High,130
+R22,Sweet mock orange,TRUE,shrub,TRUE,FALSE,FALSE,R2,R,High,130
+R22,Kousa dogwood,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Common lilac,FALSE,shrub,TRUE,FALSE,FALSE,R2,R,High,130
+R22,Siberian dogwood,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Great laurel,TRUE,shrub,TRUE,FALSE,FALSE,R2,R,High,130
+R22,Smoketree,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Japanese pieris,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Japanese barberry,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Multiflora rose,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Mexican orange,FALSE,shrub,TRUE,FALSE,FALSE,R2,R,High,130
+R22,Koreanspice viburnum,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R22,Western red cedar,TRUE,shrub,TRUE,FALSE,FALSE,R2,R,High,130
+R23,Polystichum braunii,TRUE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R23,Lavandula angustifolia,FALSE,plant,TRUE,FALSE,FALSE,R2,R,High,130
+R23,Strawberry,TRUE,plant,TRUE,TRUE,FALSE,R2,R,High,130
+R23,Festuca californica,FALSE,plant,FALSE,FALSE,TRUE,R2,R,High,130
+R23,Viola tricolor,FALSE,plant,TRUE,FALSE,FALSE,R2,R,High,130
+R23,Hakonechloa macra,FALSE,plant,FALSE,FALSE,FALSE,R2,R,High,130
+R23,Myrsine lessertiana,FALSE,shrub,FALSE,TRUE,FALSE,R2,R,High,130
+R23,Hydrangea paniculata,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R23,Prunus caroliniana,FALSE,shrub,FALSE,TRUE,FALSE,R2,R,High,130
+R23,Common lilac,FALSE,shrub,TRUE,FALSE,FALSE,R2,R,High,130
+R23,Syringa villosa,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R23,Common boxwood,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R23,Daphne odora,FALSE,shrub,FALSE,FALSE,FALSE,R2,R,High,130
+R31,Ditch lily,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R31,Garden tulip,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Garden phlox,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Bigleaf hydrangea,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Giant onion,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Lady's mantle,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Siberian iris,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Chinese astilbe,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,August lily,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Spreading rush,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Wild geranium,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Common lady fern,TRUE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Common comfrey,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Hakone grass,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Iceland poppy,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Strawberry,TRUE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R31,Whorled tickseed,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Kale,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R31,Raspberry,TRUE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Garden asparagus,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Potato,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Cornflower,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Zonal geranium,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R31,Winter jasmine,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Stinking hellebore,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Holly olive,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Panicle hydrangea,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Japanese snowbell,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Pacific rhododendron,TRUE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Scotch heather,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Dappled willow,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Japanese barberry,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R31,English lavender,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Japanese maple,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R31,Common lilac,FALSE,shrub,TRUE,FALSE,FALSE,R3,R,High,135
+R31,Trumpet honeysuckle,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R32,Creeping buttercup,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R32,Common lady fern,TRUE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R32,English ivy,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R32,Siebold's plantain lily,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R32,Ditch lily,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R32,Peony,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R32,Solomon's seal,TRUE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R32,Yellow archangel,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R32,Redwood sorrel,TRUE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R32,Cherry laurel,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R32,Scotch heather,FALSE,shrub,TRUE,FALSE,FALSE,R3,R,High,135
+R32,China rose,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R32,English holly,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R32,Border forsythia,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R32,Pacific rhododendron,TRUE,shrub,TRUE,FALSE,FALSE,R3,R,High,135
+R32,Bigleaf hydrangea,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Creeping bellflower,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Wall lettuce,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R33,Norway maple,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Cornflower,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R33,Spanish bluebell,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Orange coneflower,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Plantain lily,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Ditch lily,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R33,White panicle,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Creeping buttercup,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Yellow archangel,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Wax begonia,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R33,Mountain laurel,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Western red cedar,TRUE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Multiflower rose,FALSE,shrub,TRUE,FALSE,FALSE,R3,R,High,135
+R33,Pacific rhododendron,TRUE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Chaemacyparis pisifera,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Japanese pieris,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Norway spruce,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Winter creeper,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Catawba roseberry,FALSE,shrub,TRUE,FALSE,FALSE,R3,R,High,135
+R33,French rose,FALSE,shrub,TRUE,FALSE,FALSE,R3,R,High,135
+R33,Rhododendron ferrugineum,FALSE,shrub,TRUE,FALSE,FALSE,R3,R,High,135
+R33,Ruby's laciniatus,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Common lilac,FALSE,shrub,TRUE,FALSE,FALSE,R3,R,High,135
+R33,Common boxwood,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Smooth hydrangea,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R33,Arborvitae,FALSE,shrub,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Garden petunia,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R34,Lady's mantle,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R34,Siberian iris,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R34,Rhubarb,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Bacopa,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R34,Sweet potato vine,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Zonal geranium,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R34,Garden verbena,FALSE,plant,TRUE,FALSE,FALSE,R3,R,High,135
+R34,Ivy geranium,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Lady fern,TRUE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Pacific bleeding heart,TRUE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Sweet violet,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Common holly,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,English ivy,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Wall lettuce,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Creeping woodsorrel,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Garden lupine,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Sweet william,FALSE,plant,FALSE,TRUE,FALSE,R3,R,High,135
+R34,Garden snapdragon,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Hardy fuchsia,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Oregano,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Tarragon,FALSE,plant,FALSE,FALSE,FALSE,R3,R,High,135
+R34,Japanese skimmia,FALSE,shrub,FALSE,TRUE,FALSE,R3,R,High,135
+R34,Highbush blueberry,TRUE,shrub,FALSE,TRUE,FALSE,R3,R,High,135
+R34,NA,NA,NA,NA,NA,NA,R3,R,High,135
+R34,NA,NA,NA,NA,NA,NA,R3,R,High,135
