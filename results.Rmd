@@ -160,3 +160,59 @@ shannon_ecomomic_plot
 ggsave(filename = paste0(IMAGE_FILE_PATH, "1-18_shannon-diversity-vs-economic-level.png"),
        plot = shannon_ecomomic_plot)
 ```
+
+### ANOVA on how economic level influences tree species richness
+```{r}
+# add economic group level names to data
+garden_data <- garden_data |>
+  mutate(economic_category = as.factor(str_sub(house, 1, 1)),
+         economic_category = as.factor(
+           case_when(
+             economic_category == "P" ~ "Low",
+             economic_category == "M" ~ "Medium",
+             economic_category == "R" ~ "High"
+             )
+           ),
+         # specify order of economic group levels
+         economic_category = fct_relevel(economic_category, c("Low", "Medium", "High")))
+
+tree_richness_economic_anova <- aov(tree_species_richness ~ economic_category, garden_data)
+results_tree_richness_economic_anova <- summary(tree_richness_economic_anova)
+results_tree_richness_economic_anova
+```
+```{r}
+tree_richness_economic_anova_df <-
+  results_tree_richness_economic_anova[[1]][[1, "Df"]] |>
+  round(4)
+
+tree_richness_economic_anova_df_resid <-
+  results_tree_richness_economic_anova[[1]][[2, "Df"]] |>
+  round(4)
+
+tree_richness_economic_anova_fvalue <-
+  results_tree_richness_economic_anova[[1]][[1, "F value"]] |>
+  round(4)
+
+tree_richness_economic_anova_pvalue <- 
+  results_tree_richness_economic_anova[[1]][[1, "Pr(>F)"]] |>
+  round(4)
+
+
+cat("df (degrees of freedom):", tree_richness_economic_anova_df, "\n")
+cat("Residual:", tree_richness_economic_anova_df_resid, "\n")
+cat("F:", tree_richness_economic_anova_fvalue, "\n")
+cat("p-value:", tree_richness_economic_anova_pvalue)
+```
+
+```{r}
+tree_richness_economic_plot <-
+  ggplot(garden_data, aes(x = economic_category, y = tree_species_richness)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(x = "Economic level",
+       y = "Tree species richness",
+       title = "Tree species richness across economic levels")
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "1-19_tree-richness-vs-economic-level.png"),
+       plot = tree_richness_economic_plot)
+```
