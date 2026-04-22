@@ -50,7 +50,7 @@ canopy_ecomomic_plot <-
   theme_minimal() +
   labs(x = "Economic level",
        y = "Canopy cover garden (%)",
-       title = "Backyard canopy cover vs economic level")
+       title = "Backyard canopy cover vs Economic level")
 
 canopy_ecomomic_plot
 
@@ -84,7 +84,7 @@ garden_biomass_ecomomic_plot <-
   theme_minimal() +
   labs(x = "Economic level",
        y = "Garden biomass (kg)",
-       title = "Garden biomass vs economic level")
+       title = "Garden biomass vs Economic level")
 
 garden_biomass_ecomomic_plot
 
@@ -124,4 +124,39 @@ veg_richness_plot
 
 ggsave(filename = paste0(IMAGE_FILE_PATH, "1-16_veg-richness-vs-economic-level.png"),
        plot = veg_richness_plot)
+```
+
+### Tree diversity in tems of percentage area per backyeard vs. Economic Level
+
+```{r}
+shannon_ecomomic_lr <- lm(shannon_index_per_garden_withpercentcover ~ economic_level, garden_data)
+results_shannon_ecomomic_lr <- summary(shannon_ecomomic_lr)
+results_shannon_ecomomic_lr
+```
+
+```{r}
+shannon_ecomomic_lr_pvalue <- results_shannon_ecomomic_lr$coefficients["economic_level", "Pr(>|t|)"] |>
+  round(4)
+shannon_biomass_ecomomic_lr_r2 <- results_shannon_ecomomic_lr$r.squared |>
+  round(4)
+
+cat("p-value:", shannon_ecomomic_lr_pvalue, "\n")
+cat("R-squared:", shannon_biomass_ecomomic_lr_r2)
+```
+
+```{r, message = FALSE}
+shannon_ecomomic_plot <-
+  ggplot(garden_data, aes(x = economic_level,
+                          y = shannon_index_per_garden_withpercentcover)) +
+  geom_smooth(method = "lm") +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Economic level",
+       y = "Shannon Diversity Index",
+       title = "Shannon Diversity in terms of Canopy percent cover vs Economic level")
+
+shannon_ecomomic_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "1-18_shannon-diversity-vs-economic-level.png"),
+       plot = shannon_ecomomic_plot)
 ```
