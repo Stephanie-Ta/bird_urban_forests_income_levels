@@ -1,0 +1,11 @@
+# Results
+
+```{r}
+# Loading libraries and data
+GARDEN_FILE_PATH = "data/raw/GARDENS_spreadsheet.xlsx"
+
+```
+
+## Chapter 1
+
+### Canopy cover in backyards vs. Economic Level
