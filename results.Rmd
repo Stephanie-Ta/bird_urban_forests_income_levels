@@ -216,3 +216,78 @@ tree_richness_economic_plot <-
 ggsave(filename = paste0(IMAGE_FILE_PATH, "1-19_tree-richness-vs-economic-level.png"),
        plot = tree_richness_economic_plot)
 ```
+
+## Chapter 2
+
+### Bird species richness in each backyard vs % canopy cover in back yard
+removed outlier in analysis
+```{r}
+# (omit outlier)
+bird_canopy_lr <- lm(bird_diversity ~ canopy_cover_garden_maybepercentage, garden_data[-13, ])
+results_bird_canopy_lr <- summary(bird_canopy_lr)
+results_bird_canopy_lr
+```
+
+```{r}
+bird_canopy_lr_pvalue <-
+  results_bird_canopy_lr$coefficients["canopy_cover_garden_maybepercentage", "Pr(>|t|)"] |>
+  round(4)
+bird_canopy_lr_r2 <- results_bird_canopy_lr$r.squared |>
+  round(4)
+
+cat("p-value:", bird_canopy_lr_pvalue, "\n")
+cat("R-squared:", bird_canopy_lr_r2)
+```
+
+```{r, message = FALSE}
+bird_canopy_plot <-
+  ggplot(garden_data[-13, ], aes(x = canopy_cover_garden_maybepercentage,
+                          y = bird_diversity)) +
+  geom_smooth(method = "lm") +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Canopy cover backyard (%)",
+       y = "Bird species richness",
+       title = "Bird species richness vs Backyard canopy cover")
+
+bird_canopy_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "2-21_bird_vs_canopy.png"),
+       plot = bird_canopy_plot)
+```
+
+### Bird species richness vs vegetation species richness
+kept outlier in analysis
+```{r}
+# (omit outlier)
+bird_veg_lr <- lm(bird_diversity ~ overall_garden_diversity, garden_data)
+results_bird_veg_lr <- summary(bird_veg_lr)
+results_bird_veg_lr
+```
+
+```{r}
+bird_veg_lr_pvalue <-
+  results_bird_veg_lr$coefficients["overall_garden_diversity", "Pr(>|t|)"] |>
+  round(4)
+bird_veg_lr_r2 <- results_bird_veg_lr$r.squared
+
+cat("p-value:", bird_veg_lr_pvalue, "\n")
+cat("R-squared:", bird_veg_lr_r2)
+```
+
+```{r, message = FALSE}
+bird_veg_plot <-
+  ggplot(garden_data[-13, ], aes(x = overall_garden_diversity,
+                          y = bird_diversity)) +
+  geom_smooth(method = "lm") +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Total plant species richness in backyard",
+       y = "Bird species richness",
+       title = "Bird species richness vs Backyard plant diversity")
+
+bird_veg_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "2-21_bird_vs_veg_richness.png"),
+       plot = bird_veg_plot)
+```
