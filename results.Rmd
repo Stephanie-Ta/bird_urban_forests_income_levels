@@ -4,15 +4,10 @@
 # Loading libraries and data
 library(readxl)
 library(janitor)
-library(MASS)
-library(AER)
 library(tidyverse)
 library(broom)
-library(lme4)
-library(lmerTest)
-library(plotly)
-library(knitr)
-library(dplyr)
+library(purrr)
+library(cowplot)
 
 GARDEN_FILE_PATH <- "data/raw/GARDENS_spreadsheet.xlsx"
 garden_data <- read_excel(GARDEN_FILE_PATH, sheet='Everything_statistics') |>
@@ -288,6 +283,109 @@ bird_veg_plot <-
 
 bird_veg_plot
 
-ggsave(filename = paste0(IMAGE_FILE_PATH, "2-21_bird_vs_veg_richness.png"),
+ggsave(filename = paste0(IMAGE_FILE_PATH, "2-22_bird_vs_veg_richness.png"),
        plot = bird_veg_plot)
 ```
+
+### Bird species richness vs native plant species as a ratio of all species in backyard
+didn't include outlier in analysis
+```{r message = FALSE}
+# add native percentage to garden data
+native_percent <- read_excel(GARDEN_FILE_PATH, sheet='Native_vs_not_GRAPHING') |>
+  select(House, Native_percent_total) |>
+  clean_names() # clean column names
+
+garden_data <- garden_data |>
+  left_join(native_percent, by = join_by(house))
+```
+```{r}
+bird_native_lr <- lm(bird_diversity ~ native_percent_total, garden_data[-13, ])
+results_bird_native_lr <- summary(bird_native_lr)
+results_bird_native_lr
+```
+
+```{r}
+bird_native_lr_pvalue <-
+  results_bird_native_lr$coefficients["native_percent_total", "Pr(>|t|)"] |>
+  round(4)
+bird_native_lr_r2 <- results_bird_native_lr$r.squared
+
+cat("p-value:", bird_native_lr_pvalue, "\n")
+cat("R-squared:", bird_native_lr_r2)
+```
+Limit y-axis to 0-30?
+
+```{r, message = FALSE}
+bird_native_plot <-
+  ggplot(garden_data[-13, ], aes(x = native_percent_total,
+                          y = bird_diversity)) +
+  geom_smooth(method = "lm") +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Native % plants total",
+       y = "Bird species richness",
+       title = "Bird species richness vs Native plant proportion")
+
+bird_native_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "2-23_bird_vs_native.png"),
+       plot = bird_native_plot)
+```
+
+### Accumulation curve accross houses
+
+### Panel comparing vegetation and birds variables vs economic level and the same over area of backyard
+```{r fig.height = 12, fig.width = 6}
+garden_data <- garden_data |>
+  mutate(biomass_per_m2 = biomass_total_kg/garden_size_m_2,
+         plants_per_m2 = overall_garden_diversity/garden_size_m_2,
+         trees_per_m2 = tree_species_richness/garden_size_m_2,
+         canopy_per_m2 = canopy_cover_garden_maybepercentage/garden_size_m_2,
+         birds_per_m2 = bird_diversity/garden_size_m_2,
+         )
+
+y_vars <- c("biomass_total_kg", "biomass_per_m2",
+            "overall_garden_diversity", "plants_per_m2",
+            "tree_species_richness", "trees_per_m2",
+            "canopy_cover_garden_maybepercentage", "canopy_per_m2",
+            "bird_diversity", "birds_per_m2")
+titles <- c("Biomass", "Biomass per area",
+            "Plant richness", "Plant richness per area",
+            "Tree richness", "Tree richness per area",
+            "Canopy cover", "Canopy cover per area",
+            "Bird richness", "Bird richness per area")
+
+plots <- map2(y_vars, titles, \(var, title) {
+  # compute p-value for the slope of economic_level
+  p <- tidy(lm(garden_data[[var]] ~ garden_data$economic_level))$p.value[2]
+  p_label <- paste0("p = ", signif(p, 3))
+  
+  ggplot(garden_data, aes(x = economic_level, y = .data[[var]])) +
+    geom_smooth(method = "lm") +
+    geom_point() +
+    theme_minimal() +
+    annotate("text", x = -Inf, y = Inf, label = p_label,
+             hjust = -0.1, vjust = 1.5, size = 4) +
+    labs(y = NULL, x = NULL, title = title)
+})
+
+panel_plot <- plot_grid(plotlist = plots, ncol = 2)
+panel_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "2-25_panel-plot.png"),
+       plot = panel_plot,
+       height = 12,
+       width = 6)
+```
+
+## Appendix
+
+### Species count over time
+
+### Species diversity throughout the morning
+
+### Bird species richness vs economic level
+
+### Vegetation composition
+
+###
