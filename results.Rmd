@@ -1,11 +1,127 @@
 # Results
 
-```{r}
+```{r message = FALSE, warning = FALSE}
 # Loading libraries and data
-GARDEN_FILE_PATH = "data/raw/GARDENS_spreadsheet.xlsx"
+library(readxl)
+library(janitor)
+library(MASS)
+library(AER)
+library(tidyverse)
+library(broom)
+library(lme4)
+library(lmerTest)
+library(plotly)
+library(knitr)
+library(dplyr)
 
+GARDEN_FILE_PATH <- "data/raw/GARDENS_spreadsheet.xlsx"
+garden_data <- read_excel(GARDEN_FILE_PATH, sheet='Everything_statistics') |>
+  clean_names() # clean column names
+
+# File path to save images of the graphs to
+IMAGE_FILE_PATH <-"images/"
 ```
 
 ## Chapter 1
 
 ### Canopy cover in backyards vs. Economic Level
+
+```{r}
+canopy_ecomomic_lr <- lm(canopy_cover_garden_maybepercentage ~ economic_level, garden_data)
+results_canopy_ecomomic_lr <- summary(canopy_ecomomic_lr)
+results_canopy_ecomomic_lr
+```
+
+```{r}
+canopy_ecomomic_lr_pvalue <- results_canopy_ecomomic_lr$coefficients["economic_level", "Pr(>|t|)"] |>
+  round(4)
+canopy_ecomomic_lr_r2 <- results_canopy_ecomomic_lr$r.squared |>
+  round(4)
+
+cat("p-value:", canopy_ecomomic_lr_pvalue, "\n")
+cat("R-squared:", canopy_ecomomic_lr_r2)
+```
+
+```{r, message = FALSE}
+canopy_ecomomic_plot <-
+  ggplot(garden_data, aes(x = economic_level, y = canopy_cover_garden_maybepercentage)) +
+  geom_smooth(method = "lm") +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Economic level",
+       y = "Canopy cover garden (%)",
+       title = "Backyard canopy cover vs economic level")
+
+canopy_ecomomic_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "1-14_canopy-cover-vs-economic-level.png"),
+       plot = canopy_ecomomic_plot)
+```
+
+### Tree total biomass per backyard vs. Economic Level
+
+```{r}
+tree_biomass_ecomomic_lr <- lm(biomass_total_kg ~ economic_level, garden_data)
+results_tree_biomass_ecomomic_lr <- summary(tree_biomass_ecomomic_lr)
+results_tree_biomass_ecomomic_lr
+```
+
+```{r}
+tree_biomass_ecomomic_lr_pvalue <- results_tree_biomass_ecomomic_lr$coefficients["economic_level", "Pr(>|t|)"] |>
+  round(4)
+tree_biomass_ecomomic_lr_r2 <- results_tree_biomass_ecomomic_lr$r.squared |>
+  round(4)
+
+cat("p-value:", tree_biomass_ecomomic_lr_pvalue, "\n")
+cat("R-squared:", tree_biomass_ecomomic_lr_r2)
+```
+
+```{r, message = FALSE}
+garden_biomass_ecomomic_plot <-
+  ggplot(garden_data, aes(x = economic_level, y = biomass_total_kg)) +
+  geom_smooth(method = "lm") +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Economic level",
+       y = "Garden biomass (kg)",
+       title = "Garden biomass vs economic level")
+
+garden_biomass_ecomomic_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "1-15_garden-biomass-vs-economic-level.png"),
+       plot = garden_biomass_ecomomic_plot)
+```
+
+### Total vegetation species richness per backyard vs Economic level
+
+```{r}
+veg_richness_ecomomic_lr <- lm(overall_garden_diversity ~ economic_level, garden_data)
+results_veg_richness_lr <- summary(veg_richness_ecomomic_lr)
+results_veg_richness_lr
+```
+
+```{r}
+veg_richness_ecomomic_lr_pvalue <- results_veg_richness_lr$coefficients["economic_level", "Pr(>|t|)"] |>
+  round(4)
+veg_richness_lr_r2 <- results_veg_richness_lr$r.squared |>
+  round(4)
+
+cat("p-value:", veg_richness_ecomomic_lr_pvalue, "\n")
+cat("R-squared:", veg_richness_lr_r2)
+```
+
+```{r, message = FALSE}
+veg_richness_plot <-
+  ggplot(garden_data, aes(x = economic_level, y = overall_garden_diversity)) +
+  geom_smooth(method = "lm") +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Economic level",
+       y = "Total backyard plant species richness",
+       title = "Total backyard plant species richness vs Economic level")
+
+veg_richness_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "1-16_veg-richness-vs-economic-level.png"),
+       plot = veg_richness_plot)
+```
