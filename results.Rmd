@@ -199,7 +199,7 @@ cat("F:", tree_richness_economic_anova_fvalue, "\n")
 cat("p-value:", tree_richness_economic_anova_pvalue)
 ```
 
-```{r}
+```{r fig.height = 5, fig.width = 5}
 tree_richness_economic_plot <-
   ggplot(garden_data, aes(x = economic_category, y = tree_species_richness)) +
   geom_boxplot() +
@@ -208,8 +208,12 @@ tree_richness_economic_plot <-
        y = "Tree species richness",
        title = "Tree species richness across economic levels")
 
+tree_richness_economic_plot
+
 ggsave(filename = paste0(IMAGE_FILE_PATH, "1-19_tree-richness-vs-economic-level.png"),
-       plot = tree_richness_economic_plot)
+       plot = tree_richness_economic_plot,
+       height = 5,
+       width = 5)
 ```
 
 ## Chapter 2
