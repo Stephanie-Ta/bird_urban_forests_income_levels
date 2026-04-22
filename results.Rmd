@@ -46,7 +46,7 @@ cat("R-squared:", canopy_ecomomic_lr_r2)
 canopy_ecomomic_plot <-
   ggplot(garden_data, aes(x = economic_level, y = canopy_cover_garden_maybepercentage)) +
   geom_smooth(method = "lm") +
-  geom_point() +
+  geom_point(data = garden_data[-17, ]) +
   theme_minimal() +
   labs(x = "Economic level",
        y = "Canopy cover garden (%)",
@@ -114,7 +114,7 @@ cat("R-squared:", veg_richness_lr_r2)
 veg_richness_plot <-
   ggplot(garden_data, aes(x = economic_level, y = overall_garden_diversity)) +
   geom_smooth(method = "lm") +
-  geom_point() +
+  geom_point(data = garden_data[-1, ]) +
   theme_minimal() +
   labs(x = "Economic level",
        y = "Total backyard plant species richness",
