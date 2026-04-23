@@ -35,7 +35,8 @@ canopy_ecomomic_lr <- lm(canopy_cover_garden_maybepercentage ~ economic_level, g
 results_canopy_ecomomic_lr <- summary(canopy_ecomomic_lr)
 results_canopy_ecomomic_lr
 ```
-p-value: 0.0129 
+p-value: 0.0129
+
 R-squared: 0.2078
 
 ```{r message = FALSE, warning = FALSE}
@@ -62,7 +63,8 @@ results_tree_biomass_ecomomic_lr <- summary(tree_biomass_ecomomic_lr)
 results_tree_biomass_ecomomic_lr
 ```
 
-p-value: 0.0459 
+p-value: 0.0459
+
 R-squared: 0.1348
 
 
@@ -90,7 +92,8 @@ veg_richness_ecomomic_lr <- lm(overall_garden_diversity ~ economic_level, garden
 results_veg_richness_lr <- summary(veg_richness_ecomomic_lr)
 results_veg_richness_lr
 ```
-p-value: 0.9226 
+p-value: 0.9226
+
 R-squared: 0.0003435
 
 ```{r, message = FALSE}
@@ -116,7 +119,8 @@ shannon_ecomomic_lr <- lm(shannon_index_per_garden_withpercentcover ~ economic_l
 results_shannon_ecomomic_lr <- summary(shannon_ecomomic_lr)
 results_shannon_ecomomic_lr
 ```
-p-value: 0.0048 
+p-value: 0.0048
+
 R-squared: 0.2505
 
 ```{r, message = FALSE}
@@ -158,10 +162,14 @@ tree_richness_economic_anova <- aov(tree_species_richness ~ economic_category, g
 results_tree_richness_economic_anova <- summary(tree_richness_economic_anova)
 results_tree_richness_economic_anova
 ```
-df (degrees of freedom): 2 
-Residual: 27 
+df (degrees of freedom): 2
+
+Residual: 27
+
 F: 4.409
+
 p-value: 0.022
+
 
 **Check assumptions (1) normality of residuals using a Shapiro-Wilk normality test and (2) equal variance of each group using a Levene's test.**
 ```{r}
@@ -208,7 +216,8 @@ bird_canopy_lr <- lm(bird_diversity ~ canopy_cover_garden_maybepercentage, garde
 results_bird_canopy_lr <- summary(bird_canopy_lr)
 results_bird_canopy_lr
 ```
-p-value: 0.4372 
+p-value: 0.4372
+
 R-squared: 0.0234
 
 ```{r, message = FALSE}
@@ -236,7 +245,8 @@ bird_veg_lr <- lm(bird_diversity ~ overall_garden_diversity, garden_data)
 results_bird_veg_lr <- summary(bird_veg_lr)
 results_bird_veg_lr
 ```
-p-value: 0.9692 
+p-value: 0.9692
+
 R-squared: 0.000054295
 
 ```{r, message = FALSE}
@@ -272,7 +282,8 @@ bird_native_lr <- lm(bird_diversity ~ native_percent_total, garden_data[-13, ])
 results_bird_native_lr <- summary(bird_native_lr)
 results_bird_native_lr
 ```
-p-value: 0.918 
+p-value: 0.918
+
 R-squared: 0.0003998
 
 
@@ -473,7 +484,7 @@ Kruskal-Wallis Test:
 ```{r}
 kruskal.test(average_tree_height ~ economic_category, data = average_tree_height_per_house)
 ```
-The median of average tree height per house did not differ significantly across economic categories (p-value > 0.064 > 0.05).
+The median of average tree height per house did not differ significantly across economic categories (p-value = 0.064 > 0.05).
 
 
 ```{r fig.height = 6, fig.width = 5}
