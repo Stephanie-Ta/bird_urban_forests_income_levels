@@ -8,10 +8,15 @@ library(tidyverse)
 library(broom)
 library(purrr)
 library(cowplot)
+library(car)
 
 GARDEN_FILE_PATH <- "data/raw/GARDENS_spreadsheet.xlsx"
 garden_data <- read_excel(GARDEN_FILE_PATH, sheet='Everything_statistics') |>
   clean_names() # clean column names
+
+BIRD_FILE_PATH <- "data/raw/BIRDS_spreadsheet2.xlsx"
+bird_data <- read_excel(BIRD_FILE_PATH, sheet="Long_clean") |>
+  clean_names()
 
 # File path to save images of the graphs to
 IMAGE_FILE_PATH <-"images/"
@@ -37,15 +42,15 @@ cat("p-value:", canopy_ecomomic_lr_pvalue, "\n")
 cat("R-squared:", canopy_ecomomic_lr_r2)
 ```
 
-```{r, message = FALSE}
+```{r message = FALSE}
 canopy_ecomomic_plot <-
   ggplot(garden_data, aes(x = economic_level, y = canopy_cover_garden_maybepercentage)) +
   geom_smooth(method = "lm") +
   geom_point(data = garden_data[-17, ]) +
   theme_minimal() +
-  labs(x = "Economic level",
-       y = "Canopy cover garden (%)",
-       title = "Backyard canopy cover vs Economic level")
+  labs(x = "Economic Level",
+       y = "Canopy Cover Garden (%)",
+       title = "Backyard Canopy Cover vs. Economic Level")
 
 canopy_ecomomic_plot
 
@@ -77,9 +82,9 @@ garden_biomass_ecomomic_plot <-
   geom_smooth(method = "lm") +
   geom_point() +
   theme_minimal() +
-  labs(x = "Economic level",
-       y = "Garden biomass (kg)",
-       title = "Garden biomass vs Economic level")
+  labs(x = "Economic Level",
+       y = "Garden Biomass (kg)",
+       title = "Garden Biomass vs. Economic Level")
 
 garden_biomass_ecomomic_plot
 
@@ -111,9 +116,9 @@ veg_richness_plot <-
   geom_smooth(method = "lm") +
   geom_point(data = garden_data[-1, ]) +
   theme_minimal() +
-  labs(x = "Economic level",
-       y = "Total backyard plant species richness",
-       title = "Total backyard plant species richness vs Economic level")
+  labs(x = "Economic Level",
+       y = "Total Backyard Plant Species Richness",
+       title = "Total Backyard Plant Species Richness vs. Economic Level")
 
 veg_richness_plot
 
@@ -146,9 +151,9 @@ shannon_ecomomic_plot <-
   geom_smooth(method = "lm") +
   geom_point() +
   theme_minimal() +
-  labs(x = "Economic level",
+  labs(x = "Economic Level",
        y = "Shannon Diversity Index",
-       title = "Shannon Diversity in terms of Canopy percent cover vs Economic level")
+       title = "Shannon Diversity in Terms of Canopy Percent Cover vs. Economic Level")
 
 shannon_ecomomic_plot
 
@@ -170,11 +175,26 @@ garden_data <- garden_data |>
            ),
          # specify order of economic group levels
          economic_category = fct_relevel(economic_category, c("Low", "Medium", "High")))
+```
 
+ANOVA:
+```{r}
 tree_richness_economic_anova <- aov(tree_species_richness ~ economic_category, garden_data)
 results_tree_richness_economic_anova <- summary(tree_richness_economic_anova)
 results_tree_richness_economic_anova
 ```
+
+**Check assumptions (1) normality of residuals using a Shapiro-Wilk normality test and (2) equal variance of each group using a Levene's test.**
+```{r}
+shapiro.test(tree_richness_economic_anova$residuals)
+```
+
+```{r}
+leveneTest(tree_species_richness ~ economic_category, garden_data)
+```
+Neither assumption is violated (p-values > 0.05).
+
+**Summary of ANOVA results:**
 ```{r}
 tree_richness_economic_anova_df <-
   results_tree_richness_economic_anova[[1]][[1, "Df"]] |>
@@ -199,15 +219,16 @@ cat("F:", tree_richness_economic_anova_fvalue, "\n")
 cat("p-value:", tree_richness_economic_anova_pvalue)
 ```
 
+Plot:
 ```{r fig.height = 5, fig.width = 5}
 tree_richness_economic_plot <-
   ggplot(garden_data, aes(x = economic_category, y = tree_species_richness)) +
   geom_boxplot() +
   theme_minimal() +
   stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "red") +
-  labs(x = "Economic level",
-       y = "Tree species richness",
-       title = "Tree species richness across economic levels")
+  labs(x = "Economic Group",
+       y = "Tree Species Richness",
+       title = "Tree Species Richness Across Economic Groups")
 
 tree_richness_economic_plot
 
@@ -246,9 +267,9 @@ bird_canopy_plot <-
   geom_smooth(method = "lm") +
   geom_point() +
   theme_minimal() +
-  labs(x = "Canopy cover backyard (%)",
-       y = "Bird species richness",
-       title = "Bird species richness vs Backyard canopy cover")
+  labs(x = "Canopy Cover Backyard (%)",
+       y = "Bird Species Richness",
+       title = "Bird Species Richness vs. Backyard Canopy Cover")
 
 bird_canopy_plot
 
@@ -282,9 +303,9 @@ bird_veg_plot <-
   geom_smooth(method = "lm") +
   geom_point() +
   theme_minimal() +
-  labs(x = "Total plant species richness in backyard",
-       y = "Bird species richness",
-       title = "Bird species richness vs Backyard plant diversity")
+  labs(x = "Total Plant Species Richness in Backyard",
+       y = "Bird Species Richness",
+       title = "Bird Species Richness vs. Backyard Plant Diversity")
 
 bird_veg_plot
 
@@ -327,9 +348,9 @@ bird_native_plot <-
   geom_smooth(method = "lm") +
   geom_point() +
   theme_minimal() +
-  labs(x = "Native % plants total",
-       y = "Bird species richness",
-       title = "Bird species richness vs Native plant proportion")
+  labs(x = "Native % Plants Total",
+       y = "Bird Species Richness",
+       title = "Bird Species Richness vs. Native Plant Proportion")
 
 bird_native_plot
 
@@ -338,6 +359,58 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "2-23_bird_vs_native.png"),
 ```
 
 ### Accumulation curve accross houses
+```{r}
+set.seed(123) # set seed for reproducible permutations
+
+# presence/absence matrix where rows = houses and columns = species
+presence_matrix <- bird_data |>
+  count(house, species) |>
+  pivot_wider(names_from = species, values_from = n, values_fill = 0) |>
+  column_to_rownames("house") |>
+  mutate(across(everything(), ~ as.integer(. > 0)))
+
+# species accumulation curve
+n_permutations <- 100
+houses <- rownames(presence_matrix)
+n_houses <- length(houses)
+n_species <- ncol(presence_matrix)
+
+curves <- matrix(0, nrow = n_permutations, ncol = n_houses)
+
+for (i in seq_len(n_permutations)) {
+  perm <- sample(houses)
+  seen <- rep(FALSE, n_species)
+
+  for (j in seq_along(perm)) {
+    seen <- seen | as.logical(presence_matrix[perm[j], ])
+    curves[i, j] <- sum(seen)
+  }
+}
+
+# summarise across permutations
+results <- tibble(
+  x          = seq_len(n_houses),
+  mean_curve = colMeans(curves),
+  lower      = apply(curves, 2, quantile, probs = 0.025),
+  upper      = apply(curves, 2, quantile, probs = 0.975)
+)
+
+# plot
+accumulation_plot <- ggplot(results, aes(x = x)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), fill = "grey60", alpha = 0.4) +
+  geom_line(aes(y = mean_curve), color = "#3366FF", linewidth = 1) +
+  labs(
+    title = "Species Accumulation Curve Across Houses",
+    x     = "Number of Houses Sampled",
+    y     = "Cumulative Species Detected"
+  ) +
+  theme_minimal()
+
+accumulation_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "2-24_accumulation_plot.png"),
+       plot = accumulation_plot)
+```
 
 ### Panel comparing vegetation and birds variables vs economic level and the same over area of backyard
 ```{r fig.height = 12, fig.width = 6}
@@ -392,39 +465,29 @@ tree_height <- read_excel(GARDEN_FILE_PATH, sheet='Tree_per_garden') |>
   left_join(garden_data[, c("house", "economic_category")], by = c("id" = "house")) |>
   filter(id != "P22") # remove outlier
 ```
-residuals not normally dist
 
+ANOVA:
 ```{r}
 tree_height_economic_anova <- aov(ht_m ~ economic_category, tree_height)
 results_tree_height_economic_anova <- summary(tree_height_economic_anova)
 results_tree_height_economic_anova
+```
 
-qqnorm(tree_height_economic_anova$residuals)
+**Check assumptions (1) normality of residuals using a Shapiro-Wilk normality test and (2) equal variance of each group using a Levene's test.**
+```{r}
+shapiro.test(tree_height_economic_anova$residuals)
 ```
 
 ```{r}
-tree_height_economic_anova_df <-
-  results_tree_height_economic_anova[[1]][[1, "Df"]] |>
-  round(4)
-
-tree_height_economic_anova_df_resid <-
-  results_tree_height_economic_anova[[1]][[2, "Df"]] |>
-  round(4)
-
-tree_height_economic_anova_fvalue <-
-  results_tree_height_economic_anova[[1]][[1, "F value"]] |>
-  round(4)
-
-tree_height_economic_anova_pvalue <- 
-  results_tree_height_economic_anova[[1]][[1, "Pr(>F)"]] |>
-  round(4)
-
-
-cat("df (degrees of freedom):", tree_height_economic_anova_df, "\n")
-cat("Residual:", tree_height_economic_anova_df_resid, "\n")
-cat("F:", tree_height_economic_anova_fvalue, "\n")
-cat("p-value:", tree_height_economic_anova_pvalue)
+leveneTest(ht_m ~ economic_category, tree_height)
 ```
+The assumption of normally distributed residuals is violated (p-value < 0.05) while the assumption of variance is not (p-value > 0.05). Therefore, a Kruskal-Wallis test is more appropriate to compare the **median** of each group instead of the **mean**. The medians better reflects the central tendency in the case of outliers and skewedness. Additionally, the Kruskal-Wallis test does not make assumptions about the data distribution or variablility.
+
+Kruskal-Wallis Test:
+```{r}
+kruskal.test(ht_m ~ economic_category, data = tree_height)
+```
+There is a statistically significant difference in median tree height across economic categories (p = 0.022 < 0.05).
 
 ```{r fig.height = 6, fig.width = 5}
 tree_height_economic_plot <-
@@ -432,14 +495,16 @@ tree_height_economic_plot <-
   geom_boxplot() +
   stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "red") +
   theme_minimal() +
-  labs(x = "Economic level",
-       y = "Tree height",
-       title = "Tree height across economic levels")
+  labs(x = "Economic Group",
+       y = "Tree Height",
+       title = "Tree Height Across Economic Groups")
 
 tree_height_economic_plot
 
-# ggsave(filename = paste0(IMAGE_FILE_PATH, "other_tree-height-vs-economic-level.png"),
-#        plot = tree_height_economic_plot)
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-1_tree-height-vs-economic-level.png"),
+      plot = tree_height_economic_plot,
+      height = 6,
+      width = 6)
 ```
   
 ### ANOVA average tree height per house per economic level
@@ -452,19 +517,39 @@ avg_tree_height_economic_anova <-
   aov(average_tree_height ~ economic_category, average_tree_height_per_house)
 
 summary(avg_tree_height_economic_anova)
-
-## violates normality assumption
 ```
 
+**Check assumptions (1) normality of residuals using a Shapiro-Wilk normality test and (2) equal variance of each group using a Levene's test.**
+```{r}
+shapiro.test(avg_tree_height_economic_anova$residuals)
+```
+
+```{r}
+leveneTest(average_tree_height ~ economic_category, data = average_tree_height_per_house)
+```
+Again, the assumption of normally distributed residuals is violated (p-value < 0.05) while the assumption of variance is not (p-value > 0.05). Therefore, a Kruskal-Wallis test again to compare the **median** of each group instead of the **mean**.
+
+Kruskal-Wallis Test:
+```{r}
+kruskal.test(average_tree_height ~ economic_category, data = average_tree_height_per_house)
+```
+The median of average tree height per house did not differ significantly across economic categories (p-value > 0.064 > 0.05).
+
+
 ```{r fig.height = 6, fig.width = 5}
-tree_height_economic_plot <-
+avg_tree_height_economic_plot <-
   ggplot(average_tree_height_per_house, aes(x = economic_category, y = average_tree_height)) +
   geom_boxplot() +
   stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "red") +
   theme_minimal() +
-  labs(x = "Economic level",
-       y = "Average tree height per house",
-       title = "Average tree height per house across economic levels")
+  labs(x = "Economic Group",
+       y = "Average Tree Height per House",
+       title = "Average Tree Height per House Across Economic Groups")
 
-tree_height_economic_plot
+avg_tree_height_economic_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-2_average-tree-height-per-house-vs-economic-level.png"),
+      plot = avg_tree_height_economic_plot,
+      height = 6,
+      width = 6)
 ```
