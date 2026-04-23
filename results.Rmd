@@ -204,6 +204,7 @@ tree_richness_economic_plot <-
   ggplot(garden_data, aes(x = economic_category, y = tree_species_richness)) +
   geom_boxplot() +
   theme_minimal() +
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "red") +
   labs(x = "Economic level",
        y = "Tree species richness",
        title = "Tree species richness across economic levels")
@@ -388,12 +389,17 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "2-25_panel-plot.png"),
 tree_height <- read_excel(GARDEN_FILE_PATH, sheet='Tree_per_garden') |>
   select(ID, `Ht (m)`) |>
   clean_names() |>
-  left_join(garden_data[, c("house", "economic_category")], by = c("id" = "house"))
+  left_join(garden_data[, c("house", "economic_category")], by = c("id" = "house")) |>
+  filter(id != "P22") # remove outlier
 ```
+residuals not normally dist
+
 ```{r}
 tree_height_economic_anova <- aov(ht_m ~ economic_category, tree_height)
 results_tree_height_economic_anova <- summary(tree_height_economic_anova)
 results_tree_height_economic_anova
+
+qqnorm(tree_height_economic_anova$residuals)
 ```
 
 ```{r}
@@ -420,10 +426,11 @@ cat("F:", tree_height_economic_anova_fvalue, "\n")
 cat("p-value:", tree_height_economic_anova_pvalue)
 ```
 
-```{r}
+```{r fig.height = 6, fig.width = 5}
 tree_height_economic_plot <-
   ggplot(tree_height, aes(x = economic_category, y = ht_m)) +
   geom_boxplot() +
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "red") +
   theme_minimal() +
   labs(x = "Economic level",
        y = "Tree height",
@@ -435,14 +442,29 @@ tree_height_economic_plot
 #        plot = tree_height_economic_plot)
 ```
   
-## Appendix
+### ANOVA average tree height per house per economic level
+```{r}
+average_tree_height_per_house <- tree_height |>
+  group_by(id, economic_category) |>
+  summarize(average_tree_height = mean(ht_m))
 
-### Species count over time
+avg_tree_height_economic_anova <-
+  aov(average_tree_height ~ economic_category, average_tree_height_per_house)
 
-### Species diversity throughout the morning
+summary(avg_tree_height_economic_anova)
 
-### Bird species richness vs economic level
+## violates normality assumption
+```
 
-### Vegetation composition
+```{r fig.height = 6, fig.width = 5}
+tree_height_economic_plot <-
+  ggplot(average_tree_height_per_house, aes(x = economic_category, y = average_tree_height)) +
+  geom_boxplot() +
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "red") +
+  theme_minimal() +
+  labs(x = "Economic level",
+       y = "Average tree height per house",
+       title = "Average tree height per house across economic levels")
 
-###
+tree_height_economic_plot
+```
