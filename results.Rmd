@@ -24,6 +24,10 @@ IMAGE_FILE_PATH <-"images/"
 
 ## Chapter 1
 
+To investigate how economic level is associated with the structure and composition of vegetation in private urban forests, linear models were fitted with economic level as the independent variable and the following response variables per backyard: canopy cover, tree total biomass, total vegetation species richness, and Shannon diversity index based on canopy percent cover.
+
+A one-way ANOVA was used to test whether tree species richness differed across economic groups. Normality and homogeneity of variances were verified using the Shapiro-Wilk and Levene's tests, respectively.
+
 ### Canopy cover in backyards vs. Economic Level
 
 ```{r}
@@ -76,6 +80,7 @@ cat("p-value:", tree_biomass_ecomomic_lr_pvalue, "\n")
 cat("R-squared:", tree_biomass_ecomomic_lr_r2)
 ```
 
+ASK ABOUT TREE VS GARDEN BIOMASS
 ```{r, message = FALSE}
 garden_biomass_ecomomic_plot <-
   ggplot(garden_data, aes(x = economic_level, y = biomass_total_kg)) +
@@ -240,6 +245,14 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "1-19_tree-richness-vs-economic-level.
 
 ## Chapter 2
 
+To investigate how bird species richness is associated with vegetation composition and structure in private urban forests, linear models were fitted with bird species richness as the response variable and the following predictors per backyard: canopy cover, plant species richness, and native plant proportion.
+
+A bird species accumulation curve was constructed by randomly ordering houses and cumulatively recording the number of new species detected with each additional house sampled. This process was repeated 100 times with different random orderings, and the mean cumulative species richness along with the 95% confidence interval across permutations were calculated.
+
+Vegetation and bird variables, as well as vegetation and bird variables per backyard area, were tested using linear models with economic level as the independent variable.
+
+Vegetation and bird variables, both raw and standardized per backyard area, were tested using linear models with economic level as the independent variable.
+
 ### Bird species richness in each backyard vs % canopy cover in back yard
 removed outlier in analysis
 ```{r}
@@ -305,7 +318,7 @@ bird_veg_plot <-
   theme_minimal() +
   labs(x = "Total Plant Species Richness in Backyard",
        y = "Bird Species Richness",
-       title = "Bird Species Richness vs. Backyard Plant Diversity")
+       title = "Bird Species Richness vs. Backyard Plant Species Richness")
 
 bird_veg_plot
 
@@ -456,6 +469,8 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "2-25_panel-plot.png"),
        width = 6)
 ```
 ## Other
+
+To test whether tree height and average tree height per house differed across economic groups, normality and homogeneity of variances were assessed using the Shapiro-Wilk and Levene's tests, respectively. As normality was violated, a Kruskal-Wallis test was used as a non-parametric alternative.
 
 ### ANOVA tree height per economic level
 ```{r}
