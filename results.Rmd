@@ -61,6 +61,7 @@ canopy_ecomomic_plot
 ggsave(filename = paste0(IMAGE_FILE_PATH, "1-14_canopy-cover-vs-economic-level.png"),
        plot = canopy_ecomomic_plot)
 ```
+Example figure caption: Relationship between backyard canopy cover (%) and economic level. The line represents the linear model fit with 95% confidence interval (shaded grey). An outlier with very high canopy cover was omitted from the graph.
 
 ### Tree total biomass per backyard vs. Economic Level
 
@@ -91,6 +92,7 @@ garden_biomass_ecomomic_plot
 ggsave(filename = paste0(IMAGE_FILE_PATH, "1-15_garden-biomass-vs-economic-level.png"),
        plot = garden_biomass_ecomomic_plot)
 ```
+Example figure caption: Relationship between garden ?? tree?? biomass (kg) and economic level. The line represents the linear model fit with 95% confidence interval (shaded grey).
 
 ### Total vegetation species richness per backyard vs Economic level
 
@@ -131,6 +133,7 @@ veg_richness_plot
 ggsave(filename = paste0(IMAGE_FILE_PATH, "1-16_veg-richness-vs-economic-level.png"),
        plot = veg_richness_plot)
 ```
+Example figure caption: Relationship between plant species richness and economic level. The line represents the negative binomial model fit with 95% confidence interval (shaded grey). An outlier with very high plant species richness was omitted from the graph.
 
 ### Tree diversity in tems of percentage area per backyard vs. Economic Level
 
@@ -159,6 +162,7 @@ shannon_ecomomic_plot
 ggsave(filename = paste0(IMAGE_FILE_PATH, "1-18_shannon-diversity-vs-economic-level.png"),
        plot = shannon_ecomomic_plot)
 ```
+Example figure caption: Relationship between Shannon Diversity Index in terms of canopy percent cover and economic level. The line represents the linear model fit with 95% confidence interval (shaded grey).
 
 ### ANOVA on how economic level influences tree species richness
 ```{r}
@@ -219,6 +223,7 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "1-19_tree-richness-vs-economic-level.
        height = 5,
        width = 5)
 ```
+Example figure caption: Tree species richness observed per economic group. Boxplots represent the mean (red diamond), median (bold horizontal line), interquartile range (boxes), and 1.5 interquartile range (whiskers).
 
 ## Chapter 2
 
@@ -244,7 +249,7 @@ results_bird_canopy_poisson
 ```
 p-value: 0.1332
 
-```{r, message = FALSE}
+```{r, message = FALSE, warning = FALSE}
 no_p12_data <- garden_data |>
   filter(house != "p12")
   
@@ -263,6 +268,7 @@ bird_canopy_plot
 ggsave(filename = paste0(IMAGE_FILE_PATH, "2-21_bird_vs_canopy.png"),
        plot = bird_canopy_plot)
 ```
+Example figure caption: Relationship between bird species richness and backyard canopy cover (%). The line represents the Poisson model fit with 95% confidence interval (shaded grey). An outlier with very low bird species richness was omitted from the graph.
 
 ### Bird species richness vs vegetation species richness
 ```{r}
@@ -296,6 +302,7 @@ bird_veg_plot
 ggsave(filename = paste0(IMAGE_FILE_PATH, "2-22_bird_vs_veg_richness.png"),
        plot = bird_veg_plot)
 ```
+Example figure caption: Relationship between bird species richness and plant species richness. The line represents the Poisson model fit with 95% confidence interval (shaded grey). An outlier with very low bird species richness was omitted from the graph.
 
 ### Bird species richness vs native plant species as a ratio of all species in backyard
 ```{r message = FALSE}
@@ -345,6 +352,7 @@ bird_native_plot
 ggsave(filename = paste0(IMAGE_FILE_PATH, "2-23_bird_vs_native.png"),
        plot = bird_native_plot)
 ```
+Example figure caption: Relationship between bird species richness and native proportion of plants (%). The line represents the Poisson model fit with 95% confidence interval (shaded grey). An outlier with very low bird species richness was omitted from the graph.
 
 ### Accumulation curve accross houses
 ```{r}
@@ -399,9 +407,10 @@ accumulation_plot
 ggsave(filename = paste0(IMAGE_FILE_PATH, "2-24_accumulation_plot.png"),
        plot = accumulation_plot)
 ```
+Example figure caption: Bird species accumulation curve based on 100 random permutations of houses. The line represents the mean cumulative species richness and with the 95% confidence interval (shaded grey).
 
 ### Panel comparing vegetation and birds variables vs economic level and the same over area of backyard
-```{r fig.height = 12, fig.width = 6}
+```{r fig.height = 12, fig.width = 6, warning = FALSE, message = FALSE}
 garden_data <- garden_data |>
   mutate(biomass_per_m2 = biomass_total_kg/garden_size_m_2,
          plants_per_m2 = overall_garden_diversity/garden_size_m_2,
@@ -443,11 +452,13 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "2-25_panel-plot.png"),
        height = 12,
        width = 6)
 ```
+Example figure caption: Relationship between biomass, plant species richness, canopy cover, and bird species richness (raw and area standardized per backyard area) against economic level. The line represents the linear model fit with 95% confidence interval (shaded grey).
+
 ## Other
 
-To test whether tree height and average tree height per house differed across economic groups, normality and homogeneity of variances were assessed using the Shapiro-Wilk and Levene's tests, respectively. As normality was violated, a Kruskal-Wallis test was used as a non-parametric alternative.
+To test whether tree height and average tree height per house differed across economic groups, normality and homogeneity of variances were assessed using the Shapiro-Wilk and Levene's tests, respectively. As normality was violated, a Kruskal-Wallis test was used as a non-parametric alternative. An outlier was removed from the analysis and plots.
 
-### ANOVA tree height per economic level
+### Tree height per economic level
 ```{r}
 tree_height <- read_excel(GARDEN_FILE_PATH, sheet='Tree_per_garden') |>
   select(ID, `Ht (m)`) |>
@@ -459,8 +470,6 @@ tree_height <- read_excel(GARDEN_FILE_PATH, sheet='Tree_per_garden') |>
 ANOVA:
 ```{r}
 tree_height_economic_anova <- aov(ht_m ~ economic_category, tree_height)
-results_tree_height_economic_anova <- summary(tree_height_economic_anova)
-results_tree_height_economic_anova
 ```
 
 **Check assumptions (1) normality of residuals using a Shapiro-Wilk normality test and (2) equal variance of each group using a Levene's test.**
@@ -496,8 +505,9 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "other-1_tree-height-vs-economic-level
       height = 6,
       width = 6)
 ```
-  
-### ANOVA average tree height per house per economic level
+Example figure caption: Tree height observed per economic group. Boxplots represent the mean (red diamond), median (bold horizontal line), interquartile range (boxes), and 1.5 interquartile range (whiskers).
+
+### Average tree height per house per economic level
 ```{r}
 average_tree_height_per_house <- tree_height |>
   group_by(id, economic_category) |>
@@ -505,8 +515,6 @@ average_tree_height_per_house <- tree_height |>
 
 avg_tree_height_economic_anova <-
   aov(average_tree_height ~ economic_category, average_tree_height_per_house)
-
-summary(avg_tree_height_economic_anova)
 ```
 
 **Check assumptions (1) normality of residuals using a Shapiro-Wilk normality test and (2) equal variance of each group using a Levene's test.**
@@ -543,3 +551,5 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "other-2_average-tree-height-per-house
       height = 6,
       width = 6)
 ```
+
+Example figure caption: Average tree height per house observed per economic group. Boxplots represent the mean (red diamond), median (bold horizontal line), interquartile range (boxes), and 1.5 interquartile range (whiskers).
