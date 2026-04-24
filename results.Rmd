@@ -9,6 +9,8 @@ library(broom)
 library(purrr)
 library(cowplot)
 library(car)
+library(AER)
+library(MASS)
 
 GARDEN_FILE_PATH <- "data/raw/GARDENS_spreadsheet.xlsx"
 garden_data <- read_excel(GARDEN_FILE_PATH, sheet='Everything_statistics') |>
@@ -24,7 +26,9 @@ IMAGE_FILE_PATH <-"images/"
 
 ## Chapter 1
 
-To investigate how economic level is associated with the structure and composition of vegetation in private urban forests, linear models were fitted with economic level as the independent variable and the following response variables per backyard: canopy cover, tree total biomass, total vegetation species richness, and Shannon diversity index based on canopy percent cover.
+To investigate how economic level is associated with the structure and composition of vegetation in private urban forests, linear models were fitted with economic level as the independent variable and the following response variables per backyard: canopy cover, tree total biomass, and Shannon diversity index based on canopy percent cover.
+
+In addition, a negative binomial regression model was fitted to assess whether total vegetation species richness was associated with economic level. As the data were overdispersed, a negative binomial model was used instead of Poisson.
 
 A one-way ANOVA was used to test whether tree species richness differed across economic groups. Normality and homogeneity of variances were verified using the Shapiro-Wilk and Levene's tests, respectively.
 
@@ -40,10 +44,13 @@ p-value: 0.0129
 R-squared: 0.2078
 
 ```{r message = FALSE, warning = FALSE}
+no_p22_data <- garden_data |>
+  filter(house != "P22")
+
 canopy_ecomomic_plot <-
   ggplot(garden_data, aes(x = economic_level, y = canopy_cover_garden_maybepercentage)) +
   geom_smooth(method = "lm") +
-  geom_point(data = garden_data[-17, ]) +
+  geom_point(data = no_p22_data) +
   theme_minimal() +
   labs(x = "Economic Level",
        y = "Canopy Cover Garden (%)",
@@ -87,20 +94,33 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "1-15_garden-biomass-vs-economic-level
 
 ### Total vegetation species richness per backyard vs Economic level
 
+Fit Poisson model since vegetation species richness is a count variable and checking for overdispersion. A Poisson model assumes equidispersion, where the variance of the response variable (vegetation species richness) is equal to its mean. In the case that its variance is greater than its mean, a negative binomial model should be used instead.
 ```{r}
-veg_richness_ecomomic_lr <- lm(overall_garden_diversity ~ economic_level, garden_data)
-results_veg_richness_lr <- summary(veg_richness_ecomomic_lr)
-results_veg_richness_lr
+veg_richness_ecomomic_poisson <-
+  glm(overall_garden_diversity ~ economic_level,
+      family = poisson,
+      data = garden_data)
+dispersiontest(veg_richness_ecomomic_poisson)
 ```
-p-value: 0.9226
+Since the dispersion test yields p-value = 0.02 < 0.05, there is overdispersion in the data and we'll use a negative binomial model.
 
-R-squared: 0.0003435
+```{r}
+veg_richness_ecomomic_nb <-
+  glm.nb(overall_garden_diversity ~ economic_level,
+      data = garden_data)
+results_veg_richness_nb <- tidy(veg_richness_ecomomic_nb, exponentiate = TRUE)
+results_veg_richness_nb
+```
+p-value = 0.908
 
 ```{r, message = FALSE}
+no_m11_data <- garden_data |>
+  filter(house != "m11")
+  
 veg_richness_plot <-
   ggplot(garden_data, aes(x = economic_level, y = overall_garden_diversity)) +
-  geom_smooth(method = "lm") +
-  geom_point(data = garden_data[-1, ]) +
+  geom_smooth(method = "glm.nb") +
+  geom_point(data = no_m11_data) +
   theme_minimal() +
   labs(x = "Economic Level",
        y = "Total Backyard Plant Species Richness",
@@ -112,7 +132,7 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "1-16_veg-richness-vs-economic-level.p
        plot = veg_richness_plot)
 ```
 
-### Tree diversity in tems of percentage area per backyeard vs. Economic Level
+### Tree diversity in tems of percentage area per backyard vs. Economic Level
 
 ```{r}
 shannon_ecomomic_lr <- lm(shannon_index_per_garden_withpercentcover ~ economic_level, garden_data)
@@ -202,16 +222,14 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "1-19_tree-richness-vs-economic-level.
 
 ## Chapter 2
 
-To investigate how bird species richness is associated with vegetation composition and structure in private urban forests, linear models were fitted with bird species richness as the response variable and the following predictors per backyard: canopy cover, plant species richness, and native plant proportion.
+To investigate how bird species richness is associated with vegetation composition and structure in private urban forests, Poisson regression models were fitted with bird species richness as the response variable and the following predictors per backyard: canopy cover, plant species richness, and native plant proportion.
 
 A bird species accumulation curve was constructed by randomly ordering houses and cumulatively recording the number of new species detected with each additional house sampled. This process was repeated 100 times with different random orderings, and the mean cumulative species richness along with the 95% confidence interval across permutations were calculated.
 
 Vegetation and bird variables, both raw and standardized per backyard area, were tested using linear models with economic level as the independent variable.
 
 ### Bird species richness in each backyard vs % canopy cover in back yard
-removed outlier in analysis
 ```{r}
-# (omit outlier)
 bird_canopy_lr <- lm(bird_diversity ~ canopy_cover_garden_maybepercentage, garden_data[-13, ])
 results_bird_canopy_lr <- summary(bird_canopy_lr)
 results_bird_canopy_lr
@@ -221,11 +239,14 @@ p-value: 0.4372
 R-squared: 0.0234
 
 ```{r, message = FALSE}
+no_p12_data <- garden_data |>
+  filter(house != "p12")
+  
 bird_canopy_plot <-
-  ggplot(garden_data[-13, ], aes(x = canopy_cover_garden_maybepercentage,
+  ggplot(garden_data, aes(x = canopy_cover_garden_maybepercentage,
                           y = bird_diversity)) +
   geom_smooth(method = "lm") +
-  geom_point() +
+  geom_point(data = no_p12_data) +
   theme_minimal() +
   labs(x = "Canopy Cover Backyard (%)",
        y = "Bird Species Richness",
@@ -238,9 +259,7 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "2-21_bird_vs_canopy.png"),
 ```
 
 ### Bird species richness vs vegetation species richness
-kept outlier in analysis
 ```{r}
-# (omit outlier)
 bird_veg_lr <- lm(bird_diversity ~ overall_garden_diversity, garden_data)
 results_bird_veg_lr <- summary(bird_veg_lr)
 results_bird_veg_lr
@@ -251,10 +270,10 @@ R-squared: 0.000054295
 
 ```{r, message = FALSE}
 bird_veg_plot <-
-  ggplot(garden_data[-13, ], aes(x = overall_garden_diversity,
+  ggplot(garden_data, aes(x = overall_garden_diversity,
                           y = bird_diversity)) +
   geom_smooth(method = "lm") +
-  geom_point() +
+  geom_point(data = no_p12_data) +
   theme_minimal() +
   labs(x = "Total Plant Species Richness in Backyard",
        y = "Bird Species Richness",
@@ -267,7 +286,6 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "2-22_bird_vs_veg_richness.png"),
 ```
 
 ### Bird species richness vs native plant species as a ratio of all species in backyard
-didn't include outlier in analysis
 ```{r message = FALSE}
 # add native percentage to garden data
 native_percent <- read_excel(GARDEN_FILE_PATH, sheet='Native_vs_not_GRAPHING') |>
@@ -292,10 +310,10 @@ Limit y-axis to 0-30?
 
 ```{r, message = FALSE}
 bird_native_plot <-
-  ggplot(garden_data[-13, ], aes(x = native_percent_total,
+  ggplot(garden_data, aes(x = native_percent_total,
                           y = bird_diversity)) +
   geom_smooth(method = "lm") +
-  geom_point() +
+  geom_point(data = no_p12_data) +
   theme_minimal() +
   labs(x = "Native % Plants Total",
        y = "Bird Species Richness",
