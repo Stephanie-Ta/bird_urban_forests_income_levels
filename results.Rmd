@@ -4,13 +4,13 @@
 # Loading libraries and data
 library(readxl)
 library(janitor)
+library(MASS)
 library(tidyverse)
 library(broom)
 library(purrr)
 library(cowplot)
 library(car)
 library(AER)
-library(MASS)
 
 GARDEN_FILE_PATH <- "data/raw/GARDENS_spreadsheet.xlsx"
 garden_data <- read_excel(GARDEN_FILE_PATH, sheet='Everything_statistics') |>
@@ -222,7 +222,7 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "1-19_tree-richness-vs-economic-level.
 
 ## Chapter 2
 
-To investigate how bird species richness is associated with vegetation composition and structure in private urban forests, Poisson regression models were fitted with bird species richness as the response variable and the following predictors per backyard: canopy cover, plant species richness, and native plant proportion.
+To investigate how bird species richness is associated with vegetation composition and structure in private urban forests, Poisson regression models were fitted with bird species richness as the response variable and the following predictors per backyard: canopy cover, plant species richness, and native plant proportion. Equidispersion was verified using a dispersion test, confirming that Poisson models were appropriate.
 
 A bird species accumulation curve was constructed by randomly ordering houses and cumulatively recording the number of new species detected with each additional house sampled. This process was repeated 100 times with different random orderings, and the mean cumulative species richness along with the 95% confidence interval across permutations were calculated.
 
@@ -230,13 +230,19 @@ Vegetation and bird variables, both raw and standardized per backyard area, were
 
 ### Bird species richness in each backyard vs % canopy cover in back yard
 ```{r}
-bird_canopy_lr <- lm(bird_diversity ~ canopy_cover_garden_maybepercentage, garden_data[-13, ])
-results_bird_canopy_lr <- summary(bird_canopy_lr)
-results_bird_canopy_lr
+bird_canopy_poisson <-
+  glm(bird_diversity ~ canopy_cover_garden_maybepercentage,
+      family = poisson,
+      data = garden_data)
+dispersiontest(bird_canopy_poisson)
 ```
-p-value: 0.4372
+p-value = 0.1163 > 0.05, there is no significant overdispersion.
 
-R-squared: 0.0234
+```{r}
+results_bird_canopy_poisson <- tidy(bird_canopy_poisson, exponentiate = TRUE)
+results_bird_canopy_poisson
+```
+p-value: 0.1332
 
 ```{r, message = FALSE}
 no_p12_data <- garden_data |>
@@ -245,7 +251,7 @@ no_p12_data <- garden_data |>
 bird_canopy_plot <-
   ggplot(garden_data, aes(x = canopy_cover_garden_maybepercentage,
                           y = bird_diversity)) +
-  geom_smooth(method = "lm") +
+  geom_smooth(method = "glm", method.args = list(family = "poisson")) +
   geom_point(data = no_p12_data) +
   theme_minimal() +
   labs(x = "Canopy Cover Backyard (%)",
@@ -260,19 +266,25 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "2-21_bird_vs_canopy.png"),
 
 ### Bird species richness vs vegetation species richness
 ```{r}
-bird_veg_lr <- lm(bird_diversity ~ overall_garden_diversity, garden_data)
-results_bird_veg_lr <- summary(bird_veg_lr)
-results_bird_veg_lr
+bird_veg_poisson <-
+  glm(bird_diversity ~ overall_garden_diversity,
+      family = "poisson",
+      data = garden_data)
+dispersiontest(bird_veg_poisson)
 ```
-p-value: 0.9692
+p-value = 0.1167 > 0.05, there is no significant overdispersion.
 
-R-squared: 0.000054295
+```{r}
+results_bird_veg_poisson <- tidy(bird_veg_poisson, exponentiate = TRUE)
+results_bird_veg_poisson
+```
+p-value = 0.9507
 
 ```{r, message = FALSE}
 bird_veg_plot <-
   ggplot(garden_data, aes(x = overall_garden_diversity,
                           y = bird_diversity)) +
-  geom_smooth(method = "lm") +
+  geom_smooth(method = "glm", method.args = list(family = "poisson")) +
   geom_point(data = no_p12_data) +
   theme_minimal() +
   labs(x = "Total Plant Species Richness in Backyard",
@@ -295,24 +307,33 @@ native_percent <- read_excel(GARDEN_FILE_PATH, sheet='Native_vs_not_GRAPHING') |
 garden_data <- garden_data |>
   left_join(native_percent, by = join_by(house))
 ```
+
 ```{r}
-bird_native_lr <- lm(bird_diversity ~ native_percent_total, garden_data[-13, ])
-results_bird_native_lr <- summary(bird_native_lr)
-results_bird_native_lr
+bird_native_poisson <-
+  glm(bird_diversity ~ native_percent_total,
+      family = poisson,
+      data = garden_data)
+dispersiontest(bird_native_poisson)
 ```
-p-value: 0.918
 
-R-squared: 0.0003998
+p-value = 0.1168 > 0.05, there is no significant overdispersion.
 
+```{r}
+results_bird_native_poisson <- tidy(bird_native_poisson, exponentiate = TRUE)
+results_bird_native_poisson
+```
 
+p-value = 0.9116
 
-Limit y-axis to 0-30?
 
 ```{r, message = FALSE}
+no_p12_data <- garden_data |>
+  filter(house != "P12")
+
 bird_native_plot <-
   ggplot(garden_data, aes(x = native_percent_total,
                           y = bird_diversity)) +
-  geom_smooth(method = "lm") +
+  geom_smooth(method = "glm", method.args = list(family = "poisson")) +
   geom_point(data = no_p12_data) +
   theme_minimal() +
   labs(x = "Native % Plants Total",
