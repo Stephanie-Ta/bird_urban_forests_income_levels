@@ -16,6 +16,15 @@ GARDEN_FILE_PATH <- "data/raw/GARDENS_spreadsheet.xlsx"
 garden_data <- read_excel(GARDEN_FILE_PATH, sheet='Everything_statistics') |>
   clean_names() # clean column names
 
+coniferous_data <- read_excel(GARDEN_FILE_PATH, sheet='Tree_per_garden') |>
+  clean_names() |>
+  filter(coniferous_not == "con") |>
+  group_by(id) |>
+  summarise(coniferous_canopy = sum(crown_area))
+
+garden_data <- left_join(garden_data, coniferous_data, by = c("house" = "id")) |>
+  mutate(coniferous_canopy = replace_na(coniferous_canopy, 0))
+
 BIRD_FILE_PATH <- "data/raw/BIRDS_spreadsheet2.xlsx"
 bird_data <- read_excel(BIRD_FILE_PATH, sheet="Long_clean") |>
   clean_names()
@@ -32,7 +41,7 @@ In addition, a negative binomial regression model was fitted to assess whether t
 
 A one-way ANOVA was used to test whether tree species richness differed across economic groups. Normality and homogeneity of variances were verified using the Shapiro-Wilk and Levene's tests, respectively.
 
-### Canopy cover in backyards vs. Economic Level
+### Backyard Canopy Cover vs. Economic Level
 
 ```{r}
 no_p22_data <- garden_data |>
@@ -63,7 +72,7 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "1-14_canopy-cover-vs-economic-level.p
 ```
 Example figure caption: Relationship between backyard canopy cover (%) and economic level. The line represents the linear model fit with 95% confidence interval (shaded grey).
 
-### Tree total biomass per backyard vs. Economic Level
+### Backyard Tree Biomass vs. Economic Level
 
 ```{r}
 tree_biomass_ecomomic_lr <- lm(biomass_total_kg ~ economic_level, garden_data)
@@ -92,7 +101,7 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "1-15_tree-biomass-vs-economic-level.p
 ```
 Example figure caption: Relationship between bacyard tree biomass (kg) and economic level. The line represents the linear model fit with 95% confidence interval (shaded grey).
 
-### Total vegetation species richness per backyard vs Economic level
+### Total Backyard Plant Species Richness vs. Economic Level
 
 Fit Poisson model since vegetation species richness is a count variable and checking for overdispersion. A Poisson model assumes equidispersion, where the variance of the response variable (vegetation species richness) is equal to its mean. In the case that its variance is greater than its mean, a negative binomial model should be used instead.
 ```{r}
@@ -133,7 +142,7 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "1-16_veg-richness-vs-economic-level.p
 ```
 Example figure caption: Relationship between plant species richness and economic level. The line represents the negative binomial model fit with 95% confidence interval (shaded grey).
 
-### Tree diversity in tems of percentage area per backyard vs. Economic Level
+### Shannon Diversity in Terms of Canopy Percent Cover vs. Economic Level
 
 ```{r}
 shannon_ecomomic_lr <- lm(shannon_index_per_garden_withpercentcover ~ economic_level, garden_data)
@@ -162,7 +171,7 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "1-18_shannon-diversity-vs-economic-le
 ```
 Example figure caption: Relationship between Shannon Diversity Index in terms of canopy percent cover and economic level. The line represents the linear model fit with 95% confidence interval (shaded grey).
 
-### ANOVA on how economic level influences tree species richness
+### ANOVA on Tree Species Richness Across Economic Groups
 ```{r}
 # add economic group level names to data
 garden_data <- garden_data |>
@@ -231,7 +240,7 @@ A bird species accumulation curve was constructed by randomly ordering houses an
 
 Vegetation and bird variables, both raw and standardized per backyard area, were tested using linear models with economic level as the independent variable.
 
-### Bird species richness in each backyard vs % canopy cover in back yard
+### Bird Species Richness vs. Backyard Canopy Cover
 ```{r}
 no_p21_m13_m11 <- garden_data |>
   filter(!house %in% c("P21", "M13", "M11"))
@@ -263,12 +272,12 @@ bird_canopy_plot <-
 
 bird_canopy_plot
 
-ggsave(filename = paste0(IMAGE_FILE_PATH, "2-21_bird_vs_canopy.png"),
+ggsave(filename = paste0(IMAGE_FILE_PATH, "2-21_bird-vs-canopy.png"),
        plot = bird_canopy_plot)
 ```
 Example figure caption: Relationship between bird species richness and backyard canopy cover (%). The line represents the Poisson model fit with 95% confidence interval (shaded grey).
 
-### Bird species richness vs vegetation species richness
+### Bird Species Richness vs. Backyard Plant Species Richness
 ```{r}
 bird_veg_poisson <-
   glm(bird_diversity ~ overall_garden_diversity,
@@ -297,12 +306,12 @@ bird_veg_plot <-
 
 bird_veg_plot
 
-ggsave(filename = paste0(IMAGE_FILE_PATH, "2-22_bird_vs_veg_richness.png"),
+ggsave(filename = paste0(IMAGE_FILE_PATH, "2-22_bird-vs-veg-richness.png"),
        plot = bird_veg_plot)
 ```
 Example figure caption: Relationship between bird species richness and plant species richness. The line represents the Poisson model fit with 95% confidence interval (shaded grey).
 
-### Bird species richness vs native plant species as a ratio of all species in backyard
+### Bird Species Richness vs. Native Plant Proportion
 ```{r message = FALSE}
 # add native percentage to garden data
 native_percent <- read_excel(GARDEN_FILE_PATH, sheet='Native_vs_not_GRAPHING') |>
@@ -344,7 +353,7 @@ bird_native_plot <-
 
 bird_native_plot
 
-ggsave(filename = paste0(IMAGE_FILE_PATH, "2-23_bird_vs_native.png"),
+ggsave(filename = paste0(IMAGE_FILE_PATH, "2-23_bird-vs-native.png"),
        plot = bird_native_plot)
 ```
 Example figure caption: Relationship between bird species richness and native proportion of plants (%). The line represents the Poisson model fit with 95% confidence interval (shaded grey).
@@ -399,7 +408,7 @@ accumulation_plot <- ggplot(results, aes(x = x)) +
 
 accumulation_plot
 
-ggsave(filename = paste0(IMAGE_FILE_PATH, "2-24_accumulation_plot.png"),
+ggsave(filename = paste0(IMAGE_FILE_PATH, "2-24_accumulation-plot.png"),
        plot = accumulation_plot)
 ```
 Example figure caption: Bird species accumulation curve based on 100 random permutations of houses. The line represents the mean cumulative species richness and with the 95% confidence interval (shaded grey).
@@ -456,12 +465,12 @@ Example figure caption: Relationship between biomass, plant species richness, ca
 
 To test whether tree height and average tree height per house differed across economic groups, normality and homogeneity of variances were assessed using the Shapiro-Wilk and Levene's tests, respectively. As normality was violated, a Kruskal-Wallis test was used as a non-parametric alternative. An outlier was removed from the analysis and plots.
 
-### Tree height per economic level
+### Tree height per economic group
 ```{r}
 tree_height <- read_excel(GARDEN_FILE_PATH, sheet='Tree_per_garden') |>
   select(ID, `Ht (m)`) |>
   clean_names() |>
-  left_join(garden_data[, c("house", "economic_category")], by = c("id" = "house")) |>
+  left_join(garden_data[, c("house", "economic_category", "economic_level")], by = c("id" = "house")) |>
   filter(id != "P22") # remove outlier
 ```
 
@@ -505,10 +514,64 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "other-1_tree-height-vs-economic-level
 ```
 Example figure caption: Tree height observed per economic group. Boxplots represent the mean (red diamond), median (bold horizontal line), interquartile range (boxes), and 1.5 interquartile range (whiskers).
 
-### Average tree height per house per economic level
+#### Linear Regression of Tree Height vs. Economic Level
+```{r}
+tree_height_lr <- lm(ht_m ~ economic_level, data = tree_height)
+results_tree_height_lr <- summary(tree_height_lr)
+results_tree_height_lr
+```
+p-value: 0.0107
+
+R-squared: 0.05938
+
+
+I do not suggest using this model since there does not seem to be linearity in the coefficients, the residuals vs. fitted points does not show a cloud. Also, the Q-Q Residuals does not show normality of the error term since the points do not follow the 45 degree line.
+```{r}
+plot(tree_height_lr, 1)
+plot(tree_height_lr, 2)
+```
+
+```{r message = FALSE, warning = FALSE}
+tree_height_economic_box_plot <-
+  ggplot(tree_height, aes(x = as.factor(economic_level), y = ht_m)) +
+  geom_boxplot() +
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "red") +
+  theme_minimal() +
+  labs(x = "Economic Level",
+       y = "Tree Height",
+       title = "Tree Height Across Economic Levels")
+
+tree_height_economic_box_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-1_boxplot-tree-height-vs-economic-level.png"),
+       plot = tree_height_economic_box_plot)
+```
+Example figure caption: Tree height observed per economic level. Boxplots represent the mean (red diamond), median (bold horizontal line), interquartile range (boxes), and 1.5 interquartile range (whiskers).
+
+NOTE: I don't really recommend using a box plot for this, since there are a differing amount of observations per economic level, and the box plot hides individual observations.
+
+
+```{r}
+tree_height_ecomomic_lr_plot <-
+  ggplot(tree_height, aes(x = economic_level, y = ht_m)) +
+  geom_smooth(method = "lm") +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Economic Level",
+       y = "Tree Height",
+       title = "Tree Height vs. Economic Level")
+
+tree_height_ecomomic_lr_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-1_line-tree-height-vs-economic-level.png"),
+       plot = tree_height_ecomomic_lr_plot)
+```
+Example figure caption: Relationship between tree height (m) and economic level. The line represents the linear model fit with 95% confidence interval (shaded grey).
+
+### Average tree height per house per economic group
 ```{r}
 average_tree_height_per_house <- tree_height |>
-  group_by(id, economic_category) |>
+  group_by(id, economic_category, economic_level) |>
   summarize(average_tree_height = mean(ht_m))
 
 avg_tree_height_economic_anova <-
@@ -551,3 +614,193 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "other-2_average-tree-height-per-house
 ```
 
 Example figure caption: Average tree height per house observed per economic group. Boxplots represent the mean (red diamond), median (bold horizontal line), interquartile range (boxes), and 1.5 interquartile range (whiskers).
+
+#### Linear Regression of Average Tree Height vs. Economic Level
+```{r}
+avg_tree_height_lr <- lm(average_tree_height ~ economic_level, data = average_tree_height_per_house)
+results_avg_tree_height_lr <- summary(avg_tree_height_lr)
+results_avg_tree_height_lr
+```
+p-value: 0.144
+
+R-squared: 0.09882
+
+
+I do not suggest using this model since there does not seem to be linearity in the coefficients, the residuals vs. fitted points does not show a cloud. The Q-Q Residuals shows normality of the error term since the points do follow the 45 degree line, but the former point still stands.
+```{r}
+plot(avg_tree_height_lr, 1)
+plot(avg_tree_height_lr, 2)
+```
+
+```{r message = FALSE, warning = FALSE}
+avg_tree_height_economic_box_plot <-
+  ggplot(average_tree_height_per_house, aes(x = as.factor(economic_level), y = average_tree_height)) +
+  geom_boxplot() +
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "red") +
+  theme_minimal() +
+  labs(x = "Economic Level",
+       y = "Average Tree Height per House",
+       title = "Average Tree Height per House Across Economic Levels")
+
+avg_tree_height_economic_box_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-2_boxplot-average-tree-height-vs-economic-level.png"),
+       plot = avg_tree_height_economic_box_plot)
+```
+Example figure caption: Average tree height per house observed per economic level. Boxplots represent the mean (red diamond), median (bold horizontal line), interquartile range (boxes), and 1.5 interquartile range (whiskers).
+
+NOTE: I don't really recommend using a box plot for this, since there are little amount of observations/houses per economic level, and the box plot can imply that there are more observations than there are.
+
+
+```{r}
+avg_tree_height_ecomomic_lr_plot <-
+  ggplot(average_tree_height_per_house, aes(x = economic_level, y = average_tree_height)) +
+  geom_smooth(method = "lm") +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Economic Level",
+       y = "Tree Height",
+       title = "Tree Height vs. Economic Level")
+
+avg_tree_height_ecomomic_lr_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-2_line-average-tree-height-vs-economic-level.png"),
+       plot = avg_tree_height_ecomomic_lr_plot)
+```
+Example figure caption: Relationship between average tree height per house (m) and economic level. The line represents the linear model fit with 95% confidence interval (shaded grey).
+
+### Backyard Coniferous Canopy Cover vs. Economic Level
+Note: only 12 backyards have coniferous trees
+
+```{r}
+con_canopy_ecomomic_lr <- lm(coniferous_canopy ~ economic_level, no_p22_data)
+results_con_canopy_ecomomic_lr <- summary(con_canopy_ecomomic_lr)
+results_con_canopy_ecomomic_lr
+```
+p-value: 0.00739
+
+R-squared: 0.2371
+
+```{r message = FALSE, warning = FALSE}
+con_canopy_ecomomic_plot <-
+  ggplot(no_p22_data, aes(x = economic_level, y = coniferous_canopy)) +
+  geom_smooth(method = "lm") +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Economic Level",
+       y = "Coniferous Canopy Cover",
+       title = "Coniferous Canopy Cover vs. Economic Level")
+
+con_canopy_ecomomic_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, 
+                         "other-3_coniferous-canopy-cover-vs-economic-level.png"),
+       plot = con_canopy_ecomomic_plot)
+```
+Example figure caption: Relationship between coniferous canopy cover and economic level. The line represents the linear model fit with 95% confidence interval (shaded grey).
+
+### Bird Species Richness vs. Backyard Coniferous Canopy Cover
+Note: only 12 backyards have coniferous trees.
+
+```{r}
+bird_con_canopy_poisson <-
+  glm(bird_diversity ~ coniferous_canopy,
+      family = poisson,
+      data = no_p21_m13_m11)
+dispersiontest(bird_con_canopy_poisson)
+```
+p-value = 0.1941 > 0.05, there is no significant overdispersion.
+
+```{r}
+results_bird_con_canopy_poisson <- tidy(bird_con_canopy_poisson, exponentiate = TRUE)
+results_bird_con_canopy_poisson
+```
+p-value: 0.5946
+
+```{r, message = FALSE, warning = FALSE}
+bird_con_canopy_plot <-
+  ggplot(no_p21_m13_m11, aes(x = coniferous_canopy,
+                          y = bird_diversity)) +
+  geom_smooth(method = "glm", method.args = list(family = "poisson")) +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Coniferous Canopy Cover",
+       y = "Bird Species Richness",
+       title = "Bird Species Richness vs. Backyard Coniferous Canopy Cover")
+
+bird_con_canopy_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-4_bird-vs-coniferous-canopy.png"),
+       plot = bird_con_canopy_plot)
+```
+Example figure caption: Relationship between bird species richness and coniferous canopy cover. The line represents the Poisson model fit with 95% confidence interval (shaded grey).
+
+### Bird Species Richness vs. 50m Canopy Cover
+```{r}
+bird_50m_canopy_poisson <-
+  glm(bird_diversity ~ canopy_cover_radius_50m,
+      family = poisson,
+      data = no_p21_m13_m11)
+dispersiontest(bird_50m_canopy_poisson)
+```
+
+p-value = 0.1886 > 0.05, there is no significant overdispersion.
+
+```{r}
+results_bird_50m_canopy_poisson <- tidy(bird_50m_canopy_poisson, exponentiate = TRUE)
+results_bird_50m_canopy_poisson
+```
+p-value: 0.2737
+
+```{r, message = FALSE, warning = FALSE}
+bird_50m_canopy_plot <-
+  ggplot(no_p21_m13_m11, aes(x = canopy_cover_radius_50m,
+                          y = bird_diversity)) +
+  geom_smooth(method = "glm", method.args = list(family = "poisson")) +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "50m Canopy Cover",
+       y = "Bird Species Richness",
+       title = "Bird Species Richness vs. 50m Canopy Cover")
+
+bird_50m_canopy_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-5_bird-vs-50m-canopy.png"),
+       plot = bird_50m_canopy_plot)
+```
+Example figure caption: Relationship between bird species richness and 50m canopy cover. The line represents the Poisson model fit with 95% confidence interval (shaded grey).
+
+### Bird Species Richness vs. 100m Canopy Cover
+```{r}
+bird_100m_canopy_poisson <-
+  glm(bird_diversity ~ canopy_cover_radius_100m,
+      family = poisson,
+      data = no_p21_m13_m11)
+dispersiontest(bird_100m_canopy_poisson)
+```
+
+p-value = 0.1823 > 0.05, there is no significant overdispersion.
+
+```{r}
+results_bird_100m_canopy_poisson <- tidy(bird_100m_canopy_poisson, exponentiate = TRUE)
+results_bird_100m_canopy_poisson
+```
+p-value: 0.1872
+
+```{r, message = FALSE, warning = FALSE}
+bird_100m_canopy_plot <-
+  ggplot(no_p21_m13_m11, aes(x = canopy_cover_radius_100m,
+                          y = bird_diversity)) +
+  geom_smooth(method = "glm", method.args = list(family = "poisson")) +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "100m Canopy Cover",
+       y = "Bird Species Richness",
+       title = "Bird Species Richness vs. 100m Canopy Cover")
+
+bird_100m_canopy_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-6_bird-vs-100m-canopy.png"),
+       plot = bird_100m_canopy_plot)
+```
+Example figure caption: Relationship between bird species richness and 100m canopy cover. The line represents the Poisson model fit with 95% confidence interval (shaded grey).
