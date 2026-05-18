@@ -804,3 +804,61 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "other-6_bird-vs-100m-canopy.png"),
        plot = bird_100m_canopy_plot)
 ```
 Example figure caption: Relationship between bird species richness and 100m canopy cover. The line represents the Poisson model fit with 95% confidence interval (shaded grey).
+
+
+### Number of Insectivore Species vs. Canopy Cover
+Fitted a Poisson regression modelwith insectivore bird species richness as the response variable and canopy cover, per backyard as the predictor. Equidispersion was verified using a dispersion test, confirming that Poisson models were appropriate
+```{r message = FALSE}
+# get data on which birds are insectivores
+insectivore_data <- read_excel(BIRD_FILE_PATH, sheet="Birds_info_table") |>
+  clean_names() |>
+  select(species_code, feeding_guild) |>
+  filter(feeding_guild == "Insectivore")
+
+# filter bird data to only include insectivores
+# count number of insectivores per house
+insectivore_house_data <- bird_data |>
+  filter(species %in% insectivore_data$species_code) |>
+  select(house, species) |>
+  unique() |> # remove duplicates
+  group_by(house) |>
+  summarise(number_insectivores = n())
+
+# add number of insectivores to garden data
+garden_data <- left_join(garden_data, insectivore_house_data, by = join_by(house)) |>
+  mutate(number_insectivores = replace_na(number_insectivores, 0))
+```
+
+```{r}
+# poisson model
+insectivore_canopy_poisson <-
+  glm(number_insectivores ~ canopy_cover_garden_maybepercentage,
+      family = poisson,
+      data = garden_data)
+dispersiontest(insectivore_canopy_poisson)
+```
+p-value = 0.3945 > 0.05, there is no significant overdispersion.
+
+```{r}
+results_bird_veg_poisson <- tidy(insectivore_canopy_poisson, exponentiate = TRUE)
+results_bird_veg_poisson
+```
+p-value = 0.2064
+
+```{r, message = FALSE, warning = FALSE}
+insectivore_canopy_plot <-
+  ggplot(garden_data, aes(x = canopy_cover_garden_maybepercentage,
+                          y = number_insectivores)) +
+  geom_smooth(method = "glm", method.args = list(family = "poisson")) +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Canopy Cover Backyard (%)",
+       y = "Insectivore Bird Species Richness",
+       title = "Insectivore Bird Species Richness vs. Backyard Canopy Cover")
+
+insectivore_canopy_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-7_insectivore-vs-canopy.png"),
+       plot = bird_native_plot)
+```
+Example figure caption: Relationship between insectivore bird species richness and backyard canopy cover (%). The line represents the Poisson model fit with 95% confidence interval (shaded grey).
