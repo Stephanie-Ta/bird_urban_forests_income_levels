@@ -991,6 +991,8 @@ p_labels <- feeding_models_results |>
 
 annot_data <- p_labels |>
   mutate(
+    canopy_label = factor(canopy_label, levels = c("Backyard", "50m", "100m")),
+    feeding_label = factor(feeding_label, levels = c("Insectivore", "Granivore", "Omnivore")),
     canopy_cover = -Inf,
     richness = Inf
   )
