@@ -881,7 +881,7 @@ garden_data <- left_join(garden_data, omnivore_house_data, by = join_by(house)) 
 ```
 
 
-```{r}
+```{r warning = FALSE}
 # poisson models and dispersion tests
 
 y_vars_feeding_guild <- c("number_insectivores",
@@ -926,7 +926,7 @@ kable(feeding_models_results)
 ```
 From above, see that equidispersion is verified (dispersion_test_p_value > 0.05).
 
-```{r}
+```{r message = FALSE, warning = FALSE}
 long_data <- garden_data |>
   select(
     number_insectivores,
