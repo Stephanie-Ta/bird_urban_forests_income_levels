@@ -26,6 +26,23 @@ coniferous_data <- read_excel(GARDEN_FILE_PATH, sheet='Tree_per_garden') |>
 garden_data <- left_join(garden_data, coniferous_data, by = c("house" = "id")) |>
   mutate(coniferous_canopy = replace_na(coniferous_canopy, 0))
 
+native_tree_canopy_data <- read_excel(GARDEN_FILE_PATH, sheet='Tree_per_garden') |>
+  clean_names() |>
+  group_by(id) |>
+  summarise(
+    total_canopy = sum(crown_area, na.rm = TRUE),
+    native_canopy = sum(crown_area[native_or_non_native == "Native"], na.rm = TRUE)
+  ) |>
+  mutate(
+    native_canopy_prop = native_canopy/total_canopy
+  )
+
+garden_data <- left_join(garden_data, native_tree_canopy_data, by = c("house" = "id")) |>
+  mutate(native_canopy = replace_na(native_canopy, 0),
+         total_canopy = replace_na(total_canopy, 0),
+         native_canopy_prop = replace_na(native_canopy_prop, 0))
+  
+
 BIRD_FILE_PATH <- "data/raw/BIRDS_spreadsheet2.xlsx"
 bird_data <- read_excel(BIRD_FILE_PATH, sheet="Long_clean") |>
   clean_names()
@@ -979,7 +996,7 @@ plot_data <- long_data |>
   )
 
 feeding_models_results <- feeding_models_results |>
-  rename(model_p_value = p.value)
+ rename(model_p_value = p.value)
 
 p_labels <- feeding_models_results |>
   mutate(
@@ -1038,3 +1055,74 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "other-7_feeding_guilds-vs-canopy.png"
 ```
 Example figure caption: Relationship between granivore, insectivore, and omnivore bird species richness and backyard canopy cover (%), 50m canopy cover, and 100m canopy cover. The lines represents the Poisson model fit with 95% confidence interval (shaded grey).
 
+### Bird Species Richness vs. Total Native Tree Canopy Cover
+```{r}
+bird_total_native_canopy_poisson <-
+  glm(bird_diversity ~ native_canopy,
+      family = poisson,
+      data = garden_data)
+dispersiontest(bird_total_native_canopy_poisson)
+```
+p-value = 0.1148 > 0.05, there is no significant overdispersion.
+
+```{r}
+results_bird_total_native_canopy_poisson <- tidy(bird_total_native_canopy_poisson, exponentiate = TRUE)
+results_bird_total_native_canopy_poisson
+```
+p-value: 0.2838
+
+```{r, message = FALSE, warning = FALSE}
+bird_bird_total_native_canopy_plot <-
+  ggplot(garden_data, aes(x = native_canopy,
+                          y = bird_diversity)) +
+  geom_smooth(method = "glm", method.args = list(family = "poisson")) +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Total Native Tree Canopy Cover",
+       y = "Bird Species Richness",
+       title = "Bird Species Richness vs. Total Native Tree Canopy Cover")
+
+bird_bird_total_native_canopy_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-8_bird-vs-total-native-canopy.png"),
+       plot = bird_bird_total_native_canopy_plot)
+```
+Example figure caption: Relationship between bird species richness and total native tree canopy cover. The line represents the Poisson model fit with 95% confidence interval (shaded grey).
+
+### Bird Species Richness vs. Proportion of Native Tree Canopy Cover
+divide by total tree canopy cover
+
+```{r}
+bird_prop_native_canopy_poisson <-
+  glm(bird_diversity ~ native_canopy_prop,
+      family = poisson,
+      data = garden_data)
+dispersiontest(bird_prop_native_canopy_poisson)
+```
+p-value = 0.1291 > 0.05, there is no significant overdispersion.
+
+```{r}
+results_bird_prop_native_canopy_poisson <- tidy(bird_prop_native_canopy_poisson, exponentiate = TRUE)
+results_bird_prop_native_canopy_poisson
+```
+p-value: 0.01955
+
+This is significant, but the following graph does not inspire confidence.
+
+```{r, message = FALSE, warning = FALSE}
+bird_bird_prop_native_canopy_plot <-
+  ggplot(garden_data, aes(x = native_canopy_prop,
+                          y = bird_diversity)) +
+  geom_smooth(method = "glm", method.args = list(family = "poisson")) +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Proportion of Native Tree Canopy Cover",
+       y = "Bird Species Richness",
+       title = "Bird Species Richness vs. Proportion of Native Tree Canopy Cover")
+
+bird_bird_prop_native_canopy_plot
+
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-9_bird-vs-proportion-native-canopy.png"),
+       plot = bird_bird_prop_native_canopy_plot)
+```
+Example figure caption: Relationship between bird species richness and proportion of native tree canopy cover. The line represents the Poisson model fit with 95% confidence interval (shaded grey).
