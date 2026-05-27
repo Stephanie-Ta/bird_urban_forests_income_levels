@@ -1035,3 +1035,4 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "other-7_feeding_guilds-vs-canopy.png"
        plot = feeding_guild_canopy_plot)
 ```
 Example figure caption: Relationship between granivore, insectivore, and omnivore bird species richness and backyard canopy cover (%), 50m canopy cover, and 100m canopy cover. The lines represents the Poisson model fit with 95% confidence interval (shaded grey).
+
