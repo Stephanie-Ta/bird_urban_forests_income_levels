@@ -11,6 +11,7 @@ library(purrr)
 library(cowplot)
 library(car)
 library(AER)
+library(knitr)
 
 GARDEN_FILE_PATH <- "data/raw/GARDENS_spreadsheet.xlsx"
 garden_data <- read_excel(GARDEN_FILE_PATH, sheet='Everything_statistics') |>
@@ -806,13 +807,16 @@ ggsave(filename = paste0(IMAGE_FILE_PATH, "other-6_bird-vs-100m-canopy.png"),
 Example figure caption: Relationship between bird species richness and 100m canopy cover. The line represents the Poisson model fit with 95% confidence interval (shaded grey).
 
 
-### Number of Insectivore Species vs. Canopy Cover
-Fitted a Poisson regression modelwith insectivore bird species richness as the response variable and canopy cover, per backyard as the predictor. Equidispersion was verified using a dispersion test, confirming that Poisson models were appropriate
+### Species of Different Feeding Guilds vs. Canopy Cover
+Fitted a Poisson regression model with bird species richness for each feeding guild as the response variable with canopy cover per backyard (percent, 50m, and 100m) as the predictor. Equidispersion was verified using a dispersion test, confirming that Poisson models were appropriate
 ```{r message = FALSE}
-# get data on which birds are insectivores
-insectivore_data <- read_excel(BIRD_FILE_PATH, sheet="Birds_info_table") |>
+bird_type_data <- read_excel(BIRD_FILE_PATH, sheet="Birds_info_table") |>
   clean_names() |>
-  select(species_code, feeding_guild) |>
+  select(species_code, feeding_guild)
+  
+# INSECTIVORE DATA
+# get data on which birds are insectivores
+insectivore_data <- bird_type_data |>
   filter(feeding_guild == "Insectivore")
 
 # filter bird data to only include insectivores
@@ -827,38 +831,207 @@ insectivore_house_data <- bird_data |>
 # add number of insectivores to garden data
 garden_data <- left_join(garden_data, insectivore_house_data, by = join_by(house)) |>
   mutate(number_insectivores = replace_na(number_insectivores, 0))
+
+
+# GRANIVORE DATA
+granivore_data <- bird_type_data |>
+  filter(feeding_guild == "Granivore")
+
+granivore_house_data <- bird_data |>
+  filter(species %in% granivore_data$species_code) |>
+  select(house, species) |>
+  unique() |> # remove duplicates
+  group_by(house) |>
+  summarise(number_granivores = n())
+
+garden_data <- left_join(garden_data, granivore_house_data, by = join_by(house)) |>
+  mutate(number_granivores = replace_na(number_granivores, 0))
+
+
+# OMIVORE DATA
+omnivore_data <- bird_type_data |>
+  filter(feeding_guild == "Omnivore")
+
+omnivore_house_data <- bird_data |>
+  filter(species %in% omnivore_data$species_code) |>
+  select(house, species) |>
+  unique() |> # remove duplicates
+  group_by(house) |>
+  summarise(number_omnivores = n())
+
+garden_data <- left_join(garden_data, omnivore_house_data, by = join_by(house)) |>
+  mutate(number_omnivores = replace_na(number_omnivores, 0))
 ```
 
+
 ```{r}
-# poisson model
-insectivore_canopy_poisson <-
-  glm(number_insectivores ~ canopy_cover_garden_maybepercentage,
+# poisson models and dispersion tests
+
+y_vars_feeding_guild <- c("number_insectivores",
+                          "number_granivores",
+                          "number_omnivores")
+
+x_vars_canopy <- c("canopy_cover_garden_maybepercentage",
+                   "canopy_cover_radius_50m",
+                   "canopy_cover_radius_100m")
+
+feeding_models_results <- map_dfr(y_vars_feeding_guild, \(feeding_guild) {
+  
+  map_dfr(x_vars_canopy, \(canopy_type) {
+    
+    # fit a poisson model for each pairing
+    feeding_model <- glm(
+      as.formula(paste(feeding_guild, "~", canopy_type)),
       family = poisson,
-      data = garden_data)
-dispersiontest(insectivore_canopy_poisson)
+      data = garden_data
+    )
+    
+    # dispersion test check
+    dispersion_p_value <- dispersiontest(feeding_model)$p.value |>
+      round(4)
+    
+    # poisson model results (row 2 = the predictor term)
+    results <- tidy(feeding_model, exponentiate = TRUE) |>
+      slice(2)
+    
+    # combine all results into one row
+    tibble(
+      y_variable = feeding_guild,
+      x_variable = canopy_type,
+      dispersion_test_p_value = dispersion_p_value
+    ) |>
+      bind_cols(results)
+    
+  })
+})
+
+kable(feeding_models_results)
 ```
-p-value = 0.3945 > 0.05, there is no significant overdispersion.
+From above, see that equidispersion is verified (dispersion_test_p_value > 0.05).
 
 ```{r}
-results_bird_veg_poisson <- tidy(insectivore_canopy_poisson, exponentiate = TRUE)
-results_bird_veg_poisson
-```
-p-value = 0.2064
+long_data <- garden_data |>
+  select(
+    number_insectivores,
+    number_granivores,
+    number_omnivores,
+    canopy_cover_garden_maybepercentage,
+    canopy_cover_radius_50m,
+    canopy_cover_radius_100m
+  ) |>
+  pivot_longer(
+    cols = starts_with("number_"),
+    names_to = "feeding_guild",
+    values_to = "richness"
+  ) |>
+  pivot_longer(
+    cols = starts_with("canopy_cover"),
+    names_to = "canopy_type",
+    values_to = "canopy_cover"
+  )
 
-```{r, message = FALSE, warning = FALSE}
-insectivore_canopy_plot <-
-  ggplot(garden_data, aes(x = canopy_cover_garden_maybepercentage,
-                          y = number_insectivores)) +
-  geom_smooth(method = "glm", method.args = list(family = "poisson")) +
+long_data <- long_data |>
+  mutate(
+    valid_pair = case_when(
+      feeding_guild == "number_insectivores" &
+        canopy_type %in% c("canopy_cover_garden_maybepercentage",
+                           "canopy_cover_radius_50m",
+                           "canopy_cover_radius_100m") ~ TRUE,
+      feeding_guild == "number_granivores" &
+        canopy_type %in% c("canopy_cover_garden_maybepercentage",
+                           "canopy_cover_radius_50m",
+                           "canopy_cover_radius_100m") ~ TRUE,
+      feeding_guild == "number_omnivores" &
+        canopy_type %in% c("canopy_cover_garden_maybepercentage",
+                           "canopy_cover_radius_50m",
+                           "canopy_cover_radius_100m") ~ TRUE,
+      TRUE ~ FALSE
+    )
+  ) |>
+  filter(valid_pair)
+
+feeding_labels <- c(
+  number_insectivores = "Insectivore",
+  number_granivores = "Granivore",
+  number_omnivores = "Omnivore"
+)
+
+canopy_labels <- c(
+  canopy_cover_garden_maybepercentage = "Backyard",
+  canopy_cover_radius_50m = "50m",
+  canopy_cover_radius_100m = "100m"
+)
+
+plot_data <- long_data |>
+  mutate(
+    feeding_label = feeding_labels[feeding_guild],
+    canopy_label = canopy_labels[canopy_type]
+  ) |>
+  mutate(
+    canopy_label = factor(
+      canopy_label,
+      levels = c("Backyard", "50m", "100m")
+    ),
+    feeding_label = factor(
+      feeding_label,
+      levels = c("Insectivore", "Granivore", "Omnivore")
+    )
+  )
+
+feeding_models_results <- feeding_models_results |>
+  rename(model_p_value = p.value)
+
+p_labels <- feeding_models_results |>
+  mutate(
+    feeding_label = feeding_labels[y_variable],
+    canopy_label = canopy_labels[x_variable],
+    label = paste0("p = ", signif(model_p_value, 3))
+  ) |>
+  select(feeding_label, canopy_label, label)
+
+annot_data <- p_labels |>
+  mutate(
+    canopy_cover = -Inf,
+    richness = Inf
+  )
+```
+
+```{r messsage = FALSE, warning = FALSE}
+feeding_guild_canopy_plot <-
+  ggplot(plot_data, aes(x = canopy_cover, y = richness)) +
+  
   geom_point() +
+  
+  geom_smooth(
+    method = "glm",
+    method.args = list(family = poisson),
+    se = TRUE
+  ) +
+  
+  geom_text(
+    data = annot_data,
+    aes(x = canopy_cover, y = richness, label = label),
+    inherit.aes = FALSE,
+    hjust = -0.1,
+    vjust = 1.5,
+    size = 4
+  ) +
+  
+  facet_grid(
+    feeding_label ~ canopy_label,
+    scales = "free"
+  ) +
+  
   theme_minimal() +
-  labs(x = "Canopy Cover Backyard (%)",
-       y = "Insectivore Bird Species Richness",
-       title = "Insectivore Bird Species Richness vs. Backyard Canopy Cover")
+  
+  labs(
+    x = "Canopy Cover",
+    y = "Species Richness"
+  )
 
-insectivore_canopy_plot
+feeding_guild_canopy_plot
 
-ggsave(filename = paste0(IMAGE_FILE_PATH, "other-7_insectivore-vs-canopy.png"),
-       plot = bird_native_plot)
+ggsave(filename = paste0(IMAGE_FILE_PATH, "other-7_feeding_guilds-vs-canopy.png"),
+       plot = feeding_guild_canopy_plot)
 ```
-Example figure caption: Relationship between insectivore bird species richness and backyard canopy cover (%). The line represents the Poisson model fit with 95% confidence interval (shaded grey).
+Example figure caption: Relationship between granivore, insectivore, and omnivore bird species richness and backyard canopy cover (%), 50m canopy cover, and 100m canopy cover. The lines represents the Poisson model fit with 95% confidence interval (shaded grey).
